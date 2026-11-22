@@ -12825,7 +12825,7 @@ $\DiversifiedTransmitPublic$ is not in $\SubgroupJstar$.
   \item There are no \nonCanonicalPoint encodings of \jubjubCurve points in $\SubgroupJstar$.
   \item The restriction on $\DiversifiedTransmitPublic$ reflects its current type
         $\KAPublicPrimeOrder{Sapling} = \SubgroupJstar$. In versions of this specification
-        prior to \historyref{2025.6.0}, $\DiversifiedTransmitPublic$ had type
+        prior to v2025.6.0, $\DiversifiedTransmitPublic$ had type
         $\KA{Sapling}\mathsf{.PublicPrimeSubgroup} = \SubgroupJ$, i.e. including $\ZeroJ$.
         Implementations of consumers for this encoding may need to be updated to exclude
         $\ZeroJ$, and should be checked for consistency with the current version of
@@ -12882,7 +12882,7 @@ For \incomingViewingKeys on \Testnet, the \humanReadablePart is \ascii{zivktests
         This encoding is therefore deprecated: the preferred way to encode a \Sapling
         \incomingViewingKey is as a component of a \unifiedIncomingViewingKey using the
         \IVKEncoding specified in \cite{ZIP-316}, which does include the \diversifierKey.
-  \item In versions of this specification prior to \historyref{2025.6.0}, the range
+  \item In versions of this specification prior to v2025.6.0, the range
         of $\InViewingKey$ was defined as $\binaryrange{\InViewingKeyLength{Sapling}}$,
         i.e.\ including $0$. Implementations of consumers for this encoding may need
         to be updated to exclude $0$.
@@ -14736,7 +14736,7 @@ The \targetThreshold for a given \blockHeight $\BlockHeight$ is then calculated 
         in the definition of $\MedianTime$ during the first $\PoWMedianBlockSpan - 1$ \blocks of
         the \blockChain), the element that begins the second half of the sequence is taken.
         This corresponds to the \zcashd implementation, but was not specified correctly in versions
-        of this specification prior to \historyref{2019.0.0}.
+        of this specification prior to v2019.0.0.
 \end{pnotes}
 
 On \Testnet from \blockHeight $299188$ onward, the difficulty adjustment algorithm
