@@ -376,12 +376,10 @@
 \newcommand{\lemmaref}[1]{\raisebox{0ex}{\hyperref[#1]{Lemma \ref*{#1}\vphantom{,}}} on \page\pageref*{#1}}
 \newcommand{\footnoteref}[1]{\hairspace\raisebox{0ex}{\cref{#1}}}
 \newcommand{\snarkref}[2]{\raisebox{0ex}{\hyperref[#2]{\linkstrut\smash{\textbf{#1}}}}}
-\newcommand{\historyref}[1]{\raisebox{0ex}{\hyperref[#1]{\linkstrut\smash{v#1}}}}
 \newcommand{\zcashdref}[1]{\href{https://github.com/zcash/zcash/releases/tag/#1}{\softwaretype{zcashd\;#1}}}
 \newcommand{\zebraref}[1]{\href{https://github.com/ZcashFoundation/zebra/releases/tag/#1}{\softwaretype{zebra\;#1}}}
 
 \newcommand{\callout}[2]{\vspace{1ex plus 2pt minus 2pt}#1\textbf{#2}\hspace{1em}}
-\newcommand{\historyentry}[2]{\introlist\extralabel{#1}{\ifstrempty{#2}{\callout{}{#1}}{\headingandlabel{\callout{}{#1}{#2}}{\##1}}}}
 
 \renewcommand{\appendixautorefname}{ }
 \renewcommand{\sectionautorefname}{ }
