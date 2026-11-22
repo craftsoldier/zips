@@ -3121,241 +3121,54 @@ This document was built with Lua\TeX, which is \href{https://github.com/zcash/zi
 
 
 \lsection{Introduction}{introduction}
+\phantomsection\label{overview}
 
-\Zcash is an implementation of the \defining{\DecentralizedAnonymousPaymentScheme
-\Zerocash \cite{BCGGMTV2014}}, with security fixes and improvements
-to performance and functionality. It bridges the existing
-transparent payment scheme used by \defining{\Bitcoin \cite{Nakamoto2008}} with a
-\emph{shielded} payment scheme secured by \zeroKnowledgeSuccinctNoninteractiveArgumentsOfKnowledge.
+\Zcash builds on the \Zerocash payment scheme \cite{BCGGMTV2014}, with security fixes and
+improvements to performance and functionality, and proves its shielded payments with
+\zeroKnowledgeSuccinctNoninteractiveArgumentsOfKnowledge, which over the network's history
+have been carried by three shielded protocols: \Sprout, the protocol from launch until the
+Sapling upgrade; \Sapling, introduced by the network upgrade of the same name and used for
+the Sapling pool; and \Orchard, used for both the Orchard pool and the Ironwood pool.
 
-\vspace{1ex}
-In this document, technical terms for concepts that play an important rôle in \Zcash are
-written in \defining{\term{slanted text}}, which links to an index entry.
-\emph{Italics} are used for emphasis and for references between sections of the document.
-The symbol \S{} precedes section numbers in cross-references.
+Value in \Zcash sits in six pools, the transparent, Sprout, Sapling, Orchard, Ironwood and
+deferred development fund pools, and transparent value moves essentially as in \Bitcoin,
+with addresses and amounts visible on the block chain. Shielded value is carried instead by
+notes, each of which specifies an amount and indirectly the shielded payment address the
+note was sent to, and notes sent to an address can be spent with the spending key for the
+address, yet the note itself never appears on the block chain in readable form, since
+anyone reading the chain would then learn the amount and the address.
 
-The key words \defining{\MUST, \MUSTNOT, \SHOULD, \SHOULDNOT, \RECOMMENDED, \MAY, and \OPTIONAL}
-in this document are to be interpreted as described in \cite{RFC-2119} when
-they appear in \defining{\ALLCAPS}. These words may also appear in this document in
-lower case as plain English words, absent their normative meanings.
+For each note, the block chain records a note commitment, which works like a sealed
+envelope hiding the note while fixing the contents so nobody can change them later. Each
+commitment takes a fixed place in a tree of note commitments, and the owner can later prove
+a note sits in the tree without opening the envelope.
 
-\vspace{1ex}
-The most significant changes from the original \Zerocash are explained in \crossref{differences}.
+A commitment alone cannot mark a note as spent, since pointing at the commitment would show
+everyone which note was spent, so each note also has a nullifier, which only the owner's
+keys can compute and nobody else can connect to the commitment. Spending a note reveals the
+nullifier, and every node keeps the nullifiers seen so far and rejects any transaction
+revealing one already on the block chain, so a note stays unspent until the nullifier
+appears and can never be spent twice.
 
-Changes before the \NUSaplingUpgrade are not highlighted.
+A transaction can carry transparent inputs and outputs alongside shielded parts, which
+spend notes and create new ones, and for each note spent the spender attaches a
+zero-knowledge proof showing the commitment is somewhere in the tree, the nullifier belongs
+to the same note and the spender holds the right key, without revealing which commitment is
+meant. Signatures stop anyone else from altering the transaction, and every transaction
+must balance, so no value is created out of nothing.
 
-Changes specific to the \NUSaplingUpgrade following \NUOverwinter
-are highlighted in \sapling{\saplingcolorname}.
+The recipient learns of a payment from a copy of the note the sender publishes encrypted to
+the recipient's address, like a letter only the recipient can open, and the ciphertext
+gives no hint of who the letter is for. The recipient's wallet scans the block chain to find
+and decrypt the notes addressed to the recipient, and in Sapling, Orchard and Ironwood a
+full viewing key sees incoming and outgoing notes without the power to spend, much like
+read-only access to a bank account.
 
-\notbeforeblossom{Changes specific to the \NUBlossom upgrade following \NUSapling
-are highlighted in \blossom{\blossomcolorname}.}
-
-\notbeforeheartwood{Changes specific to the \NUHeartwood upgrade following \NUBlossom
-are highlighted in \heartwood{\heartwoodcolorname}.}
-
-\notbeforecanopy{Changes specific to the \NUCanopy upgrade following \NUHeartwood
-are highlighted in \canopy{\canopycolorname}.}
-
-\notbeforenufive{Changes specific to the \NUFive upgrade following \NUCanopy
-are highlighted in \nufive{\nufivecolorname}.}
-
-\notbeforenusix{Changes specific to the \NUSix upgrade following \NUFive
-are highlighted in \nusix{\nusixcolorname}.}
-
-\notbeforenusixone{Changes specific to the \NUSixOne upgrade following \NUSix
-are highlighted in \nusixone{\nusixonecolorname}.}
-
-\notbeforenusixtwo{Changes specific to the \NUSixTwo upgrade following \NUSixOne
-are highlighted in \nusixtwo{\nusixtwocolorname}.}
-
-\notbeforenusixthree{Changes specific to the \NUSixThree upgrade following \NUSixTwo
-are highlighted in \nusixthree{\nusixthreecolorname}.}
-
-\notbeforenuseven{Changes specific to the \NUSeven upgrade following \NUSixThree
-are highlighted in \nuseven{\nusevencolorname}.}
-
-All of these are also changes from \Zerocash.
-
-The name ``Sprout'' refers to the \Zcash protocol prior to \NUSapling
-(both before and after \NUOverwinter), and in particular its \SproutShieldedProtocol.
-The name ``Sapling'' refers to the \NUSaplingNetworkUpgrade, and also the
-\SaplingShieldedProtocol which is used for the \SaplingPool.
-\nufive{The name ``Orchard'' refers to the \OrchardShieldedProtocol, used for the
-\OrchardPool}\nusixthree{ and the \IronwoodPool}.
-
-\vspace{1ex}
-\introlist
-This specification is structured as follows:
-
-\begin{itemize}
-  \item Notation — definitions of notation used throughout the document;
-  \item Concepts — the principal abstractions needed to understand the protocol;
-  \item Abstract Protocol — a \nh{high-level} description of the protocol in terms
-        of ideal cryptographic components;
-  \item Concrete Protocol — how the functions and encodings of the abstract
-        protocol are instantiated;
-  \item Network Upgrades — the strategy for upgrading the \Zcash protocol.
-  \item Consensus Changes from \Bitcoin — how \Zcash differs from \Bitcoin at
-        the consensus layer, including the Proof of Work;
-  \item Differences from the \Zerocash protocol — a summary of changes from the
-        protocol in \cite{BCGGMTV2014}.
-  \item Appendix: Circuit Design — details of how the \Sapling circuits are
-        defined as \quadraticConstraintPrograms.
-  \item Appendix: Batching Optimizations — improvements to the efficiency of
-        validating multiple signatures and verifying multiple proofs.
-\end{itemize}
-
-
-\vspace{-2ex}
-\lsubsection{Caution}{caution}
-
-\Zcash security depends on consensus. Should a program interacting with the
-\Zcash network diverge from consensus, its security will be weakened or destroyed.
-The cause of the divergence doesn't matter: it could be a bug in your program,
-it could be an error in this documentation which you implemented as described,
-or it could be that you do everything right but other software on the network
-behaves unexpectedly. The specific cause will not matter to the users of your
-software whose wealth is lost.
-
-Having said that, a specification of \emph{intended} behaviour is essential
-for security analysis, understanding of the protocol, and maintenance of
-\Zcash and related software. If you find any mistake in this specification,
-please file an issue at \url{https://github.com/zcash/zips/issues}, or if
-security-relevant please submit a GitHub Security Advisory to the relevant
-repository (see \url{https://github.com/zcash/zips/security/policy}).
-
-\lsubsection{High-level Overview}{overview}
-
-The following overview is intended to give a concise summary of the ideas
-behind the protocol, for an audience already familiar with \blockChain-based
-cryptocurrencies such as \Bitcoin. It is imprecise in some aspects and is not
-part of the normative protocol specification. This overview applies to
-\notnufive{both \Sprout and \Sapling}\notbeforenufive{\Sprout, \Sapling, and \Orchard},
-differences in the cryptographic constructions used notwithstanding.
-
-\introsection
-All value in \Zcash belongs to some \defining{\chainValuePool}. The current \chainValuePools
-are the \defining{\TransparentPool, \SproutPool, \SaplingLikePoolList\nusix{, and
-\DeferredPool}}. \nusixthree{The \IronwoodPool uses the same \shieldedProtocol
-as the \OrchardPool.}
-Transfers of \transparent value work essentially as in \Bitcoin and have the
-same privacy properties.
-Value in a \shielded \chainValuePool is carried by \notes\footnotewithlabel{notesandnullifiers}{In
-\Zerocash \cite{BCGGMTV2014}, \notes were called
-\defining{\quotedtermandindex{coins}{coins (in Zerocash)}},
-and \nullifiers were called
-\defining{\quotedtermandindex{serial numbers}{serial numbers (in Zerocash)}}.},
-which specify an amount and (indirectly) a \shieldedPaymentAddress, which is a
-destination to which \notes can be sent.
-As in \Bitcoin, this is associated with a \privateKey that can be used to
-spend \notes sent to the address; in \Zcash this is called a \spendingKey.
-
-To each \note there is cryptographically associated a \noteCommitment. Once the
-\transaction creating a \note has been mined, the \note is associated with a fixed
-\notePosition in a tree of \noteCommitments, and with a \nullifier\footnoteref{notesandnullifiers}
-unique to that \note. Computing the \nullifier requires the associated private
-\spendingKey\sapling{ (or the \nullifierDerivingKey for \SaplingLikePoolAdj \notes)}.
-It is infeasible to correlate the \noteCommitment or \notePosition with the
-corresponding \nullifier without knowledge of at least this key. An unspent valid
-\note, at a given point on the \blockChain, is one for which the \noteCommitment
-has been publically revealed on the \blockChain prior to that point, but the
-\nullifier has not.
-
-\introlist
-A \transaction can contain \transparent inputs, outputs, and scripts, which all
-work as in \Bitcoin \cite{Bitcoin-Protocol}.
-It also can include \joinSplitDescriptions,\sapling{ \spendDescriptions,\notnufive{ and}
-\outputDescriptions}\nufive{ and\nusixthree{ (for the \OrchardLikePools)} \actionDescriptions}.
-Together these describe \defining{\shieldedTransfers} which take in \defining{\shieldedInput} \notes,
-and/or produce \defining{\shieldedOutput} \notes.
-(For \Sprout, each \joinSplitDescription handles up to two \shieldedInputs and
-up to two \shieldedOutputs.\sapling{ For \Sapling, each \shieldedInput or \shieldedOutput
-has its own description.}\nufive{ For \Orchard, each \actionDescription
-handles up to one \shieldedInput and up to one \shieldedOutput.})
-It is also possible for value to be transferred between \chainValuePools,
-either \transparent or \shielded; this always reveals the amount transferred.
-
-In each \shieldedTransfer, the \nullifiers of the input \notes are revealed (preventing
-them from being spent again) and the commitments of the output \notes are revealed
-(allowing them to be spent in future).
-
-A \transaction also includes computationally sound \zkSNARK proofs and signatures,
-which prove that all of the following hold except with insignificant probability:
-
-\introlist
-For each \shieldedInput,
-
-\begin{itemize}
-  \item \saplingonward{there is a revealed \valueCommitment to the same value as
-        the input \note;\nufive{\footnotewithlabel{orchardvaluecommitments}{\nufive{For
-        the \OrchardShieldedProtocol, each Action reveals a single \valueCommitment to
-        the net value spent by the Action, rather than one \valueCommitment for the input
-        \note and one for the output \note.}}}}
-  \item if the value is nonzero, some revealed \noteCommitment exists for this \note;
-  \item the prover knew the \authProvingKey of the \note;
-  \item the \nullifier and \noteCommitment are computed correctly.
-\end{itemize}
-
-\vspace{-1.5ex}
-and for each \shieldedOutput,
-
-\vspace{0.5ex}
-\begin{itemize}
-  \item \saplingonward{there is a revealed \valueCommitment to the same value as
-        the output \note;\nufive{\footnoteref{orchardvaluecommitments}}}
-  \item the \noteCommitment is computed correctly;
-  \item it is infeasible to cause the \nullifier of the output \note to collide
-        with the \nullifier of any other \note.
-\end{itemize}
-
-For \Sprout, the \joinSplitStatement also includes an explicit balance check.
-\sapling{For \SaplingAndOrchard, the \valueCommitments corresponding to the inputs and
-outputs are checked to balance (together with any net \transparent input or output)
-outside the \zkSNARK.}
-
-In addition, various measures\sapling{ (differing between \Sprout and \SaplingOrOrchard)}
-are used to ensure that the \transaction cannot be modified by a party not authorized
-to do so.
-
-Outside the \zkSNARK, it is checked that the \nullifiers for the input
-\notes had not already been revealed (i.e.\ they had not already been spent).
-
-A \shieldedPaymentAddress includes a \transmissionKey for a ``\keyPrivate'' asymmetric
-encryption scheme. \defining{\mbox{\xKeyPrivate}} means that ciphertexts do not
-reveal information about which key they were encrypted to, except to a holder of the
-corresponding \privateKey, which in this context is called the \receivingKey. This
-facility is used to communicate encrypted output \notes on the \blockChain to their
-intended recipient, who can use the \receivingKey to scan the \blockChain for
-\notes addressed to them and then decrypt those \notes.
-
-\sapling{
-In \SaplingAndOrchard, for each \spendingKey there is a \fullViewingKey that allows
-recognizing both incoming and outgoing \notes without having \spendingAuthority.
-This is implemented by an additional ciphertext in each
-\outputDescription\nufive{ or \actionDescription}.
-}
-
-The basis of the privacy properties of \Zcash is that when a \note is spent,
-the spender only proves that some commitment for it had been revealed, without
-revealing which one. This implies that a spent \note cannot be linked to the
-\transaction in which it was created. That is, from an adversary's point of
-view the set of possibilities for a given \note input to a \transaction{}
----its \defining{\noteTraceabilitySet}--- includes \emph{all} previous notes that the
-adversary does not control or know to have been spent.\footnotewithlabel{securitycaveat}{We
-make this claim only for \emph{fully shielded} \transactions. It does not exclude the
-possibility that an adversary may use data present in the cleartext of a \transaction
-such as the number of inputs and outputs, or metadata-based heuristics such as timing,
-to make probabilistic inferences about \transaction linkage.
-For consequences of this in the case of partially shielded \transactions,
-see \cite{Peterson2017}, \cite{Quesnelle2017}, and \cite{KYMM2018}.} This contrasts with
-other proposals for private payment systems, such as CoinJoin \cite{Bitcoin-CoinJoin}
-or \CryptoNote \cite{vanSaberh2014}, that are based on mixing of a limited number of
-transactions and that therefore have smaller \noteTraceabilitySets.
-
-The \nullifiers are necessary to prevent \doubleSpending: each \note on the
-\blockChain only has one valid \nullifier, and so attempting to spend a \note
-twice would reveal the \nullifier twice, which would cause the second \transaction
-to be rejected.
+With no spend ever naming a commitment, a spent note cannot be linked to the transaction
+which created the note, and to an observer the note could be any earlier note the observer
+does not control or know to be spent. The guarantee covers fully shielded transactions
+only, since the number of inputs and outputs, the timing and any amount moving between pools
+remain visible.
 
 
 \introsection
