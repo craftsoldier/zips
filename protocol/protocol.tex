@@ -10918,8 +10918,6 @@ where $\EdDSAReprR{}$ and $\EdDSAReprS{}$ are as defined in \cite{BDLSY2012}.
   \item It is \emph{not} required that the integer encoding of the $y$-coordinate\footnoteref{coordinatenames}
         of the points represented by $\EdDSAReprR{}$ or $\EdDSAReprA{}$ are less than $2^{255}-19$.
   \item It is \emph{not} required that $\EdDSAReprA{} \not\in \PreCanopyExcludedPointEncodings$.
-  \canopyonwarditem{Appendix \crossref{ed25519batchvalidate} describes an optimization that \MAY be used to speed up
-validation of batches of \EdSpecific signatures.}
 \end{pnotes}
 
 \vspace{-2.5ex}
@@ -11084,9 +11082,6 @@ Define $\RedDSAValidate{} \typecolon (\vk \typecolon \RedDSAPublic) \times (M \t
         \vspace{-0.5ex}
   \item The value $\RedDSAReprR{}$ used as part of the input to $\RedDSAHashToScalar$ \MUST be exactly
         as encoded in the signature.
-        \vspace{-0.5ex}
-  \item Appendix \crossref{reddsabatchvalidate} describes an optimization that \MAY be used to speed up
-        validation of batches of $\RedDSA$ signatures.
 \end{pnotes}
 
 \vspace{-2ex}
