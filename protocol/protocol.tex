@@ -1246,13 +1246,13 @@ A public ledger lets every node check every payment by showing everything, and a
 
 A wallet with one key for everything would put the power to spend at risk every time the wallet only needed to read or receive a payment. Zcash instead derives a chain of keys from one random spending key, and each step runs one way, so a weaker key can be handed out without exposing the keys above.
 
-\textbf{Sapling.} The spending key gives three secrets, the spend authorizing key for approving spends, the nullifier private key for computing nullifiers and the outgoing viewing key for reading payments sent. The public halves $\mathit{ak}$ and $\mathit{nk}$ of the first two, together with the outgoing viewing key, form the full viewing key, and a hash of $\mathit{ak}$ and $\mathit{nk}$ gives the incoming viewing key, which finds and reads payments received.
+\textbf{Sapling.} The spending key gives three secrets, the spend authorizing key for approving spends, the nullifier deriving key for computing nullifiers and the outgoing viewing key for reading payments sent. The public halves $\mathit{ak}$ and $\mathit{nk}$ of the first two, together with the outgoing viewing key, form the full viewing key, and a hash of $\mathit{ak}$ and $\mathit{nk}$ gives the incoming viewing key, which finds and reads payments received.
 
 \textbf{Orchard and Ironwood.} The keys keep the same roles, but the outgoing viewing key and a diversifier key come from the full viewing key rather than straight from the spending key. Wallets must derive Orchard keys exactly as specified, or the notes may not be recoverable through the recovery protocol of \cite{ZIP-2005} if attacks with quantum computers become practical. A wallet which takes the spend authorizing key from elsewhere, such as FROST or a hardware wallet, must keep the spending key and a record of the choice to recover the notes.
 
 \textbf{Sprout.} The spending key gives one paying key and one receiving key, and each spending key has exactly one address.
 
-\textbf{Addresses.} A Sapling or Orchard address pairs a diversifier with a transmission key made from the diversifier and the incoming viewing key, so every new diversifier gives a new address. The addresses work like post-office boxes forwarding to one mailroom, where outsiders cannot tell which boxes belong together while the one incoming viewing key finds the mail sent to every box. Orchard makes each diversifier from a diversifier index, and wallets should not pick the index at random \cite{ZIP-32}.
+\textbf{Addresses.} Each Sapling or Orchard address pairs a fresh diversifier with a transmission key built from the diversifier, which keeps payers from linking their payments. The addresses work like post-office boxes forwarding to one mailroom, where outsiders cannot tell which boxes belong together while the one incoming viewing key finds the mail sent to every box. Orchard makes each diversifier from a diversifier index, and wallets should not pick the index at random \cite{ZIP-32}.
 
 \textbf{Failed derivations.} A derivation can now and then produce a value which is not a valid key, and the wallet then discards the spending key and starts again with a new one.
 
@@ -1396,9 +1396,9 @@ Sinsemilla uses a cheaper addition formula which fails in rare cases, for exampl
 
 A proof recomputes the note commitment, so Sapling and Orchard build note commitments from the same hash as the tree, and Sprout from SHA-256.
 
-\textbf{Note commitments.} A Sprout note commitment is the SHA-256 hash of the paying key, the value, $\rho$ and the trapdoor. A Sapling note commitment is the Pedersen hash point of the note's value, diversified base and transmission key, plus one more fixed point multiplied by the trapdoor. An Orchard note commitment is built the same way from Sinsemilla, over the diversified base, the transmission key, the value, $\rho$ and one further random value of the note.
+\textbf{Note commitments.} A Sprout note commitment is the SHA-256 hash of the paying key, the value, $\rho$ and the trapdoor. A Sapling note commitment starts as a Pedersen hash of the note's address and value. The trapdoor, a random number made for the note, is then added to the hash. An Orchard note commitment is made the same way with Sinsemilla. The Orchard hash covers the address, the value, $\rho$ and one further random value of the note.
 
-The added point makes the Sapling and Orchard commitments hide the note against any attacker, however powerful. Changing the note behind a commitment is as hard as finding a hash collision. Orchard also derives the incoming viewing key as a Sinsemilla commitment to $\mathit{ak}$ and $\mathit{nk}$.
+The trapdoor makes the Sapling and Orchard commitments hide the note against any attacker, however powerful. Changing the note behind a commitment is as hard as finding a hash collision. Orchard also derives the incoming viewing key as a Sinsemilla commitment to $\mathit{ak}$ and $\mathit{nk}$.
 
 \textbf{Value commitments.} The hashes behind note commitments scramble their input, so two note commitments cannot be added to give a commitment to the sum of the values. Value commitments therefore keep the plain two-point form, on Jubjub for Sapling and on Pallas for Orchard, with both fixed points made by the group hash. A Sapling value commitment could by rare chance be the identity point, which the rules for Spends and Outputs reject, and a wallet may pick a new trapdoor until the commitment is not the identity point.
 
