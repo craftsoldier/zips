@@ -3090,30 +3090,10 @@ electronic commerce and payment, financial privacy, proof of work, zero knowledg
 \renewcommand{\abstractname}{}
 \begin{abstract}
 \normalsize \noindent \textbf{Abstract.}
-\defining{\Zcash} is an implementation of the \DecentralizedAnonymousPaymentScheme
-\Zerocash, with security fixes and improvements to performance and functionality.
-It bridges the existing transparent payment scheme used by \Bitcoin with a \emph{shielded}
-payment scheme secured by \zeroKnowledgeSuccinctNoninteractiveArgumentsOfKnowledge.
-It attempted to address the problem of mining centralization by use of the \Equihash
-memory-hard \proofOfWork algorithm.
-
-\vspace{1.5ex}
-\newcommand{\thisspecdefines}[1]{This specification defines the \Zcash consensus protocol at launch, and after each of the upgrades codenamed {#1}. }
-\newcommand{\thisspecdefinesandproposes}[2]{This specification defines the \Zcash consensus protocol at launch; after each of the upgrades codenamed {#1}; and proposed changes for {#2}. }
-\noindent \notblossom{\sapling{\thisspecdefines{\NUOverwinter and \NUSapling}}}%
-\notheartwood{\blossom{\thisspecdefines{\NUOverwinter, \NUSapling, and \NUBlossom}}}%
-\notcanopy{\heartwood{\thisspecdefines{\NUOverwinter, \NUSapling, \NUBlossom, and \NUHeartwood}}}%
-\notnufive{\canopy{\thisspecdefines{\NUOverwinter, \NUSapling, \NUBlossom, \NUHeartwood, and \NUCanopy}}}%
-\notnusix{\nufive{\thisspecdefines{\NUOverwinter, \NUSapling, \NUBlossom, \NUHeartwood, \NUCanopy, and \NUFive}}}%
-\notnusixone{\nusix{\thisspecdefines{\NUOverwinter, \NUSapling, \NUBlossom, \NUHeartwood, \NUCanopy, \NUFive, and \NUSix}}}%
-\notnusixtwo{\nusixone{\thisspecdefines{\NUOverwinter, \NUSapling, \NUBlossom, \NUHeartwood, \NUCanopy, \NUFive, \NUSix, and \NUSixOne}}}%
-\notnusixthree{\nusixtwo{\thisspecdefines{\NUOverwinter, \NUSapling, \NUBlossom, \NUHeartwood, \NUCanopy, \NUFive, \NUSix, \NUSixOne, and \NUSixTwo}}}%
-\notnuseven{\nusixthree{\thisspecdefines{\NUOverwinter, \NUSapling, \NUBlossom, \NUHeartwood, \NUCanopy, \NUFive, \NUSix, \NUSixOne, \NUSixTwo, and \NUSixThree}}}%
-\nuseven{\thisspecdefines{\NUOverwinter, \NUSapling, \NUBlossom, \NUHeartwood, \NUCanopy, \NUFive, \NUSix, \NUSixOne, \NUSixTwo, \NUSixThree, and \NUSeven}}%
-It is a work in progress. Protocol differences from \Zerocash and \Bitcoin are also explained.
-
-\vspace{2ex}
-\noindent \textbf{Keywords:}~ \StrSubstitute[0]{\keywords}{,}{, }.
+\defining{\Zcash} is a cryptocurrency originally built on \Bitcoin, keeping its transparent
+payments and adding privacy-preserving \emph{shielded} payments, which hide the sender,
+recipient and amount of transactions that stay within a shielded pool and are proved valid
+with zero-knowledge proofs.
 
 \ifxetex
 \vspace{12pt}
