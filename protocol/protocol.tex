@@ -16071,112 +16071,20 @@ distinct openings of the \noteCommitment when Condition I or II is violated.
 \introlist
 \lsection{Acknowledgements}{acknowledgements}
 
-The inventors of \Zerocash are Eli \nh{Ben-Sasson}, Alessandro Chiesa,
-Christina Garman, Matthew Green, Ian Miers, Eran Tromer, and Madars Virza.
+The \Zcash protocol was designed by the inventors of \Zerocash together with
+\nh{Daira-Emma} Hopwood, Sean Bowe, Jack Grigg, Simon Liu, Taylor Hornby, Nathan Wilcox,
+Zooko Wilcox, Jay Graber, Eirik \nh{Ogilvie-Wigley}, Ariel Gabizon, George Tankersley,
+Ying~Tong Lai, Kris Nuttycombe, Jack Gavigan, Steven Smith and Greg Pfeil.
 
-The designers of the \Zcash protocol are the \Zerocash inventors
-and also \nh{Daira-Emma} Hopwood, Sean Bowe, Jack Grigg, Simon Liu, Taylor Hornby,
-Nathan Wilcox, Zooko Wilcox, Jay Graber, Eirik \nh{Ogilvie-Wigley}, Ariel Gabizon,
-George Tankersley, Ying~Tong Lai, Kris Nuttycombe, Jack Gavigan, Steven Smith,
-and Greg Pfeil.
-The \Equihash \proofOfWork algorithm was designed by Alex Biryukov and
-Dmitry Khovratovich.
+The design of \Sapling is primarily due to Matthew Green, Ian Miers, \nh{Daira-Emma} Hopwood,
+Sean Bowe, Jack Grigg and Jack Gavigan, and the design of \Orchard to \nh{Daira-Emma} Hopwood,
+Sean Bowe, Jack Grigg, Kris Nuttycombe, Ying~Tong Lai and Steven Smith.
 
-The authors would like to thank everyone with whom they have discussed the
-\Zerocash and \Zcash protocol designs; in addition to the preceding, this
-includes Mike Perry, isis agora lovecruft, Leif Ryge, Andrew Miller, Ben Blaxill,
-Samantha Hulsey, Alex Balducci, Jake Tarren, Solar Designer, Ling Ren,
-John Tromp, Paige Peterson, jl777, Alison Stevenson, Maureen Walsh,
-Filippo Valsorda, Zaki Manian, Kexin Hu, Brian Warner, Mary Maller,
-Michael Dixon, Andrew Poelstra, Benjamin Winston, Josh Cincinnati,
-Kobi Gurkan, Weikeng Chen, Henry de~Valence, Deirdre Connolly, Chelsea Komlo,
-Zancas Wilcox, Jane Lusby, teor, Izaak Meckler, Zac Williamson, Vitalik Buterin,
-Jakub Zalewski, Oana Ciobotaru, Andre Serrano, Brad Miller, Charlie O'Keefe,
-David Campbell, Elena Giralt, Francisco Gindre, Joseph Van~Geffen, Josh Swihart,
-Kevin Gorham, Larry Ruane, Marshall Gaucher, Ryan Taylor, Sasha Meyer,
-Conrado Gouvêa, Aditya Bharadwaj, Andrew Arnott, Arya, Andrea Kobrlova,
-Lukáš Korba, Honza Rychnovský, Schell Scivally, @Peacemonger, Nicolas Gailly, Danny Willems,
-Jason McGee, Mark Henderson, Tomek Piotrowski, Mariusz Pilarek, Paul Dann, Dev Ojha, Evan Forbes,
-Anna Rose, Jens Groth, Judah Caruso, Pablo Kogan, Vivek Arte, Daniel Benarroch, Aurelien Nicolas,
-Alexey Koren, Antoine Rondelet, Constance Beguier, Georgios Konstantopoulos, Matt Luongo,
-Alex Bornstein, @dontbeevil, @GGuy, @mistfpga, Gordon Mohr, Dimitris Apostolou, Gregory Maxwell,
-Pieter Wuille, Julian Abraham, and no doubt others.
-We would also like to thank the designers and developers of \Bitcoin and
-\BitcoinCore.
-
-\Zcash has benefited from security audits performed by NCC Group, Coinspect,
-Least Authority, Mary Maller, Kudelski Security, QEDIT, and Trail of Bits.
-We also thank Mary Maller for her work on reviewing the security proofs
-for \HaloTwo (any remaining errors are ours).
-
-The Faerie Gold attack was found by Zooko Wilcox (who also came up with the
-name) and Brian Warner. The fix for this attack in \Sprout was proposed by
-\nh{Daira-Emma} Hopwood; subsequent analysis of variations on the attack was
-performed by \nh{Daira-Emma} Hopwood and Sean Bowe.
-
-The internal hash collision attack was found by Taylor Hornby.
-
-The error in the \Zerocash proof of Balance relating to \collisionResistance
-of $\PRFaddr{}$ was found by \nh{Daira-Emma} Hopwood.
-
-The errors in the proof of Ledger Indistinguishability mentioned in
-\crossref{truncation} were also found by \nh{Daira-Emma} Hopwood.
-
-The 2015 Soundness vulnerability in \BCTV \cite{Parno2015} was found by
-Bryan Parno. An additional condition needed to resist this attack was
-documented by Ariel Gabizon \cite[section 3]{Gabizon2019}.
-The 2019 Soundness vulnerability in \BCTV \cite{Gabizon2019}
-was found by Ariel Gabizon.
-
-The 2026 \Orchard Action circuit soundness vulnerability was found by Taylor Hornby.
-
-The design of \Sapling is primarily due to Matthew Green, Ian Miers,
-\nh{Daira-Emma} Hopwood, Sean Bowe, Jack Grigg, and Jack Gavigan. A potential attack
-linking \diversifiedPaymentAddresses, avoided in the adopted design, was
-found by Brian Warner.
-
-The design of \Orchard is primarily due to \nh{Daira-Emma} Hopwood, Sean Bowe, Jack Grigg,
-Kris Nuttycombe, Ying~Tong Lai, and Steven Smith.
-
-The observation in \crossref{concretediversifyhash} that
-\diversifiedPaymentAddress unlinkability can be proven in the same way
-as \keyPrivacy for ElGamal, is due to Mary Maller.
-
-The arithmetization used by \HaloTwo is based on that used by \PLONK \cite{GWC2019},
-which was designed by Ariel Gabizon, Zachary Williamson, and Oana Ciobotaru.
-
-Numerous people have contributed to the science of \zeroKnowledgeProvingSystems,
-but we would particularly like to acknowledge the work of
-Shafi Goldwasser, Silvio Micali, Oded Goldreich, Mihir Bellare, Charles Rackoff,
-Joe Kilian, Yael Tauman Kalai, Guy Rothblum, Rosario Gennaro, Bryan Parno,
-Jon Howell, Craig Gentry, Mariana Raykova, Jens Groth, Rafail Ostrovsky, and
-Amit Sahai.
-
-We thank the organizers of the ZKProof standardization effort and workshops;
-and also Anna Rose, Fredrik Harrysson, Tarun Chitra, James Prestwich,
-Josh Cincinnati, Tanya Karsou, Henrik Jose, Chris Ward, and others for their
-work on the Zero Knowledge Podcast, ZK Summits, and ZK Study Club. These
-efforts have enriched the zero knowledge community immeasurably.
-
-Many of the ideas used in \Zcash{} ---including the use of \zeroKnowledgeProofs
-to resolve the tension between privacy and auditability, Merkle trees over
-note commitments (using Pedersen hashes as in \Sapling),
-and the use of ``serial numbers'' or \nullifiers to detect or prevent
-\doubleSpends--- were first applied to privacy-preserving digital currencies
-by Tomas Sander and Amnon \nh{Ta-Shma}. To a large extent \Zcash is a refinement
-of their ``Auditable, Anonymous Electronic Cash'' proposal in \cite{ST1999}.
-
-We thank Alexandra Elbakyan for her tireless work in dismantling barriers
-to scientific research.
-
-This document is set in the beautiful Quattrocento font designed by Pablo Impallari.
-\xShieldedPool names are set in Raleway Italic, by Matt McInerney, Pablo Impallari,
-and Rodrigo Fuenzalida.
-The {\schoolbook New Century Schoolbook} font by URW Type Foundry, based on
-Century Schoolbook designed by Morris Fuller Benton, is used for \emph{italics}\!.
-
-Finally, we would like to thank the Internet Archive for their scan of
-Peter Newell's illustration of the Jubjub bird, from \cite{Carroll1902}.
+Many of the ideas used in \Zcash, including \zeroKnowledgeProofs to reconcile privacy with
+auditability, Merkle trees over note commitments, and \nullifiers to prevent \doubleSpends,
+were first applied to digital currencies by Tomas Sander and Amnon \nh{Ta-Shma}, and \Zcash
+is to a large extent a refinement of their ``Auditable, Anonymous Electronic Cash'' proposal
+\cite{ST1999}.
 
 
 \intropart
