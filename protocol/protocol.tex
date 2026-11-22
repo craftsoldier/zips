@@ -1513,12 +1513,13 @@ from \Bitcoin.
 
   \item \textbf{Valid transactions.} A transaction must take value from somewhere and send value
         somewhere, keep each value balance within the total supply of 21 million ZEC, give every
-        shielded part a correct encoding, a proof which verifies and a reference to an earlier tree
-        of note commitments, and carry the signatures binding the shielded parts together, which
+        shielded part a correct encoding and a proof which verifies, refer every shielded spend to an
+        earlier tree of note commitments, and carry the signatures binding the shielded parts together, which
         also prove the hidden values balance.
 
   \item \textbf{The coinbase transaction.} The first transaction in every block collects the block
-        subsidy and fees and must pay out exactly that total, begins its script with the block
+        subsidy and the fees not removed from circulation, must since NU6 pay out exactly that
+        total, begins its script with the block
         height, cannot spend shielded notes, and must make any shielded outputs readable with an
         all-zero outgoing viewing key, while transparent coinbase outputs can be spent only after
         100 further blocks and only by a transaction with no transparent outputs.
@@ -1531,8 +1532,8 @@ from \Bitcoin.
 
   \item \textbf{Proof of work.} \Zcash replaces \Bitcoin's proof of work with \Equihash, a
         memory-hard puzzle chosen as an attempt to resist mining centralization, and the target
-        adjusts after every block rather than every two weeks, following the average of the last
-        17 blocks and aiming for one block every 75 seconds. A node follows the valid chain
+        adjusts after every block rather than every two weeks, following an average over the
+        most recent blocks to hold a steady time between blocks. A node follows the valid chain
         carrying the most total work.
 
   \item \textbf{Issuance.} New ZEC is issued with each block, at most 12.5 ZEC per block after a
@@ -1541,7 +1542,7 @@ from \Bitcoin.
         Founders' Reward, and today part of each subsidy goes to development funding, paid either
         to named recipients or into a lockbox held in reserve.
 
-  \item \textbf{What NU7 changes.} The next upgrade, NU7, brings blocks every 25 seconds, averages
+  \item \textbf{What NU7 changes.} NU7, activated in November 2026, brings blocks every 25 seconds, averages
         difficulty over the last 102 blocks, stretches the number of blocks between halvings so
         halvings keep their schedule in time, limits how many shielded spends and outputs a block
         may carry, and through the Network Sustainability Mechanism removes 60\% of transaction
