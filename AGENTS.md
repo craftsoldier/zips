@@ -282,12 +282,6 @@ The `\pnote` macro or `{pnotes}` environment is used for normative notes,
 and the `\nnote` macro or `{nnotes}` environment is used for non-normative,
 explanatory notes or rationale.
 
-Substantive changes to the protocol specification MUST have a corresponding
-Change History entry. If there is no "open" entry at the top of the Change
-History section, add one as `\historyentry{\docversion}{}`. The release
-process replaces `\docversion` and the empty second argument with the
-released version and its date, so a dated entry is a closed one.
-
 New subsections, etc. MUST use the corresponding macro (`\lsubsection`,
 `\lsubsubsection`, etc.) with a unique label argument. Use `\introsection`
 before subsections and `\introlist` before lists to avoid page breaks at
