@@ -1182,7 +1182,7 @@ Development Lab, and zcashd will not support the changes in NU6.3.
 other transactions and the block's Merkle tree use to refer to the transaction. In a transaction,
 transparent inputs and shielded spends add value to a balance, transparent outputs and shielded
 outputs take value from the balance, and the value that remains, which must not be negative, is
-the fee for the miner.
+the fee, which since NU7 the miner shares with the Network Sustainability Mechanism.
 
 Each shielded pool has a treestate, made of the note commitment tree and the nullifier set, which
 passes from each transaction to the next transaction and from each block to the next block. A spend
@@ -1259,7 +1259,7 @@ A wallet with one key for everything would put the power to spend at risk every 
 
 Nodes cannot see a shielded transfer, so the transaction carries a description of the transfer instead, holding the public values the checks need and a proof the hidden values behind them are right. No description shows a note or a shielded address, every field must be a valid encoding, and every proof must verify.
 
-\textbf{JoinSplits.} A Sprout JoinSplit spends two notes and creates two, and two public amounts move value in or out of the transparent side of the transaction, at most one of them non-zero. Since Canopy the amount moving into Sprout must be zero, which closes the Sprout pool to new value.
+\textbf{JoinSplits.} A Sprout JoinSplit spends two notes and creates two, and two public amounts move value in or out of the transparent side of the transaction, at most one of them non-zero. Since Canopy no value may move into Sprout, and since NU7 no value may move out, so the Sprout pool is frozen.
 
 \textbf{Spends and Outputs.} Sapling gives each spent note a Spend, which carries a spend authorization signature over the whole transaction, and each new note an Output, which carries the encrypted note and no signature. The value commitment and the randomized key of a Spend, and the value commitment and the ephemeral key of an Output, must not be points of small order.
 
@@ -1491,7 +1491,7 @@ Zcash launched with the Sprout protocol on 28 October 2016 and has upgraded elev
 
 \textbf{NU6.3} (July 2026) added the Ironwood pool, whose notes support quantum recovery, and closed the Orchard pool so value can only leave the pool.
 
-\textbf{NU7} (November 2026) cut the time between blocks to 25 seconds and deprecated Sprout.
+\textbf{NU7} (November 2026) cut the time between blocks to 25 seconds and froze the Sprout pool.
 
 
 \intropart
@@ -1505,8 +1505,8 @@ from \Bitcoin.
 
 \begin{enumerate}
   \item \textbf{Transactions.} A transaction keeps \Bitcoin's transparent inputs and outputs and
-        adds fields for the shielded protocols, with newer transactions using version 5, carrying
-        Sapling and Orchard parts, or version 6, which adds Ironwood. Each transaction names the
+        adds fields for the shielded protocols, and since NU7 every transaction uses version 5,
+        which can carry Sapling and Orchard parts, or version 6, which adds Ironwood. Each transaction names the
         network upgrade it was built for and may name an expiry height after which no block may
         include the transaction, and version 5 and 6 transactions are identified by a hash defined
         in \cite{ZIP-244} and \cite{ZIP-229} rather than by \Bitcoin's hash of the raw bytes.
