@@ -185,7 +185,6 @@
 %
 % [Adobe2008] https://opensource.adobe.com/dc-acrobat-sdk-docs/pdfstandards/PDF32000_2008.pdf
 \newcommand{\readas}[2]{\BeginAccSupp{method=pdfstringdef,ActualText=\text{#1}}{#2}\EndAccSupp{}}
-\newcommand{\readasunicode}[2]{\BeginAccSupp{method=hex,unicode,ActualText={#1}}{#2}\EndAccSupp{}}
 
 % Presentation that should not be read out.
 \newcommand{\present}[1]{\BeginAccSupp{ActualText=}{#1}\EndAccSupp{}}
@@ -226,8 +225,6 @@
 % Use Raleway Italic for pool names. This is a deliberately idiosyncratic stylistic
 % choice (I like the curved crossed staves of the w in Ironwood), consistent with
 % the ZIPs as of zips#1301 and zips#1309.
-\newcommand{\ralewaytype}[1]{{\fontencoding{T1}\fontfamily{Raleway-TLF}\selectfont{#1}}}
-\newcommand{\ralewayitalictype}[1]{{\fontencoding{T1}\fontfamily{Raleway-TLF}\selectfont\textsl{#1}}}
 
 % While we're at it, let's match the tt x height to Quattrocento as well,
 % and compress it a little to save space in tables.
@@ -331,7 +328,6 @@
 \makeatletter
 \renewcommand*{\@fnsymbol}[1]{\ensuremath{\ifcase#1\or \dagger\or \ddagger\or \mathsection\or \medlozenge\or \mathparagraph\else\@ctrerr\fi}}
 \makeatother
-\newcommand{\footnotestar}{\raisebox{0.25ex}{\kern0.04em *}}
 
 \newcommand{\cedilla}[1]{#1\!\!¸\kern0.088em}
 
@@ -359,7 +355,6 @@
 
 \let\oldfootnote\footnote
 \renewcommand{\footnote}[1]{\hairspace\oldfootnote{#1}}
-\newcommand{\footnotewithlabel}[2]{\hairspace\oldfootnote{\label{#1}{#2}}}
 
 \newcommand{\noborders}[1]{% no nations
   \hypersetup{pdfborderstyle=/W 0}{#1}\hypersetup{pdfborderstyle=/S/U/W 0.7}}
@@ -371,15 +366,7 @@
 \newcommand{\refprefix}{\readas{section}{\linkstrut\S\!\!}}
 \newcommand{\page}{\readas{page}{p.}\,}
 \newcommand{\crossref}[1]{\raisebox{0ex}{\refprefix\autoref{#1}}\hspace{0.25em}\emph{`\nameref*{#1}\kern -0.05em'} on \page\pageref*{#1}}
-\newcommand{\shortcrossref}[1]{\raisebox{0ex}{\refprefix\autoref{#1}} on \page\pageref*{#1}}
-\newcommand{\theoremref}[1]{\raisebox{0ex}{\hyperref[#1]{Theorem \ref*{#1}\vphantom{,}}} on \page\pageref*{#1}}
-\newcommand{\lemmaref}[1]{\raisebox{0ex}{\hyperref[#1]{Lemma \ref*{#1}\vphantom{,}}} on \page\pageref*{#1}}
-\newcommand{\footnoteref}[1]{\hairspace\raisebox{0ex}{\cref{#1}}}
-\newcommand{\snarkref}[2]{\raisebox{0ex}{\hyperref[#2]{\linkstrut\smash{\textbf{#1}}}}}
-\newcommand{\zcashdref}[1]{\href{https://github.com/zcash/zcash/releases/tag/#1}{\softwaretype{zcashd\;#1}}}
-\newcommand{\zebraref}[1]{\href{https://github.com/ZcashFoundation/zebra/releases/tag/#1}{\softwaretype{zebra\;#1}}}
 
-\newcommand{\callout}[2]{\vspace{1ex plus 2pt minus 2pt}#1\textbf{#2}\hspace{1em}}
 
 \renewcommand{\appendixautorefname}{ }
 \renewcommand{\sectionautorefname}{ }
@@ -394,8 +381,6 @@
 %\renewcommand{\url}[1]{\href{#1}{\nolinkurl{#1}}}
 
 % <https://tex.stackexchange.com/a/60212/78411>
-\newcommand{\subsubsubsection}[1]{\paragraph{#1}}
-\newcommand{\subsubsubsubsection}[1]{\subparagraph{#1}}
 \setcounter{secnumdepth}{4}
 \setcounter{tocdepth}{4}
 
@@ -403,7 +388,6 @@
 \newcommand{\notsolarge}{\fontsize{11}{11}\selectfont}
 \newcommand{\largeish}{\fontsize{12}{12}\selectfont}
 \newcommand{\larger}{\fontsize{13}{13}\selectfont}
-\newcommand{\Larger}{\fontsize{16}{16}\selectfont}
 
 \titleformat{\section}{\Large\bfseries}{\thesection}{1em}{\headingandlabel{#1}{\#\sectionlabel}}
 \titleformat{\subsection}{\larger\bfseries}{\thesubsection}{1em}{\headingandlabel{#1}{\#\sectionlabel}}
@@ -419,15 +403,11 @@
 \newcommand{\lpart}[2]{\def\sectionlabel{#2} \intropart\vspace{20ex}\addparttocontents{#1}\section*{\nh{#1}}\label{#2}}
 \newcommand{\lsection}[2]{\def\sectionlabel{#2} \section{#1}\label{#2}}
 \newcommand{\lsubsection}[2]{\def\sectionlabel{#2} \subsection{#1}\label{#2}}
-\newcommand{\lsubsubsection}[2]{\def\sectionlabel{#2} \subsubsection{#1}\label{#2}}
-\newcommand{\lsubsubsubsection}[2]{\def\sectionlabel{#2} \subsubsubsection{#1}\label{#2}}
-\newcommand{\lsubsubsubsubsection}[2]{\def\sectionlabel{#2} \subsubsubsubsection{#1}\label{#2}}
 
 \newcommand{\introlist}{\needspace{15ex}}
 \newcommand{\introsection}{\needspace{35ex}}
 \newcommand{\intropart}{\needspace{55ex}}
 
-\newcommand{\theoremlabel}[1]{\def\sectionlabel{#1}}
 
 \theorempreskip{5ex}
 
@@ -455,103 +435,27 @@
 \newtheorem{lemma}[theorem]{Lemma}
 
 
-\newcommand{\search}{\faSearch}
 
-\mathchardef\mhyphen="2D
-\mathchardef\mcolon="3A
 
-\newcommand{\lrarrow}{\texorpdfstring{$\leftrightarrow$}{↔}}
 
 % Using the astral plane character 𝕊 works, but triggers bugs in PDF readers 😛
-\newcommand{\rS}{\texorpdfstring{$\ParamS{r}$}{rS}}
 
-\newcommand{\smallcirc}{%
-  \begin{picture}(2,2)
-    \linethickness{0.4pt}
-    \put(1,1){\circle{1.2}}
-  \end{picture}}
 
 \makeatletter
-\newcommand{\hollowcolon}{\mathpalette\hollow@colon\relax}
-\newcommand{\hollow@colon}[2]{
-  \mspace{0.7mu}
-  \vbox{\hbox{$\m@th#1\smallcirc$}\nointerlineskip\kern.45ex \hbox{$\m@th#1\smallcirc$}\kern-.06ex}
-  \mspace{1mu}
-}
 \makeatother
-\newcommand{\typecolon}{\;\hollowcolon\;}
 
 % <https://tex.stackexchange.com/a/235120/78411>
 \makeatletter
-\newcommand*\bigcdot{\mathpalette\bigcdot@{.5}}
-\newcommand*\bigcdot@[2]{\mathbin{\vcenter{\hbox{\scalebox{#2}{$\m@th#1\bullet$}}}}}
 \makeatother
 
 % <https://tex.stackexchange.com/a/269020/78411>, with explicit size parameter
 \makeatletter
-\newcommand*{\bigboxplus}[1]{\mathop{\mathpalette\big@boxplus{#1}\relax}\slimits@}
-\newcommand*{\bigboxminus}[1]{\mathop{\mathpalette\big@boxminus{#1}\relax}\slimits@}
-\newcommand*{\bigdiamondplus}[1]{\mathop{\mathpalette\big@diamondplus{#1}\relax}\slimits@}
-\newcommand*{\bigdiamondminus}[1]{\mathop{\mathpalette\big@diamondminus{#1}\relax}\slimits@}
-\newcommand*{\bigvartimes}[1]{\mathop{\mathpalette\big@vartimes{#1}\relax}\slimits@}
 
-\newcommand{\big@boxplus}[2]{%
-  \vcenter{\m@th\bigbox@thickness{#1}\hbox{%
-    \setlength{\unitlength}{#2}%
-    \begin{picture}(1,1)
-    \polyline(0.1,0.1)(0.9,0.1)(0.9,0.9)(0.1,0.9)(0.1,0.1)(0.5,0.1)
-    \polyline(0.5,0.1)(0.5,0.9)
-    \polyline(0.1,0.5)(0.9,0.5)
-    \end{picture}}}}
 
-\newcommand{\big@boxminus}[2]{%
-  \vcenter{\m@th\bigbox@thickness{#1}\hbox{%
-    \setlength{\unitlength}{#2}%
-    \begin{picture}(1,1)
-    \polyline(0.1,0.1)(0.9,0.1)(0.9,0.9)(0.1,0.9)(0.1,0.1)(0.5,0.1)
-    \polyline(0.1,0.5)(0.9,0.5)
-    \end{picture}}}}
 
-\newcommand{\big@diamondplus}[2]{%
-  \vcenter{\m@th\bigbox@thickness{#1}\hbox{%
-    \setlength{\unitlength}{#2}%
-    \begin{picture}(1,1)
-    \polyline(0,0.5)(0.5,0)(1,0.5)(0.5,1)(0,0.5)(0.5,0)
-    \polyline(0.5,0)(0.5,1)
-    \polyline(0,0.5)(1,0.5)
-    \end{picture}}}}
 
-\newcommand{\big@diamondminus}[2]{%
-  \vcenter{\m@th\bigbox@thickness{#1}\hbox{%
-    \setlength{\unitlength}{#2}%
-    \begin{picture}(1,1)
-    \polyline(0,0.5)(0.5,0)(1,0.5)(0.5,1)(0,0.5)(0.5,0)
-    \polyline(0,0.5)(1,0.5)
-    \end{picture}}}}
 
-\newcommand{\big@vartimes}[2]{%
-  \vcenter{\m@th\bigbox@thickness{#1}\hbox{%
-    \setlength{\unitlength}{#2}%
-    \begin{picture}(1,1)
-    \polyline(0.2,0.08)(0.8,1)
-    \polyline(0.2,1)(0.8,0.08)
-    \end{picture}}}}
 
-\newcommand{\bigbox@thickness}[1]{%
-  \ifx#1\displaystyle
-    \linethickness{0.2ex}%
-  \else
-    \ifx#1\textstyle
-      \linethickness{0.16ex}%
-    \else
-      \ifx#1\scriptstyle
-        \linethickness{0.12ex}%
-      \else
-        \linethickness{0.1ex}%
-      \fi
-    \fi
-  \fi
-}
 \makeatother
 
 % We just want one ampersand symbol from boisik.
@@ -564,13 +468,11 @@
 \DeclareSymbolFont{MnSyC}{U}{MnSymbolC}{m}{n}
 \DeclareFontFamily{U}{MnSymbolC}{}
 \DeclareFontShape{U}{MnSymbolC}{m}{n}{<->MnSymbolC10}{}
-\DeclareMathSymbol{\fivedots}{\mathbin}{MnSyC}{15}
 \DeclareMathSymbol{\medlozenge}{\mathord}{MnSyC}{197}
 
 % $v$ is too close to $u$.
 % <https://tex.stackexchange.com/questions/130569/sharp-or-angled-v-in-math-mode-varv>
 \DeclareSymbolFont{matha}{OML}{txmi}{m}{it}
-\DeclareMathSymbol{\varv}{\mathord}{matha}{118}
 
 % These are defined by newtxmath, but that's a very opinionated package that causes a
 % bunch of regressions (IMO) to math fonts and rendering.
@@ -578,31 +480,15 @@
 \SetSymbolFont{AMSm}{bold}{U}{ntxsym}{b}{n}
 \DeclareFontSubstitution{U}{ntxsym}{m}{n}
 
-\DeclareMathSymbol{\Game}{\mathord}{AMSm}{97}
-\DeclareMathSymbol{\ggg}{\mathrel}{AMSm}{239}
-\DeclareMathSymbol{\circledast}{\mathbin}{AMSm}{254}
 
 % end of characters from newtxmath
 
 \newcommand{\hairspace}{~\!}
-\newcommand{\oparen}{\big(}
-\newcommand{\hparen}{\phantom{\oparen}}
-\newcommand{\cparen}{\big)}
-\newcommand{\mhspace}[1]{\mbox{\hspace{#1}}}
-\newcommand{\tab}{\hspace{1.8em}}
-\newcommand{\blank}{\vspace{-3ex}}
 
-\newcommand{\raisedstrut}{\raisebox{0.3ex}{\strut}}
 
 % <https://tex.stackexchange.com/a/415155/78411>
-\newcommand{\clasp}[3][0pt]{\stackengine{0pt}{#3}{\kern#1#2}{O}{c}{F}{F}{L}}
 
-\newcommand{\plus}{\hspace{0.01em}+\hspace{0.01em}}
-\newcommand{\spv}{\hspace{0.071em}\varv\hspace{0.064em}}
-\newcommand{\varvv}{\varv\kern 0.02em\varv}
-\newcommand{\yy}{\hspace{0.022em}y\hspace{0.021em}}
 
-\newcommand{\hfrac}[2]{\scalebox{0.8}{$\genfrac{}{}{0.5pt}{0}{#1}{#2}$}}
 
 % <https://en.wikibooks.org/wiki/LaTeX/Mathematics#Roots>
 \def\hksqrt{\mathpalette\DHLhksqrt}
@@ -615,7 +501,6 @@
 \newcommand{\possqrt}[1]{\,{}^+\hspace{-0.7em}\hksqrt{#1\vphantom{b}}}
 \newcommand{\optsqrt}[1]{\,{}^?\hspace{-0.7em}\hksqrt{#1\vphantom{b}}}
 
-\newcommand{\sbitbox}[2]{\bitbox{#1}{\strut #2}}
 
 
 \newcommand{\doctitle}{Zcash Protocol Specification}
@@ -652,7 +537,6 @@ electronic commerce and payment, financial privacy, proof of work, zero knowledg
 
   \pagecolor{darkpage}
   \color{lighttext}
-  \newcommand{\imagesuffix}{_dark}
 }{
   \colorlet{foregroundcolor}{black}
   \definecolor{green}{RGB}{0,100,10}
@@ -666,34 +550,11 @@ electronic commerce and payment, financial privacy, proof of work, zero knowledg
   \colorlet{warningred}{BrickRed}
   \colorlet{cream}{yellow!20}
 
-  \newcommand{\imagesuffix}{}
 }
 
-\newcommand{\todo}[1]{{\color{foregroundcolor}{$\{$\,\schoolbook{TODO: #1}\,$\}$}}}
 
-\newcommand{\vulncolor}{warningred}
 \newcommand{\setwarning}{\color{\warningcolor}}
 \newcommand{\warningcolor}{warningred}
-\newcommand{\saplingcolor}{green}
-\newcommand{\saplingcolorname}{\saplingcolor}
-\newcommand{\blossomcolor}{red}
-\newcommand{\blossomcolorname}{\blossomcolor}
-\newcommand{\heartwoodcolor}{reddishorange}
-\newcommand{\heartwoodcolorname}{orange}
-\newcommand{\canopycolor}{purple}
-\newcommand{\canopycolorname}{\canopycolor}
-\newcommand{\nufivecolor}{slateblue}
-\newcommand{\nufivecolorname}{slate blue}
-\newcommand{\nusixcolor}{pink}
-\newcommand{\nusixcolorname}{\nusixcolor}
-\newcommand{\nusixonecolor}{burgundy}
-\newcommand{\nusixonecolorname}{\nusixonecolor}
-\newcommand{\nusixtwocolor}{brown}
-\newcommand{\nusixtwocolorname}{\nusixtwocolor}
-\newcommand{\nusixthreecolor}{blue}
-\newcommand{\nusixthreecolorname}{bright blue}
-\newcommand{\nusevencolor}{teal}
-\newcommand{\nusevencolorname}{\nusevencolor}
 \newcommand{\labelcolor}{cream}
 
 \iftoggle{isnuseven}{
@@ -703,141 +564,61 @@ electronic commerce and payment, financial privacy, proof of work, zero knowledg
     \providecommand{\baseurl}{https://zips.z.cash/protocol/nu7.pdf}
   }
   \toggletrue{isnusixthree}
-  \newcommand{\setnuseven}{\color{\nusevencolor}}
-  \newcommand{\nuseven}[1]{\texorpdfstring{{\setnuseven{#1}}}{#1}}
-  \newcommand{\notnuseven}[1]{}
-  \newcommand{\notbeforenuseven}[1]{#1}
 } {
-  \newcommand{\setnuseven}{}
-  \newcommand{\nuseven}[1]{}
-  \newcommand{\notnuseven}[1]{#1}
-  \newcommand{\notbeforenuseven}[1]{}
 }
 
 \iftoggle{isnusixthree}{
   \providecommand{\baseurl}{https://zips.z.cash/protocol/nu6_3.pdf}
   \toggletrue{isnusixtwo}
-  \newcommand{\setnusixthree}{\color{\nusixthreecolor}}
-  \newcommand{\nusixthree}[1]{\texorpdfstring{{\setnusixthree{#1}}}{#1}}
-  \newcommand{\notnusixthree}[1]{}
-  \newcommand{\notbeforenusixthree}[1]{#1}
 } {
-  \newcommand{\setnusixthree}{}
-  \newcommand{\nusixthree}[1]{}
-  \newcommand{\notnusixthree}[1]{#1}
-  \newcommand{\notbeforenusixthree}[1]{}
 }
 
 \iftoggle{isnusixtwo}{
   \providecommand{\baseurl}{https://zips.z.cash/protocol/nu6_2.pdf}
   \toggletrue{isnusixone}
-  \newcommand{\setnusixtwo}{\color{\nusixtwocolor}}
-  \newcommand{\nusixtwo}[1]{\texorpdfstring{{\setnusixtwo{#1}}}{#1}}
-  \newcommand{\notnusixtwo}[1]{}
-  \newcommand{\notbeforenusixtwo}[1]{#1}
 } {
-  \newcommand{\setnusixtwo}{}
-  \newcommand{\nusixtwo}[1]{}
-  \newcommand{\notnusixtwo}[1]{#1}
-  \newcommand{\notbeforenusixtwo}[1]{}
 }
 
 \iftoggle{isnusixone}{
   \providecommand{\baseurl}{https://zips.z.cash/protocol/nu6_1.pdf}
   \toggletrue{isnusix}
-  \newcommand{\setnusixone}{\color{\nusixonecolor}}
-  \newcommand{\nusixone}[1]{\texorpdfstring{{\setnusixone{#1}}}{#1}}
-  \newcommand{\notnusixone}[1]{}
-  \newcommand{\notbeforenusixone}[1]{#1}
 } {
-  \newcommand{\setnusixone}{}
-  \newcommand{\nusixone}[1]{}
-  \newcommand{\notnusixone}[1]{#1}
-  \newcommand{\notbeforenusixone}[1]{}
 }
 
 \iftoggle{isnusix}{
   \providecommand{\baseurl}{https://zips.z.cash/protocol/nu6.pdf}
   \toggletrue{isnufive}
-  \newcommand{\setnusix}{\color{\nusixcolor}}
-  \newcommand{\nusix}[1]{\texorpdfstring{{\setnusix{#1}}}{#1}}
-  \newcommand{\notnusix}[1]{}
-  \newcommand{\notbeforenusix}[1]{#1}
 } {
-  \newcommand{\setnusix}{}
-  \newcommand{\nusix}[1]{}
-  \newcommand{\notnusix}[1]{#1}
-  \newcommand{\notbeforenusix}[1]{}
 }
 
 \iftoggle{isnufive}{
   \providecommand{\baseurl}{https://zips.z.cash/protocol/nu5.pdf}
   \toggletrue{iscanopy}
-  \newcommand{\setnufive}{\color{\nufivecolor}}
-  \newcommand{\nufive}[1]{\texorpdfstring{{\setnufive{#1}}}{#1}}
-  \newcommand{\notnufive}[1]{}
-  \newcommand{\notbeforenufive}[1]{#1}
 } {
-  \newcommand{\setnufive}{}
-  \newcommand{\nufive}[1]{}
-  \newcommand{\notnufive}[1]{#1}
-  \newcommand{\notbeforenufive}[1]{}
 }
 
 \iftoggle{iscanopy}{
   \providecommand{\baseurl}{https://zips.z.cash/protocol/canopy.pdf}
   \toggletrue{isheartwood}
-  \newcommand{\setcanopy}{\color{\canopycolor}}
-  \newcommand{\canopy}[1]{\texorpdfstring{{\setcanopy{#1}}}{#1}}
-  \newcommand{\notcanopy}[1]{}
-  \newcommand{\notbeforecanopy}[1]{#1}
 } {
-  \newcommand{\setcanopy}{}
-  \newcommand{\canopy}[1]{}
-  \newcommand{\notcanopy}[1]{#1}
-  \newcommand{\notbeforecanopy}[1]{}
 }
 
 \iftoggle{isheartwood}{
   \providecommand{\baseurl}{https://zips.z.cash/protocol/heartwood.pdf}
   \toggletrue{isblossom}
-  \newcommand{\setheartwood}{\color{\heartwoodcolor}}
-  \newcommand{\heartwood}[1]{\texorpdfstring{{\setheartwood{#1}}}{#1}}
-  \newcommand{\notheartwood}[1]{}
-  \newcommand{\notbeforeheartwood}[1]{#1}
 } {
-  \newcommand{\setheartwood}{}
-  \newcommand{\heartwood}[1]{}
-  \newcommand{\notheartwood}[1]{#1}
-  \newcommand{\notbeforeheartwood}[1]{}
 }
 
 \iftoggle{isblossom}{
   \providecommand{\baseurl}{https://zips.z.cash/protocol/blossom.pdf}
   \toggletrue{issapling}
-  \newcommand{\setblossom}{\color{\blossomcolor}}
-  \newcommand{\blossom}[1]{\texorpdfstring{{\setblossom{#1}}}{#1}}
-  \newcommand{\notblossom}[1]{}
-  \newcommand{\notbeforeblossom}[1]{#1}
 } {
-  \newcommand{\setblossom}{}
-  \newcommand{\blossom}[1]{}
-  \newcommand{\notblossom}[1]{#1}
-  \newcommand{\notbeforeblossom}[1]{}
 }
 
 \iftoggle{issapling}{
   \providecommand{\baseurl}{https://zips.z.cash/protocol/sapling.pdf}
-  \newcommand{\setsapling}{\color{\saplingcolor}}
-  \newcommand{\sapling}[1]{\texorpdfstring{{\setsapling{#1}}}{#1}}
-  \newcommand{\setoverwinter}{}
-  \newcommand{\overwinter}[1]{\texorpdfstring{{\setoverwinter{#1}}}{#1}}
 } {
   \providecommand{\baseurl}{https://zips.z.cash/protocol/sprout.pdf}
-  \newcommand{\setsapling}{}
-  \newcommand{\sapling}[1]{}
-  \newcommand{\setoverwinter}{}
-  \newcommand{\overwinter}[1]{}
 }
 
 
@@ -855,7 +636,6 @@ electronic commerce and payment, financial privacy, proof of work, zero knowledg
 
 \newcommand{\strongtype}{\textbf}
 \newcommand{\strongitalictype}[1]{\fakebold{\textit{#1}}}
-\newcommand{\strong}[1]{\strongvartype{#1}\kern0.2em}
 
 % \strongvartype is normally \strongtype, but is overridden to be \strongitalictype while in \emph.
 \newcommand{\strongvartype}{\strongtype}
@@ -872,15 +652,12 @@ electronic commerce and payment, financial privacy, proof of work, zero knowledg
 % \mathsansvartype is normally mathsanstype, but is overridden to be mathsansitalictype while in \emph.
 \newcommand{\mathsansvartype}{\mathsanstype}
 
-\newcommand{\slantedtype}[1]{\textsl{#1}}
 
 % Typefaces: Semantics
 
 % Conformance keywords
-\newcommand{\conformancetype}{\strongvartype}
 
 % Network upgrades (Sprout is included)
-\newcommand{\upgradetype}{\strongvartype}
 
 % Top-level protocols (Zcash, Bitcoin, etc.)
 \newcommand{\topprotocoltype}{\strongvartype}
@@ -889,28 +666,21 @@ electronic commerce and payment, financial privacy, proof of work, zero knowledg
 \newcommand{\subprotocoltype}{\mathsansvartype}
 
 % Pools (transparent, Sprout, Sapling, Orchard, Ironwood)
-\newcommand{\pooltype}{\ralewayitalictype}
 
 % Software packages and libraries
 \newcommand{\softwaretype}{\mathsansitalictype}
 
 % Major currency units (ZEC, TAZ)
-\newcommand{\majorcurrencyunittype}{\strongvartype}
 
 % Minor currency units (zatoshi)
-\newcommand{\minorcurrencyunittype}{\textsf}
 
 % Field names
-\newcommand{\fieldnametype}{\texttt}
 
 % Filenames
-\newcommand{\filenametype}{\texttt}
 
 % Pairings
-\newcommand{\pairingtype}{\mathsansvartype}
 
 % Elliptic curves
-\newcommand{\ellipticcurvetype}{\mathsansvartype}
 
 % The arguments are: {anchor_as_formatted_in_text}{index_sort_key}{index_as_formatted}.
 %
@@ -929,41 +699,18 @@ electronic commerce and payment, financial privacy, proof of work, zero knowledg
 \newcommand{\indexlink}[3]{\texorpdfstring{\hypersetup{pdfborderstyle=/W 0}\hyperlink{index:#2}{#1}%
 \hypersetup{pdfborderstyle={/S/U/W 0.7}}\index{#2@{\protect\hypertarget{index:#2}{}\linkstrut\smash{#3}}|\indextype}}{}\xspace}
 
-\newcommand{\codesearchurl}[1]{https://github.com/zcash/zcash/search?q=#1}
-\newcommand{\consensuslink}[1]{\fcolorbox{black}{\labelcolor}{%
-  \normalfont\normalsize\noborders{\href{\codesearchurl{#1}}{\color{black}\raisebox{0.2ex}{\linkstrut}\smash{{\small \search}\, #1}}}}\,}
 
 % # Terminology
 
 \newcommand{\rawterm}[1]{\textsl{\nh{#1}}\kern 0.05em}
-\newcommand{\termnoindex}[1]{\rawterm{#1}\xspace}
 \newcommand{\termandindex}[2]{\indexlink{\rawterm{#1}}{#2}{#2}}  % index formatted as sort key
 \newcommand{\termandindexx}[2]{\indexlink{#1}{#2}{#1}}  % index formatted as anchor
 \newcommand{\term}[1]{\termandindex{#1}{#1}}
 \newcommand{\terms}[1]{\termandindex{#1s}{#1}}
-\newcommand{\termes}[1]{\termandindex{#1es}{#1}}
-\newcommand{\termps}[1]{\termandindex{#1(s)}{#1}}
-\newcommand{\termx}[1]{\termandindex{\MakeUppercase #1}{#1}}
-\newcommand{\termxs}[1]{\termandindex{\MakeUppercase #1s}{#1}}
-\newcommand{\termxes}[1]{\termandindex{\MakeUppercase #1es}{#1}}
-\newcommand{\termbf}[1]{\termandindexx{\textbf{#1}}{#1}}
-\newcommand{\termbfandindex}[2]{\termandindexx{\textbf{#1}}{#2}}
-\newcommand{\termsf}[1]{\termandindexx{\textsf{#1}}{#1}}
-\newcommand{\termsfandindex}[2]{\termandindexx{\textsf{#1}}{#2}}
 
 % Define only the single-argument cases here; others don't help conciseness.
-\newcommand{\termconformance}[1]{\termandindexx{\conformancetype{#1}}{#1}}
 \newcommand{\termtopprotocol}[1]{\termandindexx{\topprotocoltype{#1}}{#1}}
-\newcommand{\termsubprotocol}[1]{\termandindexx{\subprotocoltype{#1}}{#1}}
-\newcommand{\termpoolandindex}[2]{\indexlink{\pooltype{#1}}{#2}{#2}}
-\newcommand{\termsoftware}[1]{\termandindexx{\softwaretype{#1}}{#1}}
-\newcommand{\termmajorcurrencyunit}[1]{\termandindexx{\majorcurrencyunittype{#1}}{#1}}
-\newcommand{\termminorcurrencyunit}[1]{\termandindexx{\minorcurrencyunittype{#1}}{#1}}
 
-\newcommand{\quotedtermnoindex}[1]{``~\!\!\termnoindex{#1}''}
-\newcommand{\quotedtermandindex}[2]{``~\!\!\termandindex{#1}{#2}''}
-\newcommand{\quotedterm}[1]{``~\!\!\term{#1}''}
-\newcommand{\definingquotedterm}[1]{\defining{\quotedterm{#1}}}
 
 % Use `\readas[unicode]` to resolve ambiguity for listeners ("Sapling upgrade", "Orchard pool", etc.)
 % TODO: does `\readas` work in headings?
@@ -976,25 +723,12 @@ electronic commerce and payment, financial privacy, proof of work, zero knowledg
 \newcommand{\ZerocashText}{\topprotocoltype{Zerocash}}
 
 % Network Upgrades
-\newcommand{\NUOverwinter}{\termandindexx{\upgradetype{Overwinter}}{Overwinter (Network Upgrade 0)}}
-\newcommand{\NUSapling}{\readas{Sapling upgrade}{\termandindexx{\upgradetype{Sapling}}{Sapling (Network Upgrade 1)}}\xspace}
-\newcommand{\NUSaplingUpgrade}{\readas{Sapling upgrade}{\termandindexx{\upgradetype{Sapling}}{Sapling (Network Upgrade 1)} upgrade}\xspace}
-\newcommand{\NUSaplingNetworkUpgrade}{\readas{Sapling network upgrade}{\termandindexx{\upgradetype{Sapling}}{Sapling (Network Upgrade 1)} \networkUpgrade}\xspace}
-\newcommand{\NUBlossom}{\termandindexx{\upgradetype{Blossom}}{Blossom (Network Upgrade 2)}}
-\newcommand{\NUHeartwood}{\termandindexx{\upgradetype{Heartwood}}{{Heartwood (Network Upgrade 3)}}}
-\newcommand{\NUCanopy}{\termandindexx{\upgradetype{Canopy}}{Canopy (Network Upgrade 4)}}
 % "N<zwsp>U<zwsp>5"
-\newcommand{\NUFive}{\readasunicode{004e200b0055200b0035}{\termandindexx{\upgradetype{NU5}}{NU5 (Network Upgrade 5)}}\xspace}
 % "N<zwsp>U<zwsp>6"
-\newcommand{\NUSix}{\readasunicode{004e200b0055200b0036}{\termandindexx{\upgradetype{NU6}}{NU6 (Network Upgrade 6)}}\xspace}
 % "N<zwsp>U<zwsp>6.1"
-\newcommand{\NUSixOne}{\readasunicode{004e200b0055200b0036002e0031}{\termandindexx{\upgradetype{NU6.1}}{NU6.1 (Network Upgrade 6.1)}}\xspace}
 % "N<zwsp>U<zwsp>6.2"
-\newcommand{\NUSixTwo}{\readasunicode{004e200b0055200b0036002e0032}{\termandindexx{\upgradetype{NU6.2}}{NU6.2 (Network Upgrade 6.2)}}\xspace}
 % "N<zwsp>U<zwsp>6.3"
-\newcommand{\NUSixThree}{\readasunicode{004e200b0055200b0036002e0033}{\termandindexx{\upgradetype{NU6.3}}{NU6.3 (Network Upgrade 6.3)}}\xspace}
 % "N<zwsp>U<zwsp>7"
-\newcommand{\NUSeven}{\readasunicode{004e200b0055200b0037}{\termandindexx{\upgradetype{NU7}}{NU7 (Network Upgrade 7)}}\xspace}
 
 % Protocol-name math identifiers. The protocol analogue of the pool ids (\<P>PoolId); used for
 % math superscripts and as the rendering of the protocol terms and headings below, so protocol
@@ -1004,827 +738,103 @@ electronic commerce and payment, financial privacy, proof of work, zero knowledg
 \newcommand{\OrchardProto}{\subprotocoltype{Orchard}}
 
 % The Sprout shielded protocol.
-\newcommand{\SproutShieldedProtocol}{\termandindex{\SproutProto{} shielded protocol}{Sprout shielded protocol}}
-\newcommand{\SproutProtocolAdj}{\termandindex{\SproutProto{}-protocol}{Sprout shielded protocol}}
 \newcommand{\Sprout}{\readas{Sprout protocol}{\SproutProto}\xspace}
-\newcommand{\SproutText}{\texorpdfstring{\SproutProto}{Sprout}}
 
 % The Sapling shielded protocol
-\newcommand{\SaplingShieldedProtocol}{\termandindex{\SaplingProto{} shielded protocol}{Sapling shielded protocol}}
-\newcommand{\SaplingProtocolAdj}{\termandindex{\SaplingProto{}-protocol}{Sapling shielded protocol}}
 \newcommand{\Sapling}{\readas{Sapling protocol}{\SaplingProto}\xspace}
-\newcommand{\SaplingText}{\texorpdfstring{\SaplingProto}{Sapling}}
 
 % The Orchard shielded protocol (used for both Orchard and Ironwood pools)
-\newcommand{\OrchardShieldedProtocol}{\termandindex{\OrchardProto{} shielded protocol}{Orchard shielded protocol}}
-\newcommand{\OrchardProtocolAdj}{\termandindex{\OrchardProto{}-protocol}{Orchard shielded protocol}}
 \newcommand{\Orchard}{\readas{Orchard protocol}{\OrchardProto}\xspace}
-\newcommand{\OrchardText}{\texorpdfstring{\OrchardProto}{Orchard}}
 
 % The Sapling or Orchard shielded protocols
-\newcommand{\SaplingOrOrchard}{\Sapling{}\nufive{ or \Orchard{}}\xspace}
-\newcommand{\SaplingOrOrchardText}{\SaplingText{}\notbeforenufive{ or \OrchardText{}}}
-\newcommand{\SaplingAndOrchard}{\Sapling{}\nufive{ and \Orchard{}}\xspace}
-\newcommand{\SaplingAndOrchardText}{\SaplingText{}\notbeforenufive{ and \OrchardText{}}}
 % TODO: better readas
 %\newcommand{\SaplingOrOrchard}{\notnufive{\Sapling}\notbeforenufive{\readas{Sapling or Orchard protocol}{\llSapling{}\nufive{ or \llOrchard{}}}}\xspace}
 %\newcommand{\SaplingAndOrchard}{\notnufive{\Sapling}\notbeforenufive{\readas{Sapling and Orchard protocol}{\llSapling{}\nufive{ and \llOrchard{}}}}\xspace}
 
 % The Sprout pool
-\newcommand{\SproutPoolId}{\pooltype{SproutPool}}
-\newcommand{\SproutChainValuePool}{\termpoolandindex{Sprout chain value pool}{Sprout pool}}
-\newcommand{\SproutPool}{\termpoolandindex{Sprout pool}{Sprout pool}}
-\newcommand{\SproutPoolAdj}{\termpoolandindex{Sprout-pool}{Sprout pool}}
 % There is no Sprout transaction value pool, since JoinSplits are balanced individually.
 
 % The Sapling pool
-\newcommand{\SaplingPoolId}{\pooltype{SaplingPool}}
-\newcommand{\SaplingChainValuePool}{\termpoolandindex{Sapling chain value pool}{Sapling pool}}
-\newcommand{\SaplingPool}{\termpoolandindex{Sapling pool}{Sapling pool}}
-\newcommand{\SaplingPoolAdj}{\termpoolandindex{Sapling-pool}{Sapling pool}}
 
 % The Orchard pool
-\newcommand{\OrchardPoolId}{\pooltype{OrchardPool}}
-\newcommand{\OrchardChainValuePool}{\termpoolandindex{Orchard chain value pool}{Orchard pool}}
-\newcommand{\OrchardPool}{\termpoolandindex{Orchard pool}{Orchard pool}}
-\newcommand{\OrchardPoolAdj}{\termpoolandindex{Orchard-pool}{Orchard pool}}
 
 % The Ironwood pool
-\newcommand{\IronwoodPoolId}{\pooltype{IronwoodPool}}
-\newcommand{\IronwoodChainValuePool}{\termpoolandindex{Ironwood chain value pool}{Ironwood pool}}
-\newcommand{\IronwoodPool}{\termpoolandindex{Ironwood pool}{Ironwood pool}}
-\newcommand{\IronwoodPoolAdj}{\termpoolandindex{Ironwood-pool}{Ironwood pool}}
 
 % Sapling or Orchard pool, excluding Ironwood.
-\newcommand{\SaplingOrOrchardPool}{\sapling{\SaplingPool{}}\nufive{ or \OrchardPool{}}\xspace}
-\newcommand{\SaplingOrOrchardPoolAdj}{\sapling{\SaplingPoolAdj{}}\nufive{ or \OrchardPoolAdj{}}\xspace}
-\newcommand{\SaplingAndOrchardPools}{\sapling{\SaplingPool{}}\nufive{ and \OrchardPool{}}\xspace}
-\newcommand{\SaplingAndOrchardPoolsAdj}{\sapling{\SaplingPoolAdj{}}\nufive{ and \OrchardPoolAdj{}}\xspace}
 
 % The Sapling-like pools are Sapling, Orchard, and Ironwood, which share a note plaintext format
 % (modulo changes of interpretation at Canopy and NU6.3).
-\newcommand{\SaplingLikePoolIds}{\sapling{\SaplingPoolId}\nufive{, \OrchardPoolId}\nusixthree{, \IronwoodPoolId}}
-\newcommand{\SaplingLikePoolList}{\sapling{\SaplingPool{}}\nufive{,\notnusix{ and} \OrchardPool{}}\nusixthree{, \IronwoodPool{}}}
 
-\newcommand{\SaplingLikeChainValuePool}{\notnufive{\SaplingChainValuePool{}}%
-  \notbeforenufive{\termpoolandindex{Sapling or Orchard chain value pool}{Sapling or Orchard pool}}%
-  \notbeforenusixthree{\termpoolandindex{Sapling, Orchard, or Ironwood chain value pool}{Sapling, Orchard, or Ironwood pool}}\xspace}
-\newcommand{\SaplingLikePool}{\SaplingPool{}\nufive{ or \OrchardPool{}}\nusixthree{ or \IronwoodPool{}}\xspace}
-\newcommand{\SaplingLikePoolAdj}{\SaplingPoolAdj{}\nufive{ or \OrchardPoolAdj{}}\nusixthree{ or \IronwoodPoolAdj{}}\xspace}
 
-\newcommand{\SaplingLikeChainValuePools}{\notnufive{\SaplingChainValuePool{}}%
-  \notbeforenufive{\termpoolandindex{Sapling and Orchard chain value pools}{Sapling or Orchard pool}}%
-  \notbeforenusixthree{\termpoolandindex{Sapling, Orchard, and Ironwood chain value pools}{Sapling, Orchard, or Ironwood pool}}\xspace}
-\newcommand{\SaplingLikePools}{\SaplingPool{}\nufive{ and \OrchardPool{}}\nusixthree{ and \IronwoodPool{}}\xspace}
-\newcommand{\SaplingLikePoolsAdj}{\SaplingPoolAdj{}\nufive{ and \OrchardPoolAdj{}}\nusixthree{ and \IronwoodPoolAdj{}}\xspace}
-\newcommand{\TheSaplingLikePoolsNegative}{the \SaplingPool{}\nufive{ nor the \OrchardPool{}}\nusixthree{ nor the \IronwoodPool{}}\xspace}
 
 % Either \OrchardPoolId or a generic \Pool in {\OrchardPoolId, \IronwoodPoolId}.
-\newcommand{\OrchardLikePoolId}{\notnusixthree{\OrchardPoolId}\nusixthree{\Pool}}
-\newcommand{\OrchardLikePoolIdList}{\OrchardPoolId\nusixthree{, \IronwoodPoolId}}
 
-\newcommand{\OrchardLikeChainValuePool}{\notnusixthree{\OrchardChainValuePool{}}\notbeforenusixthree{\termpoolandindex{Orchard \nusixthree{or Ironwood} chain value pool}{Orchard or Ironwood pool}\xspace}}
-\newcommand{\OrchardLikePool}{\OrchardPool{}\nusixthree{ or \IronwoodPool{}}\xspace}
-\newcommand{\OrchardLikePoolAdj}{\OrchardPoolAdj{}\nusixthree{ or \IronwoodPoolAdj{}}\xspace}
 
-\newcommand{\OrchardLikeChainValuePools}{\notnusixthree{\OrchardChainValuePool{}}\notbeforenusixthree{\termpoolandindex{Orchard \nusixthree{and Ironwood} chain value pool}{Orchard or Ironwood pool}\xspace}}
-\newcommand{\OrchardLikePools}{\OrchardPool{}\nusixthree{ and \IronwoodPool{}}\xspace}
-\newcommand{\AllOrchardLikePools}{\nusixthree{both }the \OrchardPool{}\nusixthree{ and the \IronwoodPool{}}\xspace}
-\newcommand{\TheOrchardLikePoolsNegative}{the \OrchardPool{}\nusixthree{ nor the \IronwoodPool{}}\xspace}
 
 % Transparent pool
-\newcommand{\TransparentPoolId}{\pooltype{TransparentPool}}
-\newcommand{\TransparentChainValuePool}{\termpoolandindex{transparent chain value pool}{transparent pool}}
-\newcommand{\TransparentPool}{\termpoolandindex{transparent pool}{transparent pool}}
-\newcommand{\TransparentPoolAdj}{\termpoolandindex{Transparent-pool}{transparent pool}}
 
 % Deferred development fund pool
-\newcommand{\DeferredPoolId}{\pooltype{DeferredPool}}
-\newcommand{\DeferredChainValuePool}{\termpoolandindex{deferred development fund chain value pool}{deferred development fund pool}}
-\newcommand{\DeferredPool}{\termpoolandindex{deferred development fund pool}{deferred development fund pool}}
 
-\newcommand{\transparentTxValuePool}{\term{transparent transaction value pool}}
 
 \newcommand{\Bitcoin}{\termtopprotocol{Bitcoin}}
 \newcommand{\BitcoinText}{\topprotocoltype{Bitcoin}\xspace}
 
-\newcommand{\CryptoNote}{\termsubprotocol{CryptoNote}}
-\newcommand{\Mimblewimble}{\termsubprotocol{Mimblewimble}}
-\newcommand{\Bulletproofs}{\termsubprotocol{Bulletproofs}}
 
-\newcommand{\ZEC}{\termmajorcurrencyunit{ZEC}}
-\newcommand{\TAZ}{\termmajorcurrencyunit{TAZ}}
-\newcommand{\zatoshi}{\termminorcurrencyunit{zatoshi}}
 
-\newcommand{\zcashd}{\termsoftware{zcashd}}
-\newcommand{\zebra}{\termsoftware{zebra}}
-\newcommand{\librustzcash}{\termsoftware{librustzcash}}
 \newcommand{\BitcoinCore}{\termandindex{\softwaretype{Bitcoin Core}}{Bitcoin Core}}
 
-\newcommand{\Makefile}{\filenametype{Makefile}\xspace}
 
-\newcommand{\MUST}{\termconformance{MUST}}
-\newcommand{\MUSTNOT}{\termconformance{MUST NOT}}
-\newcommand{\SHOULD}{\termconformance{SHOULD}}
-\newcommand{\SHOULDNOT}{\termconformance{SHOULD NOT}}
-\newcommand{\RECOMMENDED}{\termconformance{RECOMMENDED}}
-\newcommand{\MAY}{\termconformance{MAY}}
-\newcommand{\OPTIONAL}{\termconformance{OPTIONAL}}
-\newcommand{\ALLCAPS}{\conformancetype{ALL CAPS}\xspace}
 
-\newcommand{\collisionResistant}{\termandindex{collision-resistant}{collision resistance}}
-\newcommand{\collisionResistance}{\term{collision resistance}}
-\newcommand{\xCollisionResistance}{\termx{collision resistance}}
-\newcommand{\binding}{\termandindex{binding}{binding (commitment scheme)}}
-\newcommand{\hiding}{\termandindex{hiding}{hiding (commitment scheme)}}
-\newcommand{\quotedBinding}{\quotedtermandindex{binding}{binding (commitment scheme)}}
-\newcommand{\quotedHiding}{\quotedtermandindex{hiding}{hiding (commitment scheme)}}
-\newcommand{\reRandomized}{\term{re-randomized}}
-\newcommand{\xReRandomized}{\termx{re-randomized}}
-\newcommand{\reRandomizable}{\termandindex{re-randomizable}{re-randomized}}
-\newcommand{\reRandomization}{\termandindex{re-randomization}{re-randomized}}
-\newcommand{\randomOracle}{\term{random oracle}}
-\newcommand{\randomOracles}{\terms{random oracle}}
-\newcommand{\randomOracleAdj}{\termandindex{random-oracle}{random oracle}}
-\newcommand{\nonCanonicalPoint}{\termandindex{non-canonical}{non-canonical (compressed encoding of a point)}}
-\newcommand{\nonCanonicalFieldElement}{\termandindex{non-canonical}{non-canonical (encoding of a field element)}}
-\newcommand{\nonCanonicallyFieldElement}{\termandindex{non-canonically}{non-canonical (encoding of a field element)}}
-\newcommand{\smallOrder}{\termandindex{small order}{small order (of a group element)}}
-\newcommand{\smallOrderAdj}{\termandindex{small-order}{small order (of a group element)}}
-\newcommand{\primeOrder}{\termandindex{prime order}{prime order (of a group element)}}
-\newcommand{\primeOrderAdj}{\termandindex{prime-order}{prime order (of a group element)}}
-\newcommand{\primeOrderGroup}{\term{prime-order group}}
-\newcommand{\primeOrderSubgroup}{\term{prime-order subgroup}}
-\newcommand{\primeOrderCurve}{\term{prime-order curve}}
-\newcommand{\primeOrderCurves}{\terms{prime-order curve}}
-\newcommand{\hashToCurve}{\term{hash-to-curve}}
-\newcommand{\discreteLogarithm}{\term{discrete logarithm}}
-\newcommand{\DiscreteLogarithmProblem}{\term{Discrete Logarithm Problem}}
-\newcommand{\DiscreteLogarithmIndependence}{\term{Discrete Logarithm Independence}}
-\newcommand{\DecisionalDiffieHellmanProblem}{\term{Decisional Diffie--Hellman Problem}}
-\newcommand{\DecisionalDiffieHellmanAssumption}{\termandindex{Decisional Diffie--Hellman assumption}{Decisional Diffie--Hellman Problem}}
-\newcommand{\partitioningOracleAttack}{\term{partitioning oracle attack}}
-\newcommand{\partitioningOracleAttacks}{\terms{partitioning oracle attack}}
-\newcommand{\sideChannel}{\term{side-channel}}
-\newcommand{\multiPartyComputation}{\term{multi-party computation}}
-\newcommand{\DecentralizedAnonymousPaymentScheme}{\term{Decentralized Anonymous Payment scheme}}
 
-\newcommand{\doubleSpend}{\term{double-spend}}
 \newcommand{\doubleSpends}{\terms{double-spend}}
-\newcommand{\doubleSpending}{\termandindex{double-spending}{double-spend}}
-\newcommand{\proofOfWork}{\term{proof-of-work}}
-\newcommand{\peerToPeerProtocol}{\term{peer-to-peer protocol}}
-\newcommand{\peerToPeerNetwork}{\termandindex{peer-to-peer network}{peer-to-peer protocol}}
-\newcommand{\inBand}{\term{in-band}}
-\newcommand{\outOfBand}{\term{out-of-band}}
 \newcommand{\xUSASCII}{\term{US-ASCII}}
-\newcommand{\bitSequence}{\term{bit sequence}}
-\newcommand{\bitSequences}{\terms{bit sequence}}
-\newcommand{\bitSequenceAdj}{\termandindex{bit-sequence}{bit sequence}}
-\newcommand{\byteSequence}{\term{byte sequence}}
-\newcommand{\byteSequences}{\terms{byte sequence}}
-\newcommand{\byteSequenceAdj}{\termandindex{byte-sequence}{byte sequence}}
-\newcommand{\littleEndian}{\term{little-endian}}
-\newcommand{\bigEndian}{\term{big-endian}}
 
-\newcommand{\shaHash}{\termandindexx{$\SHAFull$}{SHA-256}}
-\newcommand{\shadHash}{\termandindexx{$\SHAFulld$}{SHA-256d}}
-\newcommand{\shaCompress}{\termandindexx{$\SHACompress$}{SHA256Compress}}
-\newcommand{\shaHashText}{\texorpdfstring{$\SHAFull$}{SHA-256}}
-\newcommand{\shadHashText}{\texorpdfstring{$\SHAFulld$}{SHA-256d}}
-\newcommand{\shaCompressText}{\texorpdfstring{$\SHACompress$}{SHA256Compress}}
-\newcommand{\bigShaHash}{\termandindexx{$\BigSHAFull$}{SHA-512}}
-\newcommand{\bigShaHashText}{\texorpdfstring{$\BigSHAFull$}{SHA-512}}
 
-\newcommand{\publicKey}{\term{public key}}
-\newcommand{\publicKeys}{\terms{public key}}
-\newcommand{\privateKey}{\term{private key}}
-\newcommand{\privateKeys}{\terms{private key}}
-\newcommand{\keyPrivacy}{\term{key privacy}}
-\newcommand{\xKeyPrivacy}{\termx{key privacy}}
-\newcommand{\keyPrivate}{\termandindex{key-private}{key privacy}}
-\newcommand{\xKeyPrivate}{\termandindex{Key-private}{key privacy}}
-\newcommand{\ephemeralPublicKey}{\term{ephemeral public key}}
-\newcommand{\ephemeralPrivateKey}{\term{ephemeral private key}}
 
-\newcommand{\note}{\term{note}}
-\newcommand{\notes}{\terms{note}}
-\newcommand{\dummy}{\termandindex{dummy}{dummy note}}
-\newcommand{\dummyNote}{\term{dummy note}}
-\newcommand{\dummyNotes}{\terms{dummy note}}
-\newcommand{\commitmentScheme}{\term{commitment scheme}}
-\newcommand{\commitmentSchemes}{\terms{commitment scheme}}
-\newcommand{\commitmentTrapdoor}{\term{commitment trapdoor}}
-\newcommand{\commitmentTrapdoors}{\terms{commitment trapdoor}}
-\newcommand{\trapdoor}{\termandindex{trapdoor}{commitment trapdoor}}
-\newcommand{\trapdoors}{\termandindex{trapdoors}{commitment trapdoor}}
-\newcommand{\noteCommitment}{\term{note commitment}}
-\newcommand{\noteCommitments}{\terms{note commitment}}
-\newcommand{\xNoteCommitments}{\termxs{note commitment}}
-\newcommand{\notesCommitment}{\termandindex{note's commitment}{note commitment}}
-\newcommand{\noteCommitmentScheme}{\term{note commitment scheme}}
-\newcommand{\noteCommitmentTree}{\term{note commitment tree}}
-\newcommand{\noteCommitmentTrees}{\terms{note commitment tree}}
-\newcommand{\notePosition}{\term{note position}}
-\newcommand{\notePositions}{\terms{note position}}
-\newcommand{\positionedNote}{\term{positioned note}}
-\newcommand{\positionedNotes}{\terms{positioned note}}
-\newcommand{\noteTraceabilitySet}{\term{note traceability set}}
-\newcommand{\noteTraceabilitySets}{\terms{note traceability set}}
-\newcommand{\valueCommitment}{\term{value commitment}}
-\newcommand{\valueCommitments}{\terms{value commitment}}
-\newcommand{\valueCommitmentScheme}{\term{value commitment scheme}}
-\newcommand{\joinSplitDescription}{\term{JoinSplit description}}
-\newcommand{\joinSplitDescriptions}{\terms{JoinSplit description}}
-\newcommand{\joinSplitTransfer}{\term{JoinSplit transfer}}
-\newcommand{\joinSplitTransfers}{\terms{JoinSplit transfer}}
-\newcommand{\joinSplitSignature}{\term{JoinSplit signature}}
-\newcommand{\joinSplitSignatures}{\terms{JoinSplit signature}}
-\newcommand{\joinSplitSigningKey}{\term{JoinSplit signing key}}
-\newcommand{\joinSplitValidatingKey}{\term{JoinSplit validating key}}
-\newcommand{\joinSplitCircuit}{\term{JoinSplit circuit}}
-\newcommand{\joinSplitStatement}{\term{JoinSplit statement}}
-\newcommand{\joinSplitStatements}{\terms{JoinSplit statement}}
-\newcommand{\joinSplitProof}{\term{JoinSplit proof}}
-\newcommand{\shieldedTransfer}{\term{shielded transfer}}
-\newcommand{\shieldedTransfers}{\terms{shielded transfer}}
-\newcommand{\shieldedSpend}{\term{shielded Spend}}
-\newcommand{\shieldedSpends}{\terms{shielded Spend}}
-\newcommand{\shieldedInput}{\term{shielded input}}
-\newcommand{\shieldedInputs}{\terms{shielded input}}
-\newcommand{\shieldedProtocol}{\term{shielded protocol}}
-\newcommand{\shieldedProtocols}{\terms{shielded protocol}}
-\newcommand{\shieldedPool}{\term{shielded pool}}
-\newcommand{\xShieldedPool}{\termx{shielded pool}}
-\newcommand{\shieldedPools}{\terms{shielded pool}}
-\newcommand{\shieldedPoolps}{\termps{shielded pool}}
-\newcommand{\spendDescription}{\term{Spend description}}
-\newcommand{\spendDescriptions}{\terms{Spend description}}
-\newcommand{\spendTransfer}{\term{Spend transfer}}
-\newcommand{\spendTransfers}{\terms{Spend transfer}}
-\newcommand{\spendCircuit}{\term{Spend circuit}}
-\newcommand{\spendStatement}{\term{Spend statement}}
-\newcommand{\spendStatements}{\terms{Spend statement}}
-\newcommand{\spendProof}{\term{Spend proof}}
-\newcommand{\spendAuthSignature}{\term{spend authorization signature}}
-\newcommand{\spendAuthSignatures}{\terms{spend authorization signature}}
-\newcommand{\xSpendAuthSignatures}{\termxs{spend authorization signature}}
-\newcommand{\spendAuthRandomizer}{\term{spend authorization randomizer}}
-\newcommand{\spendAuthRandomizers}{\terms{spend authorization randomizer}}
-\newcommand{\spendAuthSignatureScheme}{\term{spend authorization signature scheme}}
-\newcommand{\spendingAuthority}{\term{spending authority}}
-\newcommand{\outputDescription}{\term{Output description}}
-\newcommand{\outputDescriptions}{\terms{Output description}}
-\newcommand{\outputTransfer}{\term{Output transfer}}
-\newcommand{\outputTransfers}{\terms{Output transfer}}
-\newcommand{\outputCircuit}{\term{Output circuit}}
-\newcommand{\outputStatement}{\term{Output statement}}
-\newcommand{\outputStatements}{\terms{Output statement}}
-\newcommand{\outputProof}{\term{Output proof}}
-\newcommand{\actionDescription}{\term{Action description}}
-\newcommand{\actionDescriptions}{\terms{Action description}}
-\newcommand{\actionTransfer}{\term{Action transfer}}
-\newcommand{\actionTransfers}{\terms{Action transfer}}
-\newcommand{\actionCircuit}{\term{Action circuit}}
-\newcommand{\actionStatement}{\term{Action statement}}
-\newcommand{\actionStatements}{\terms{Action statement}}
-\newcommand{\actionProof}{\term{Action proof}}
-\newcommand{\saplingBindingSignature}{\termandindex{Sapling binding signature}{binding signature (Sapling)}}
-\newcommand{\saplingBindingSignatures}{\termandindex{Sapling binding signatures}{binding signature (Sapling)}}
-\newcommand{\orchardBindingSignature}{\termandindex{Orchard binding signature}{binding signature (Orchard)}}
-\newcommand{\orchardBindingSignatures}{\termandindex{Orchard binding signatures}{binding signature (Orchard)}}
-\newcommand{\ironwoodBindingSignature}{\termandindex{Ironwood binding signature}{binding signature (Ironwood)}}
-\newcommand{\ironwoodBindingSignatures}{\termandindex{Ironwood binding signatures}{binding signature (Ironwood)}}
-\newcommand{\orchardLikeBindingSignature}{\termandindex{Orchard\notbeforenusixthree{ or Ironwood} binding signature}{binding signature (Orchard-like)}}
-\newcommand{\orchardLikeBindingSignatures}{\termandindex{\Orchard\notbeforenusixthree{ or Ironwood} binding signatures}{binding signature (Orchard-like)}}
-\newcommand{\bindingSignature}{\term{binding signature}}
-\newcommand{\bindingSignatures}{\terms{binding signature}}
-\newcommand{\bindingSignatureScheme}{\term{binding signature scheme}}
-\newcommand{\txBindingValidatingKey}{\term{transaction binding validating key}}
-\newcommand{\saplingBalancingValue}{\termandindex{Sapling-pool balancing value}{balancing value (Sapling pool)}}
-\newcommand{\orchardBalancingValue}{\termandindex{Orchard-pool balancing value}{balancing value (Orchard pool)}}
-\newcommand{\ironwoodBalancingValue}{\termandindex{Ironwood-pool balancing value}{balancing value (Ironwood pool)}}
-\newcommand{\orchardLikeBalancingValue}{\termandindex{Orchard- or Ironwood-pool balancing value}{balancing value (Orchard-like pool)}}
-\newcommand{\shieldedOutput}{\term{shielded output}}
-\newcommand{\shieldedOutputs}{\terms{shielded output}}
-\newcommand{\statement}{\term{statement}}
-\newcommand{\statements}{\terms{statement}}
-\newcommand{\proofNonmalleability}{\termandindex{nonmalleability}{nonmalleability (of proofs)}}
-\newcommand{\proofBatchEntries}{\termandindex{proof batch entries}{proof batch entry}}
-\newcommand{\ppzkSNARK}{\termandindex{preprocessing zk-SNARK}{proving system (preprocessing zk-SNARK)}}
-\newcommand{\provingSystem}{\termandindex{proving system}{proving system (preprocessing zk-SNARK)}}
-\newcommand{\provingSystems}{\termandindex{proving systems}{proving system (preprocessing zk-SNARK)}}
-\newcommand{\zeroKnowledgeProvingSystem}{\termandindex{zero-knowledge proving system}{proving system (preprocessing zk-SNARK)}}
-\newcommand{\zeroKnowledgeProvingSystems}{\termandindex{zero-knowledge proving systems}{proving system (preprocessing zk-SNARK)}}
 \newcommand{\zeroKnowledgeSuccinctNoninteractiveArgumentsOfKnowledge}{\termandindex{zero-knowledge succinct non-interactive arguments of knowledge (zk-SNARKs)}{proving system (preprocessing zk-SNARK)}}
-\newcommand{\quadraticConstraintProgram}{\term{quadratic constraint program}}
-\newcommand{\quadraticConstraintPrograms}{\terms{quadratic constraint program}}
-\newcommand{\quadraticArithmeticProgram}{\term{Quadratic Arithmetic Program}}
-\newcommand{\quadraticArithmeticPrograms}{\terms{Quadratic Arithmetic Program}}
-\newcommand{\linearCombination}{\term{linear combination}}
-\newcommand{\linearCombinations}{\terms{linear combination}}
-\newcommand{\representedGroup}{\term{represented group}}
-\newcommand{\representedGroups}{\terms{represented group}}
-\newcommand{\representedSubgroup}{\term{represented subgroup}}
-\newcommand{\representedSubgroups}{\terms{represented subgroup}}
-\newcommand{\coordinateExtractor}{\term{coordinate extractor}}
-\newcommand{\groupHash}{\term{group hash}}
-\newcommand{\groupHashes}{\termes{group hash}}
-\newcommand{\familyOfGroupHashesIntoTheSubgroup}{\termandindex{family of group hashes into the subgroup}{family of group hashes into a subgroup}}
-\newcommand{\familiesOfGroupHashes}{\termandindex{families of group hashes}{family of group hashes into a subgroup}}
-\newcommand{\representedPairing}{\term{represented pairing}}
 
-\newcommand{\BCTV}{\termsubprotocol{BCTV14}}
-\newcommand{\BCTVText}{\texorpdfstring{\subprotocoltype{BCTV14}}{BCTV14}}
-\newcommand{\Groth}{\termsubprotocol{Groth16}}
-\newcommand{\GrothText}{\texorpdfstring{\subprotocoltype{Groth16}}{Groth16}}
-\newcommand{\llHaloTwo}{\subprotocoltype{Halo\;2}}
-\newcommand{\HaloTwo}{\termandindexx{\llHaloTwo}{Halo 2}}
-\newcommand{\HaloTwoText}{\texorpdfstring{\llHaloTwo}{Halo 2}}
-\newcommand{\halotwo}{\termandindexx{\softwaretype{halo2}}{halo2 (library)}}
-\newcommand{\PLONK}{\termsubprotocol{PLONK}}
 
 % Pairings
-\newcommand{\llBNPairing}{\pairingtype{BN\mhyphen254}}
-\newcommand{\BNPairing}{\termandindex{\ensuremath{\llBNPairing}}{BN-254 pairing}}
-\newcommand{\BNPairingText}{\texorpdfstring{\llBNPairing}{BN-254}}
 
-\newcommand{\llBLSPairing}{\pairingtype{BLS12\mhyphen381}}
-\newcommand{\BLSPairing}{\termandindex{\ensuremath{\llBLSPairing}}{BLS12-381 pairing}}
-\newcommand{\BLSPairingText}{\texorpdfstring{\llBLSPairing}{BLS12-381 pairing}}
 
 % Elliptic curves
-\newcommand{\Jubjub}{\termandindex{\ellipticcurvetype{Jubjub}}{Jubjub elliptic curve}}
-\newcommand{\jubjubCurve}{\termandindex{Jubjub curve}{Jubjub elliptic curve}}
-\newcommand{\JubjubText}{\texorpdfstring{\ellipticcurvetype{Jubjub}}{Jubjub}}
 
-\newcommand{\Pallas}{\termandindex{\ellipticcurvetype{Pallas}}{Pallas elliptic curve}}
-\newcommand{\pallasCurve}{\termandindex{Pallas curve}{Pallas elliptic curve}}
-\newcommand{\PallasText}{\texorpdfstring{\ellipticcurvetype{Pallas}}{Pallas}}
-\newcommand{\llIsoPallas}{\ellipticcurvetype{iso\kern0.05em\mhyphen\kern-0.05em Pallas}}
-\newcommand{\IsoPallas}{\termandindex{\llIsoPallas}{iso-Pallas elliptic curve}}
 
-\newcommand{\Vesta}{\termandindex{\ellipticcurvetype{Vesta}}{Vesta elliptic curve}}
-\newcommand{\vestaCurve}{\termandindex{Vesta curve}{Vesta elliptic curve}}
-\newcommand{\VestaText}{\texorpdfstring{\ellipticcurvetype{Vesta}}{Vesta}}
-\newcommand{\llIsoVesta}{\ellipticcurvetype{iso\kern0.05em\mhyphen\kern-0.05em Vesta}}
-\newcommand{\IsoVesta}{\termandindex{\llIsoVesta}{iso-Vesta elliptic curve}}
 
-\newcommand{\PallasAndVestaText}{\texorpdfstring{\ellipticcurvetype{Pallas}{} and \ellipticcurvetype{Vesta}{}}{Pallas and Vesta}}
 
-\newcommand{\secpCurve}{\termandindex{secp256k1 curve}{secp256k1 elliptic curve}}
 
-\newcommand{\completeTwistedEdwardsEllipticCurve}{\term{complete twisted Edwards elliptic curve}}
 \newcommand{\completeTwistedEdwardsEllipticCurves}{\terms{complete twisted Edwards elliptic curve}}
 \newcommand{\xCtEdwards}{\term{ctEdwards}}
-\newcommand{\ctEdwardsCurve}{\termandindex{ctEdwards curve}{complete twisted Edwards elliptic curve}}
-\newcommand{\ctEdwardsCurves}{\termandindex{ctEdwards curves}{complete twisted Edwards elliptic curve}}
-\newcommand{\ctEdwardsCompressedEncoding}{\termandindex{ctEdwards compressed encoding}{complete twisted Edwards compressed encoding}}
-\newcommand{\ctEdwardsCompressedEncodings}{\termandindex{ctEdwards compressed encodings}{complete twisted Edwards compressed encoding}}
-\newcommand{\affineCtEdwards}{\termandindex{affine-ctEdwards}{complete twisted Edwards affine coordinates}}
-\newcommand{\xAffineCtEdwards}{\termandindex{Affine-ctEdwards}{complete twisted Edwards affine coordinates}}
-\newcommand{\MontgomeryEllipticCurve}{\term{Montgomery elliptic curve}}
-\newcommand{\MontgomeryEllipticCurves}{\terms{Montgomery elliptic curve}}
-\newcommand{\MontgomeryCurve}{\termandindex{Montgomery curve}{Montgomery elliptic curve}}
-\newcommand{\MontgomeryCurves}{\termandindex{Montgomery curves}{Montgomery elliptic curve}}
-\newcommand{\affineMontgomery}{\termandindex{affine-Montgomery}{Montgomery affine coordinates}}
-\newcommand{\xAffineMontgomery}{\termandindex{Affine-Montgomery}{Montgomery affine coordinates}}
-\newcommand{\swEllipticCurve}{\term{short Weierstrass elliptic curve}}
-\newcommand{\swEllipticCurves}{\terms{short Weierstrass elliptic curve}}
-\newcommand{\swCurve}{\termandindex{short Weierstrass curve}{short Weierstrass elliptic curve}}
-\newcommand{\swCurves}{\termandindex{short Weierstrass curves}{short Weierstrass elliptic curve}}
-\newcommand{\swCompressedEncoding}{\term{short Weierstrass compressed encoding}}
-\newcommand{\swCompressedEncodings}{\terms{short Weierstrass compressed encoding}}
-\newcommand{\affineSW}{\termandindex{affine-short-Weierstrass}{short Weierstrass affine coordinates}}
-\newcommand{\xAffineSW}{\termandindex{Affine-short-Weierstrass}{short Weierstrass affine coordinates}}
-\newcommand{\uniformRandomString}{\term{Uniform Random String}}
-\newcommand{\uniformRandomStrings}{\terms{Uniform Random String}}
-\newcommand{\provingKey}{\termandindex{proving key}{proving key (for a zk-SNARK)}}
-\newcommand{\provingKeys}{\termandindex{proving keys}{proving key (for a zk-SNARK)}}
-\newcommand{\zkProvingKeys}{\termandindex{zero-knowledge proving keys}{proving key (for a zk-SNARK)}}
-\newcommand{\verifyingKey}{\termandindex{verifying key}{verifying key (for a zk-SNARK)}}
-\newcommand{\verifyingKeys}{\termandindex{verifying keys}{verifying key (for a zk-SNARK)}}
-\newcommand{\zkVerifyingKeys}{\termandindex{zero-knowledge verifying keys}{verifying key (for a zk-SNARK)}}
-\newcommand{\joinSplitParameters}{\term{JoinSplit parameters}}
-\newcommand{\rankOneConstraintSystem}{\term{Rank 1 Constraint System}}
-\newcommand{\primary}{\termandindex{primary}{primary input}}
-\newcommand{\xPrimary}{\termandindex{Primary}{primary input}}
-\newcommand{\primaryInput}{\term{primary input}}
-\newcommand{\primaryInputs}{\terms{primary input}}
-\newcommand{\auxiliaryInput}{\term{auxiliary input}}
-\newcommand{\auxiliaryInputs}{\terms{auxiliary input}}
-\newcommand{\fullValidator}{\term{full validator}}
-\newcommand{\fullValidators}{\terms{full validator}}
-\newcommand{\consensusRuleChange}{\term{consensus rule change}}
-\newcommand{\networkUpgrade}{\term{network upgrade}}
-\newcommand{\networkUpgrades}{\terms{network upgrade}}
-\newcommand{\network}{\term{network}}
-\newcommand{\networks}{\terms{network}}
-\newcommand{\Mainnet}{\term{Mainnet}}
-\newcommand{\Testnet}{\term{Testnet}}
-\newcommand{\settled}{\term{settled}}
-\newcommand{\rpcByteOrder}{\term{RPC byte order}}
-\newcommand{\anchor}{\term{anchor}}
-\newcommand{\anchors}{\terms{anchor}}
-\newcommand{\block}{\term{block}}
-\newcommand{\blocks}{\terms{block}}
-\newcommand{\blockHash}{\term{block hash}}
-\newcommand{\blockHashes}{\termes{block hash}}
-\newcommand{\header}{\termandindex{header}{block header}}
-\newcommand{\headers}{\termandindex{headers}{block header}}
-\newcommand{\blockHeader}{\term{block header}}
-\newcommand{\blockHeaders}{\terms{block header}}
-\newcommand{\Blockheader}{\termx{block header}}
-\newcommand{\blockVersionNumber}{\term{block version number}}
-\newcommand{\blockVersionNumbers}{\terms{block version number}}
-\newcommand{\Blockversions}{\termandindex{Block versions}{block version number}}
-\newcommand{\blockTargetSpacing}{\term{block target spacing}}
-\newcommand{\blockTimestamp}{\term{block timestamp}}
-\newcommand{\blockHeight}{\term{block height}}
-\newcommand{\blockHeights}{\terms{block height}}
-\newcommand{\activationBlock}{\term{activation block}}
-\newcommand{\activationHeight}{\term{activation block height}}
-\newcommand{\activationHeights}{\terms{activation block height}}
-\newcommand{\genesisBlock}{\term{genesis block}}
-\newcommand{\genesisBlocks}{\terms{genesis block}}
-\newcommand{\medianTimePast}{\term{median-time-past}}
-\newcommand{\transaction}{\termandindex{trans\-action}{transaction}}
-\newcommand{\transactions}{\termandindex{trans\-actions}{transactions}}
-\newcommand{\transactionID}{\term{transaction ID}}
-\newcommand{\transactionIDs}{\terms{transaction ID}}
-\newcommand{\xTransactionIDs}{\termxs{transaction ID}}
-\newcommand{\wtxid}{\term{wtxid}}
-\newcommand{\wtxids}{\terms{wtxid}}
-\newcommand{\transactionFee}{\term{transaction fee}}
-\newcommand{\transactionFees}{\terms{transaction fee}}
-\newcommand{\transactionVersion}{\termandindex{transaction version}{transaction version number}}
-\newcommand{\transactionVersions}{\termandindex{transaction versions}{transaction version number}}
-\newcommand{\TransactionVersion}{\termandindex{Transaction version}{transaction version number}}
-\newcommand{\TransactionVersions}{\termandindex{Transaction versions}{transaction version number}}
-\newcommand{\transactionVersionNumber}{\term{transaction version number}}
-\newcommand{\transactionVersionNumbers}{\terms{transaction version number}}
-\newcommand{\versionNumber}{\termandindex{version number}{transaction version number}}
 % For maintainability, make sure to use the semantically correct macro, not just one that happens to match.
-\newcommand{\versionsForSaplingPool}{version 4\nufive{ or version 5}\nusixthree{ or version 6}\xspace}
-\newcommand{\VersionsForSaplingPool}{Version 4\nufive{ or version 5}\nusixthree{ or version 6}\xspace}
-\newcommand{\versionsForOrchardPool}{version 5\nusixthree{ or version 6}\xspace}
-\newcommand{\VersionsForOrchardPool}{Version 5\nusixthree{ or version 6}\xspace}
-\newcommand{\versionsAfterFourForSaplingPool}{version 5\nusixthree{ or version 6}\xspace}
-\newcommand{\versionsWithWtxid}{version 5\nusixthree{ or version 6}\xspace}
-\newcommand{\versionsForIronwoodPool}{version 6\xspace}
-\newcommand{\VersionsForIronwoodPool}{Version 6\xspace}
-\newcommand{\transactionVersionsForOrchardPool}{\notnusixthree{\transactionVersion 5}\notbeforenusixthree{\transactionVersions 5\nusixthree{ and 6}}\xspace}
-\newcommand{\TransactionVersionsForOrchardPool}{\notnusixthree{\TransactionVersion 5}\notbeforenusixthree{\TransactionVersions 5\nusixthree{ and 6}}\xspace}
-\newcommand{\TransactionVersionsForOrchardPoolDoNot}{\notnusixthree{\TransactionVersion 5 does not}\nusixthree{\TransactionVersions 5\nusixthree{ and 6} do not}\xspace}
-\newcommand{\versionGroupID}{\term{version group ID}}
-\newcommand{\consensusBranchID}{\term{consensus branch ID}}
-\newcommand{\xConsensusBranchID}{\termx{consensus branch ID}}
-\newcommand{\coinbaseTransaction}{\term{coinbase transaction}}
-\newcommand{\coinbaseTransactions}{\terms{coinbase transaction}}
-\newcommand{\prevout}{\termandindex{prevout}{prevout (previous output)}}
-\newcommand{\prevouts}{\termandindex{prevouts}{prevout (previous output)}}
-\newcommand{\standardPtoSHScript}{\term{standard P2SH script}}
-\newcommand{\standardRedeemScript}{\term{standard redeem script}}
-\newcommand{\xStandardRedeemScript}{\termx{standard redeem script}}
-\newcommand{\transparent}{\term{transparent}}
-\newcommand{\xTransparent}{\termx{transparent}}
-\newcommand{\transparentAddress}{\term{transparent address}}
-\newcommand{\transparentAddresses}{\termes{transparent address}}
-\newcommand{\xTransparentAddresses}{\termxes{transparent address}}
-\newcommand{\PtoSH}{\termandindex{P2SH}{transparent address (P2SH)}}
-\newcommand{\PtoSHAddress}{\termandindex{P2SH address}{transparent address (P2SH)}}
-\newcommand{\PtoSHAddresses}{\termandindex{P2SH addresses}{transparent address (P2SH)}}
-\newcommand{\transparentPtoSHAddress}{\termandindex{transparent P2SH address}{transparent address (P2SH)}}
-\newcommand{\PtoSHMultisigAddress}{\termandindex{P2SH multisig address}{transparent address (P2SH multisig)}}
-\newcommand{\PtoSHMultisigAddresses}{\termandindex{P2SH multisig addresses}{transparent address (P2SH multisig)}}
-\newcommand{\transparentPtoSHMultisigAddress}{\termandindex{transparent P2SH multisig address}{transparent address (P2SH multisig)}}
-\newcommand{\PtoPKH}{\termandindex{P2PKH}{transparent address (P2PKH)}}
-\newcommand{\PtoPKHAddress}{\termandindex{P2PKH address}{transparent address (P2PKH)}}
-\newcommand{\PtoPKHAddresses}{\termandindex{P2PKH addresses}{transparent address (P2PKH)}}
-\newcommand{\transparentPtoPKHAddress}{\termandindex{transparent P2PKH address}{transparent address (P2PKH)}}
-\newcommand{\transparentInput}{\term{transparent input}}
-\newcommand{\transparentInputs}{\terms{transparent input}}
-\newcommand{\xTransparentInputs}{\termxs{transparent input}}
-\newcommand{\transparentOutput}{\term{transparent output}}
-\newcommand{\transparentOutputs}{\terms{transparent output}}
-\newcommand{\xTransparentOutputs}{\termxs{transparent output}}
-\newcommand{\chainValuePool}{\term{chain value pool}}
-\newcommand{\chainValuePools}{\terms{chain value pool}}
-\newcommand{\deferredDevFundLockbox}{\term{deferred development fund lockbox}}
-\newcommand{\lockboxDisbursement}{\term{lockbox disbursement}}
-\newcommand{\lockboxDisbursements}{\terms{lockbox disbursement}}
-\newcommand{\totalIssuedSupply}{\term{total issued supply}}
-\newcommand{\totalOutputValue}{\term{total output value}}
-\newcommand{\totalInputValue}{\term{total input value}}
-\newcommand{\shielded}{\term{shielded}}
-\newcommand{\blockChain}{\term{block chain}}
-\newcommand{\blockChains}{\terms{block chain}}
-\newcommand{\chain}{\termandindex{chain}{block chain}}
-\newcommand{\validBlockChain}{\term{valid block chain}}
-\newcommand{\bestValidBlockChain}{\term{best valid block chain}}
-\newcommand{\blockChainReorganization}{\term{block chain reorganization}}
-\newcommand{\blockChainReorganizations}{\terms{block chain reorganization}}
-\newcommand{\consensusBranch}{\term{consensus branch}}
-\newcommand{\consensusBranches}{\termes{consensus branch}}
-\newcommand{\mempool}{\term{mempool}}
-\newcommand{\treestate}{\term{treestate}}
-\newcommand{\treestates}{\terms{treestate}}
-\newcommand{\xTreestates}{\termxs{treestate}}
-\newcommand{\nullifier}{\term{nullifier}}
 \newcommand{\nullifiers}{\terms{nullifier}}
-\newcommand{\xNullifier}{\termx{nullifier}}
-\newcommand{\xNullifiers}{\termxs{nullifier}}
-\newcommand{\nullifierSet}{\term{nullifier set}}
-\newcommand{\nullifierSets}{\terms{nullifier set}}
-\newcommand{\paymentAddress}{\term{payment address}}
-\newcommand{\paymentAddresses}{\termes{payment address}}
-\newcommand{\xPaymentAddresses}{\termxes{payment address}}
-\newcommand{\shieldedPaymentAddress}{\term{shielded payment address}}
-\newcommand{\shieldedPaymentAddresses}{\termes{shielded payment address}}
-\newcommand{\expandedReceiver}{\term{expanded receiver}}
-\newcommand{\unifiedPaymentAddress}{\term{unified payment address}}
-\newcommand{\unifiedPaymentAddresses}{\termes{unified payment address}}
-\newcommand{\xUnifiedPaymentAddresses}{\termxes{unified payment address}}
-\newcommand{\unifiedIncomingViewingKey}{\term{unified incoming viewing key}}
-\newcommand{\unifiedIncomingViewingKeys}{\terms{unified incoming viewing key}}
-\newcommand{\unifiedFullViewingKey}{\term{unified full viewing key}}
-\newcommand{\unifiedFullViewingKeys}{\terms{unified full viewing key}}
-\newcommand{\IVKEncoding}{\termandindex{IVK Encoding}{IVK Encoding (in a Unified Incoming Viewing Key)}}
-\newcommand{\Bech}{\term{Bech32}}
-\newcommand{\Bechm}{\term{Bech32m}}
-\newcommand{\BechOptm}{\termandindex{Bech32[m]}{Bech32m}}
-\newcommand{\BaseFiftyEightCheck}{\term{Base58Check}}
-\newcommand{\diversifiedPaymentAddress}{\term{diversified payment address}}
-\newcommand{\diversifiedPaymentAddresses}{\termes{diversified payment address}}
-\newcommand{\defaultDiversifiedPaymentAddress}{\term{default diversified payment address}}
-\newcommand{\diversifiedBase}{\term{diversified base}}
-\newcommand{\diversifiedBases}{\terms{diversified base}}
-\newcommand{\diversifier}{\term{diversifier}}
-\newcommand{\diversifiers}{\terms{diversifier}}
-\newcommand{\diversifierKey}{\term{diversifier key}}
-\newcommand{\diversifierIndex}{\term{diversifier index}}
-\newcommand{\diversifierIndices}{\termandindex{diversifier indices}{diversifier index}}
-\newcommand{\xDiversifierIndices}{\termandindex{Diversifier indices}{diversifier index}}
-\newcommand{\incomingViewingKey}{\term{incoming viewing key}}
-\newcommand{\incomingViewingKeys}{\terms{incoming viewing key}}
-\newcommand{\outgoingViewingKey}{\term{outgoing viewing key}}
-\newcommand{\outgoingViewingKeys}{\terms{outgoing viewing key}}
-\newcommand{\outgoingCipherKey}{\term{outgoing cipher key}}
-\newcommand{\outgoingCipherKeys}{\terms{outgoing cipher key}}
-\newcommand{\fullViewingKey}{\term{full viewing key}}
-\newcommand{\fullViewingKeys}{\terms{full viewing key}}
-\newcommand{\receivingKey}{\term{receiving key}}
-\newcommand{\receivingKeys}{\terms{receiving key}}
-\newcommand{\spendingKey}{\term{spending key}}
-\newcommand{\spendingKeys}{\terms{spending key}}
-\newcommand{\expandedSpendingKey}{\term{expanded spending key}}
-\newcommand{\expandedSpendingKeys}{\terms{expanded spending key}}
-\newcommand{\extendedSpendingKey}{\term{extended spending key}}
-\newcommand{\extendedSpendingKeys}{\terms{extended spending key}}
-\newcommand{\payingKey}{\term{paying key}}
-\newcommand{\transmissionKey}{\term{transmission key}}
-\newcommand{\transmissionKeys}{\terms{transmission key}}
-\newcommand{\diversifiedTransmissionKey}{\term{diversified transmission key}}
-\newcommand{\diversifiedTransmissionKeys}{\terms{diversified transmission key}}
-\newcommand{\authSigningKey}{\term{Spend authorizing key}}
-\newcommand{\authSigningKeys}{\terms{Spend authorizing key}}
-\newcommand{\authValidatingKey}{\term{Spend validating key}}
-\newcommand{\authValidatingKeys}{\terms{Spend validating key}}
-\newcommand{\authRandomizedValidatingKey}{\term{randomized Spend validating key}}
-\newcommand{\authRandomizedValidatingKeys}{\terms{randomized Spend validating key}}
-\newcommand{\authProvingKey}{\term{proof authorizing key}}
-\newcommand{\authProvingKeys}{\terms{proof authorizing key}}
-\newcommand{\authNullifierKey}{\term{nullifier private key}}
-\newcommand{\authNullifierKeys}{\terms{nullifier private key}}
-\newcommand{\nullifierDerivingKey}{\term{nullifier deriving key}}
-\newcommand{\nullifierDerivingKeys}{\terms{nullifier deriving key}}
-\newcommand{\quantumSpendingKey}{\term{quantum spending key}}
-\newcommand{\quantumIntermediateKey}{\term{quantum intermediate key}}
-\newcommand{\commitIvkRandomness}{\termandindexx{$\CommitIvk{}$ randomness}{Commit^ivk randomness}}
-\newcommand{\rawEncoding}{\term{raw encoding}}
-\newcommand{\rawEncodings}{\terms{raw encoding}}
-\newcommand{\hdWallet}{\term{Hierarchical Deterministic Wallet}}
-\newcommand{\humanReadablePart}{\term{Human-Readable Part}}
-\newcommand{\notePlaintext}{\term{note plaintext}}
-\newcommand{\notePlaintexts}{\terms{note plaintext}}
-\newcommand{\xNotePlaintexts}{\termxs{note plaintext}}
-\newcommand{\leadByte}{\termandindex{lead byte}{lead byte (of a note plaintext)}}
-\newcommand{\leadBytes}{\termandindex{lead bytes}{lead byte (of a note plaintext)}}
-\newcommand{\notesCiphertextSprout}{\termandindex{transmitted notes ciphertext}{transmitted notes ciphertext (Sprout)}}
-\newcommand{\noteCiphertext}{\term{transmitted note ciphertext}}
-\newcommand{\noteCiphertexts}{\terms{transmitted note ciphertext}}
-\newcommand{\noteCiphertextSapling}{\termandindex{transmitted note ciphertext}{transmitted note ciphertext (Sapling)}}
-\newcommand{\noteCiphertextsSapling}{\termandindex{transmitted note ciphertexts}{transmitted note ciphertext (Sapling)}}
-\newcommand{\noteCiphertextOrchard}{\termandindex{transmitted note ciphertext}{transmitted note ciphertext (Orchard)}}
-\newcommand{\noteCiphertextsOrchard}{\termandindex{transmitted note ciphertexts}{transmitted note ciphertext (Orchard)}}
-\newcommand{\noteOrNotesCiphertext}{\termnoindex{transmitted note(s) ciphertext}}
-\newcommand{\outgoingCiphertext}{\term{outgoing ciphertext}}
-\newcommand{\outgoingCiphertexts}{\terms{outgoing ciphertext}}
-\newcommand{\incrementalMerkleTree}{\term{incremental Merkle tree}}
-\newcommand{\merkleRoot}{\termandindex{root}{root (of a Merkle tree)}}
-\newcommand{\merkleNode}{\termandindex{node}{node (of a Merkle tree)}}
-\newcommand{\merkleNodes}{\termandindex{nodes}{node (of a Merkle tree)}}
-\newcommand{\merkleHash}{\termandindex{hash value}{hash value (of a Merkle tree node)}}
-\newcommand{\merkleHashes}{\termandindex{hash values}{hash value (of a Merkle tree node)}}
-\newcommand{\merkleLeafNode}{\termandindex{leaf node}{leaf node (of a Merkle tree)}}
-\newcommand{\merkleLeafNodes}{\termandindex{leaf nodes}{leaf node (of a Merkle tree)}}
-\newcommand{\merkleInternalNode}{\termandindex{internal node}{internal node (of a Merkle tree)}}
-\newcommand{\merkleInternalNodes}{\termandindex{internal nodes}{internal node (of a Merkle tree)}}
-\newcommand{\MerkleInternalNodes}{\termandindex{Internal nodes}{internal node (of a Merkle tree)}}
-\newcommand{\merklePath}{\term{Merkle path}}
-\newcommand{\merkleLayer}{\termandindex{layer}{layer (of a Merkle tree)}}
-\newcommand{\merkleLayers}{\termandindex{layers}{layer (of a Merkle tree)}}
-\newcommand{\merkleIndex}{\termandindex{index}{index (of a Merkle tree node)}}
-\newcommand{\merkleIndices}{\termandindex{indices}{index (of a Merkle tree node)}}
-\newcommand{\zkSNARK}{\termandindex{zk-SNARK}{proving system (preprocessing zk-SNARK)}}
-\newcommand{\zkSNARKs}{\termandindex{zk-SNARKs}{proving system (preprocessing zk-SNARK)}}
-\newcommand{\zkProof}{\termandindex{zk~proof}{zk-SNARK proof}}
-\newcommand{\zeroKnowledgeProof}{\termandindex{zero-knowledge proof}{zk-SNARK proof}}
 \newcommand{\zeroKnowledgeProofs}{\termandindex{zero-knowledge proofs}{zk-SNARK proof}}
-\newcommand{\zkSNARKProof}{\termandindex{zk-SNARK proof}{zk-SNARK proof}}
-\newcommand{\zkSNARKProofs}{\termandindex{zk-SNARK proofs}{zk-SNARK proof}}
-\newcommand{\zkSNARKCircuit}{\termandindex{zk-SNARK circuit}{zk-SNARK circuit}}
-\newcommand{\zkSNARKCircuits}{\termandindex{zk-SNARK circuits}{zk-SNARK circuit}}
-\newcommand{\libsnark}{\termandindex{libsnark}{libsnark (Zcash fork)}}
-\newcommand{\bellman}{\term{bellman}}
-\newcommand{\memo}{\term{memo field}}
-\newcommand{\memos}{\terms{memo field}}
-\newcommand{\keyAgreementScheme}{\term{key agreement scheme}}
-\newcommand{\keyAgreementSchemes}{\terms{key agreement scheme}}
-\newcommand{\keyDerivationFunction}{\term{Key Derivation Function}}
-\newcommand{\keyDerivationFunctions}{\terms{Key Derivation Function}}
-\newcommand{\hashFunction}{\term{hash function}}
-\newcommand{\hashFunctions}{\terms{hash function}}
-\newcommand{\encryptionScheme}{\term{encryption scheme}}
-\newcommand{\oneTime}{\termandindex{one-time}{one-time (authenticated symmetric encryption)}}
-\newcommand{\symmetricEncryptionScheme}{\termandindex{authenticated one-time symmetric encryption scheme}{authenticated one-time symmetric encryption}}
-\newcommand{\signatureScheme}{\term{signature scheme}}
-\newcommand{\signatureSchemes}{\terms{signature scheme}}
-\newcommand{\oneTimeSignatureScheme}{\termandindex{one-time signature scheme}{one-time (signature scheme)}}
-\newcommand{\rerandomizableSignatureScheme}{\termandindex{signature scheme with re-randomizable keys}{signature scheme with re-randomizable keys}}
-\newcommand{\keyMonomorphicSignatureScheme}{\term{signature scheme with key monomorphism}}
-\newcommand{\monomorphism}{\term{monomorphism}}
-\newcommand{\sigNonmalleable}{\termandindex{nonmalleable}{nonmalleability (of signatures)}}
-\newcommand{\sigBatchEntries}{\termandindex{signature batch entries}{signature batch entry}}
-\newcommand{\signingKey}{\term{signing key}}
-\newcommand{\signingKeys}{\terms{signing key}}
-\newcommand{\validatingKey}{\termandindex{validating key}{validating key (for a signature scheme)}}
-\newcommand{\validatingKeys}{\termandindex{validating keys}{validating key (for a signature scheme)}}
-\newcommand{\randomizer}{\term{randomizer}}
-\newcommand{\randomizers}{\terms{randomizer}}
-\newcommand{\xPRF}{\termandindex{PRF}{Pseudo Random Function}}
-\newcommand{\xPRFs}{\termandindex{PRFs}{Pseudo Random Function}}
-\newcommand{\pseudoRandomFunction}{\term{Pseudo Random Function}}
-\newcommand{\pseudoRandomFunctions}{\terms{Pseudo Random Function}}
-\newcommand{\pseudoRandomPermutation}{\term{Pseudo Random Permutation}}
-\newcommand{\pseudoRandomGenerators}{\termnoindex{Pseudo Random Generators}} % only in history
-\newcommand{\expandedSeed}{\term{expanded seed}}
-\newcommand{\xPedersenHash}{\term{Pedersen hash}}
-\newcommand{\xPedersenHashes}{\termes{Pedersen hash}}
-\newcommand{\xPedersenCommitment}{\term{Pedersen commitment}}
-\newcommand{\xPedersenCommitments}{\terms{Pedersen commitment}}
-\newcommand{\xPedersenValueCommitment}{\term{Pedersen value commitment}}
-\newcommand{\xPedersenValueCommitments}{\terms{Pedersen value commitment}}
-\newcommand{\windowedPedersenCommitment}{\term{windowed Pedersen commitment}}
-\newcommand{\windowedPedersenCommitments}{\terms{windowed Pedersen commitment}}
-\newcommand{\homomorphicPedersenCommitment}{\term{homomorphic Pedersen commitment}}
-\newcommand{\homomorphicPedersenCommitments}{\terms{homomorphic Pedersen commitment}}
-\newcommand{\xSinsemillaHash}{\term{Sinsemilla hash}}
-\newcommand{\xSinsemillaHashes}{\termes{Sinsemilla hash}}
-\newcommand{\xSinsemillaCommitment}{\term{Sinsemilla commitment}}
-\newcommand{\xSinsemillaCommitments}{\terms{Sinsemilla commitment}}
-\newcommand{\xPedersenOrSinsemillaCommitments}{\termandindex{Pedersen}{Pedersen commitment}\nufive{ or \termandindex{Sinsemilla}{Sinsemilla commitment}} commitments\xspace}
-\newcommand{\chunks}{\termandindex{chunks}{chunk (of a Pedersen hash input)}}
-\newcommand{\segments}{\termandindex{segments}{segment (of a Pedersen hash input)}}
-\newcommand{\words}{\termandindex{words}{word (of a Sinsemilla hash input)}}
-\newcommand{\distinctXCriterion}{\term{distinct-$x$ criterion}}
-\newcommand{\Nary}{\mbox{$N$-ary}}
 
 % Conventions
 
 % requires #1 and #2 to be simple
-\newcommand{\pow}[2]{\readas{#1 to the #2}{{#1}^{#2}}}
-\newcommand{\bytes}[1]{\underline{\raisebox{-0.3ex}{}\smash{#1}}}
 \newcommand{\zeros}[1]{[0]^{#1}}
 \newcommand{\zerobytes}[1]{[\hexint{00}]^{#1}}
 \newcommand{\ones}[1]{[1]^{#1}}
 \newcommand{\bit}{\mathbb{B}}
 \newcommand{\byte}{\mathbb{B}\kern -0.1em\raisebox{0.45ex}{\overlap{0.0001em}{\scalebox{0.7}{$\mathbb{Y}$}}}}
 \newcommand{\Nat}{\mathbb{N}}
-\newcommand{\PosInt}{\mathbb{N}^+}
-\newcommand{\Int}{\mathbb{Z}}
-\newcommand{\Rat}{\mathbb{Q}}
-\newcommand{\GF}[1]{\mathbb{F}_{\!#1}}
-\newcommand{\GFstar}[1]{\mathbb{F}^\ast_{#1}}
 \newcommand{\typeexp}[2]{{#1}\vphantom{)}^{[{#2}]}}
 \newcommand{\bitseq}[1]{\typeexp{\bit}{#1}}
-\newcommand{\bitseqs}{\bitseq{\Nat}}
 \newcommand{\byteseq}[1]{\typeexp{\byte}{#1}}
 \newcommand{\byteseqs}{\byteseq{\Nat}}
-\newcommand{\concatbits}{\mathsf{concat}_\bit}
 \newcommand{\bconcat}{\mathop{\kern 0.05em||}}
-\newcommand{\listcomp}[1]{\overlap{0.06em}{\ensuremath{[}}~{#1}~\overlap{0.06em}{\ensuremath{]}}}
-\newcommand{\biglistcomp}[1]{\overlap{0.06em}{\ensuremath{\bigg[}}{#1}\overlap{0.06em}{\ensuremath{\bigg]}}}
-\newcommand{\fun}[2]{{#1} \mapsto {#2}}
-\newcommand{\exclusivefun}[3]{{#1} \mapsto_{\not\in\kern 0.05em{#3}\!} {#2}}
-\newcommand{\first}{\mathsf{first}}
-\newcommand{\for}{\text{ for }}
-\newcommand{\from}{\text{ from }}
-\newcommand{\upto}{\text{ up to }}
-\newcommand{\downto}{\text{ down to }}
-\newcommand{\tand}{\text{ \;and\, }}
-\newcommand{\tor}{\text{ \;or\, }}
-\newcommand{\squash}{\!\!\!}
-\newcommand{\caseif}{\squash\text{if }}
-\newcommand{\caseotherwise}{\squash\text{otherwise}}
-\newcommand{\sorted}{\mathsf{sorted}}
 \newcommand{\length}{\mathsf{length}}
 \newcommand{\truncate}[1]{\mathsf{truncate}_{#1}}
-\newcommand{\mean}{\mathsf{mean}}
-\newcommand{\median}{\mathsf{median}}
-\newcommand{\bound}[2]{\mathsf{bound\,}_{#1}^{#2}}
-\newcommand{\Lower}{\mathsf{lower}}
-\newcommand{\Upper}{\mathsf{upper}}
-\newcommand{\bitlength}{\mathsf{bitlength}}
-\newcommand{\size}{\mathsf{size}}
-\newcommand{\mantissa}{\mathsf{mantissa}}
-\newcommand{\ToCompact}{\mathsf{ToCompact}}
-\newcommand{\ToTarget}{\mathsf{ToTarget}}
-\newcommand{\ToScalar}[1]{\mathsf{ToScalar^{#1\kern-0.1em}}}
-\newcommand{\ToBase}[1]{\mathsf{ToBase^{#1\kern-0.1em}}}
 \newcommand{\hexint}[1]{\mathtt{0x{#1}}}
-\newcommand{\dontcare}{\kern -0.06em\raisebox{0.1ex}{\footnotesize{$\times$}}}
 \newcommand{\ascii}[1]{\textbf{``\texttt{#1}''}}
-\newcommand{\Justthebox}[2][-1.35ex]{\raisebox{#1}{\;\usebox{#2}\;}}
 \newcommand{\setof}[1]{\{{#1}\}}
-\newcommand{\bigsetof}[1]{\big\{{#1}\big\}}
-\newcommand{\powerset}[1]{\raisebox{-0.28ex}{\scalebox{1.25}{$\mathscr{P}$}}\kern -0.2em\big(\strut{#1}\big)}
 \newcommand{\barerange}[2]{{{#1}\,..\,{#2}}}
 \newcommand{\range}[2]{\setof{\barerange{#1}{#2}}}
-\newcommand{\bigrange}[2]{\bigsetof{\barerange{#1}{#2}}}
-\newcommand{\rangenozero}[2]{\range{#1}{#2} \setminus \setof{0}}
-\newcommand{\bigrangenozero}[2]{\bigrange{#1}{#2} \setminus \setof{0}}
-\newcommand{\binaryrange}[1]{\range{0}{2^{#1}\!\!-\!1}}
-\newcommand{\oneto}[1]{\mathrm{1}..{#1}}
-\newcommand{\alln}{\oneto{n}}
-\newcommand{\allm}{\oneto{m}}
-\newcommand{\minimum}{\mathsf{min}}
-\newcommand{\maximum}{\mathsf{max}}
 \newcommand{\floor}[1]{\mathsf{floor}\!\left({#1}\right)}
-\newcommand{\trunc}[1]{\mathsf{trunc}\!\left({#1}\right)}
 \newcommand{\ceiling}[1]{\mathsf{ceiling}\kern-0.06em\left({#1}\right)}
-\newcommand{\sceiling}[1]{\mathsf{ceiling}\left({#1}\right)}
-\newcommand{\vop}[3]{\,\raisebox{0.29ex}{\scalebox{0.89}{$\smashoperator[r]{#3_{#1}^{#2}}$\,}}}
-\newcommand{\sop}[3]{\!\scalebox{0.89}{$\scalebox{1.404}{$\strut#3$}_{#1}^{#2}$}}
-\newcommand{\vsum}[2]{\vop{#1}{#2}{\sum}}
-\newcommand{\ssum}[2]{\sop{#1}{#2}{\sum}}
-\newcommand{\vproduct}[2]{\vop{#1}{#2}{\prod}}
-\newcommand{\sproduct}[2]{\sop{#1}{#2}{\prod}}
-\newcommand{\vxor}[2]{\vop{#1}{#2}{\bigoplus}}
-\newcommand{\sxor}[2]{\sop{#1}{#2}{\bigoplus}}
-\newcommand{\vcombsum}[2]{\vop{#1}{#2}{\biggercombplus}}
-\newcommand{\scombsum}[2]{\sop{#1}{#2}{\bigcombplus}}
-\newcommand{\vgrpsum}[2]{\vop{#1}{#2}{\biggergrpplus}}
-\newcommand{\sgrpsum}[2]{\sop{#1}{#2}{\biggrpplus}}
 \newcommand{\xor}{\oplus}
-\newcommand{\biggercombplus}{\bigdiamondplus{4.6ex}}
-\newcommand{\bigcombplus}{\bigdiamondplus{3.3ex}}
-\newcommand{\combplus}{\bigdiamondplus{1.8ex}\,}
-\newcommand{\subcombplus}{\bigdiamondplus{1.4ex}}
-\newcommand{\combzero}{\Zero_{\subcombplus}}
-\newcommand{\combminus}{\bigdiamondminus{1.8ex}\,}
-\newcommand{\combneg}{\bigdiamondminus{1.8ex}}
-\newcommand{\biggergrpplus}{\bigboxplus{4.6ex}}
-\newcommand{\biggrpplus}{\bigboxplus{3.3ex}}
-\newcommand{\grpplus}{\bigboxplus{1.8ex}\,}
-\newcommand{\subgrpplus}{\bigboxplus{1.4ex}}
-\newcommand{\grpzero}{\Zero_{\subgrpplus}}
-\newcommand{\grpminus}{\bigboxminus{1.8ex}\,}
-\newcommand{\grpneg}{\bigboxminus{1.8ex}}
-\newcommand{\incompleteadd}{\,\fivedots\,}
-\newcommand{\vartimes}{\bigvartimes{1.8ex}}
 \newcommand{\band}{\binampersand}
-\newcommand{\bor}{\lor}
-\newcommand{\suband}{\raisebox{-0.6ex}{\kern-0.06em\scalebox{0.65}{$\binampersand$}}}
 \newcommand{\bchoose}{\;\scalebox{1.2}[1]{\textsf{?}}\;}
-\newcommand{\rotr}{\ggg}
-\newcommand{\mult}{\cdot}
-\newcommand{\smult}{\!\cdot\!}
-\newcommand{\scalarmult}[2]{\boldsymbol{[}{#1}\boldsymbol{]}\,{#2}}
-\newcommand{\bigscalarmult}[2]{\big[{#1}\big]\,{#2}}
-\newcommand{\Bigscalarmult}[2]{\Big[{#1}\Big]{#2}}
-\newcommand{\Biggscalarmult}[2]{\Bigg[{#1}\Bigg]{#2}}
-\newcommand{\rightarrowR}{\mathop{\clasp[-0.18em]{\raisebox{1.15ex}{\scriptsize R}}{$\,\rightarrow\,$}}}
-\newcommand{\leftarrowR}{\mathop{\clasp[0.15em]{\raisebox{1.15ex}{\scriptsize R}}{$\,\leftarrow\,$}}}
-\newcommand{\union}{\cup}
-\newcommand{\intersection}{\cap}
-\newcommand{\suchthat}{\,\vert\;}
-\newcommand{\paramdot}{\bigcdot}
-\newcommand{\lincomb}[1]{\left(\strut\kern-.025em{#1}\kern-0.04em\right)}
-\newcommand{\constraint}[3]{\lincomb{#1}\hairspace \vartimes\hairspace \lincomb{#2}\hairspace =\hairspace \lincomb{#3}}
-\newcommand{\lconstraint}[1]{\lincomb{#1}\hairspace \vartimes\mhspace{0.25em}}
-\newcommand{\maybe}[1]{{#1} \union \setof{\bot}}
-\newcommand{\Of}[1]{\!\left({#1}\right)\!}
 
 % <https://tex.stackexchange.com/a/87423/78411>
 \newcommand{\hexints}[1]{
@@ -1837,1233 +847,114 @@ electronic commerce and payment, financial privacy, proof of work, zero knowledg
 
 % Hashes
 
-\newcommand{\hSigCRH}{\mathsf{hSigCRH}}
-\newcommand{\hSigLength}{\mathsf{\ell_{hSig}}}
-\newcommand{\hSigType}{\bitseq{\hSigLength}}
-\newcommand{\EquihashGen}[1]{\mathsf{EquihashGen}_{#1}}
-\newcommand{\CRH}{\mathsf{CRH}}
-\newcommand{\SHACompress}{\mathsf{SHA256Compress}}
-\newcommand{\SHACompressBox}[1]{\SHACompress\left(\Justthebox{#1}\right)}
-\newcommand{\SHAFull}{\mathsf{SHA\mhyphen256}}
-\newcommand{\SHAFullBox}[1]{\SHAFull\left(\Justthebox{#1}\right)}
-\newcommand{\SHAFulld}{\mathsf{SHA\mhyphen256d}}
-\newcommand{\BigSHAFull}{\mathsf{SHA\mhyphen512}}
-\newcommand{\BlakeTwoGeneric}{\mathsf{BLAKE2}}
-\newcommand{\BlakeTwobGeneric}{\mathsf{BLAKE2b}}
-\newcommand{\BlakeTwob}[1]{\mathsf{BLAKE2b\kern 0.05em\mhyphen{#1}}}
-\newcommand{\BlakeTwobOf}[2]{\BlakeTwob{#1}\!\left({#2}\right)}
-\newcommand{\XMDBlakeTwob}{\mathsf{XMD\mcolon BLAKE2b}}
-\newcommand{\XMDBlakeTwobOf}[1]{\XMDBlakeTwob\!\left({#1}\right)}
-\newcommand{\BlakeTwosGeneric}{\mathsf{BLAKE2s}}
-\newcommand{\BlakeTwos}[1]{\mathsf{BLAKE2s\kern 0.05em\mhyphen{#1}}}
-\newcommand{\BlakeTwosOf}[2]{\BlakeTwos{#1}\!\left({#2}\right)}
-\newcommand{\BlakeParamBlock}{\mathsf{PB}}
-\newcommand{\BlakeIV}{\mathsf{IV}}
-\newcommand{\CRHivk}{\mathsf{CRH^{\InViewingKey}}}
-\newcommand{\CRHivkText}{\texorpdfstring{$\CRHivk$}{CRHivk}}
-\newcommand{\CRHivkOutput}{\CRHivk\mathsf{.Output}}
-\newcommand{\CRHivkBox}[1]{\CRHivk\!\left(\Justthebox{#1}\right)}
-\newcommand{\Poseidon}{\mathsf{Poseidon}}
-\newcommand{\PoseidonText}{\texorpdfstring{$\Poseidon$}{Poseidon}}
-\newcommand{\PoseidonHash}{\mathsf{PoseidonHash}}
-\newcommand{\PoseidonHashText}{\texorpdfstring{$\PoseidonHash$}{PoseidonHash}}
-\newcommand{\DiversifyHash}[1]{\mathsf{DiversifyHash}^\mathsf{#1\kern-0.1em}}
-\newcommand{\DiversifyHashText}[1]{\texorpdfstring{$\DiversifyHash{#1}$}{DiversifyHash{#1}}}
-\newcommand{\DefaultDiversifier}{\mathsf{DefaultDiversifier}}
-\newcommand{\CheckDiversifier}{\mathsf{CheckDiversifier}}
-\newcommand{\NotUpMySleeve}{U}
-\newcommand{\msg}{\mathsf{msg}}
-\newcommand{\DST}{\mathsf{DST}}
-\newcommand{\leninbytes}{\mathsf{len\_in\_bytes}}
-\newcommand{\binbytes}{\mathsf{b\_in\_bytes}}
-\newcommand{\rinbytes}{\mathsf{r\_in\_bytes}}
 
-\newcommand{\tx}{\mathsf{tx}}
-\newcommand{\cb}{\mathsf{cb}}
-\newcommand{\ReceivedSet}{\mathsf{ReceivedSet}}
-\newcommand{\SpentSet}{\mathsf{SpentSet}}
-\newcommand{\NullifierMap}{\mathsf{NullifierMap}}
-\newcommand{\NullifierType}{\mathsf{NullifierType}}
 
 % Key pairs
 
-\newcommand{\PaymentAddress}{\mathsf{addr_{pk}}}
-\newcommand{\DiversifiedPaymentAddress}{\mathsf{addr_{d}}}
-\newcommand{\PaymentAddressLeadByte}{\hexint{16}}
-\newcommand{\PaymentAddressSecondByte}{\hexint{9A}}
-\newcommand{\InViewingKey}{\mathsf{ivk}}
-\newcommand{\InViewingKeyLength}[1]{\ell^\mathsf{#1\vphantom{p}}_{\InViewingKey}\!}
-\newcommand{\InViewingKeyTypeSapling}{\range{1}{2^{\InViewingKeyLength{Sapling}}\!-\!1}}
-\newcommand{\InViewingKeyTypeOrchard}{\range{1}{\ParamP{q}-1}}
-\newcommand{\InViewingKeyRepr}{{\InViewingKey\Repr}}
-\newcommand{\InViewingKeyLeadByte}{\hexint{A8}}
-\newcommand{\InViewingKeySecondByte}{\hexint{AB}}
-\newcommand{\InViewingKeyThirdByte}{\hexint{D3}}
-\newcommand{\SpendingKeyLeadByte}{\hexint{AB}}
-\newcommand{\SpendingKeySecondByte}{\hexint{36}}
-\newcommand{\PtoSHAddressLeadByte}{\hexint{1C}}
-\newcommand{\PtoSHAddressSecondByte}{\hexint{BD}}
-\newcommand{\PtoPKHAddressLeadByte}{\hexint{1C}}
-\newcommand{\PtoPKHAddressSecondByte}{\hexint{B8}}
-\newcommand{\PaymentAddressTestnetLeadByte}{\hexint{16}}
-\newcommand{\PaymentAddressTestnetSecondByte}{\hexint{B6}}
-\newcommand{\InViewingKeyTestnetLeadByte}{\hexint{A8}}
-\newcommand{\InViewingKeyTestnetSecondByte}{\hexint{AC}}
-\newcommand{\InViewingKeyTestnetThirdByte}{\hexint{0C}}
-\newcommand{\SpendingKeyTestnetLeadByte}{\hexint{AC}}
-\newcommand{\SpendingKeyTestnetSecondByte}{\hexint{08}}
-\newcommand{\PtoSHAddressTestnetLeadByte}{\hexint{1C}}
-\newcommand{\PtoSHAddressTestnetSecondByte}{\hexint{BA}}
-\newcommand{\PtoPKHAddressTestnetLeadByte}{\hexint{1D}}
-\newcommand{\PtoPKHAddressTestnetSecondByte}{\hexint{25}}
-\newcommand{\NotePlaintextLeadByte}{\mathsf{leadByte}}
-\newcommand{\TxVersion}{\mathsf{txVersion}}
-\newcommand{\allowedLeadBytes}[1]{\mathsf{allowedLeadBytes}^{\kern0.1em\text{#1}}}
-\newcommand{\AuthPublic}{\mathsf{a_{pk}}}
-\newcommand{\AuthPublicSub}[1]{\mathsf{a_{pk,\mathnormal{#1}}}}
-\newcommand{\AuthPrivate}{\mathsf{a_{sk}}}
-\newcommand{\AuthPrivateSup}[1]{\mathsf{a^\mathrm{#1}_{sk}}}
-\newcommand{\AuthPrivateLength}{\mathsf{\ell_{\AuthPrivate}}}
-\newcommand{\AuthPublicOld}[1]{\mathsf{a^{old}_{pk,\mathnormal{#1}}}}
-\newcommand{\AuthPrivateOld}[1]{\mathsf{a^{old}_{sk,\mathnormal{#1}}}}
-\newcommand{\AuthEmphPublicOld}[1]{\mathsf{a^{old}_{\textsf{\textbf{pk}},\mathnormal{#1}}}}
-\newcommand{\AuthPublicOldX}[1]{\mathsf{a^{old}_{pk,\mathrm{#1}}}}
-\newcommand{\AuthPrivateOldX}[1]{\mathsf{a^{old}_{sk,\mathrm{#1}}}}
-\newcommand{\AuthPublicNew}[1]{\mathsf{a^{new}_{pk,\mathnormal{#1}}}}
-\newcommand{\AuthPrivateNew}[1]{\mathsf{a^{new}_{sk,\mathnormal{#1}}}}
-\newcommand{\AddressPublicNew}[1]{\mathsf{addr^{new}_{pk,\mathnormal{#1}}}}
-\newcommand{\ScalarLength}[1]{\ell^\mathsf{#1\vphantom{p}}_{\mathsf{scalar}}}
-\newcommand{\BaseLength}[1]{\ell^\mathsf{#1\vphantom{p}}_{\mathsf{base}}}
-\newcommand{\enc}{\mathsf{enc}}
-\newcommand{\DHSecret}[1]{\mathsf{sharedSecret}_{#1}}
-\newcommand{\EphemeralPublic}{\mathsf{epk}}
-\newcommand{\Repr}{\star}
-\newcommand{\MakeRepr}[2]{{#1}\rlap{\raisebox{-0.32ex}{$\Repr$}}\rule{0ex}{2.2ex}^{#2}}
-\newcommand{\EphemeralPublicRepr}{{\EphemeralPublic\Repr}}
-\newcommand{\EphemeralPrivate}{\mathsf{esk}}
-\newcommand{\EphemeralPrivateRepr}{{\EphemeralPrivate\Repr}}
-\newcommand{\EphemeralPrivateBytes}{\bytes{\EphemeralPrivate}}
-\newcommand{\EphemeralPrivateBytesType}{\byteseq{32}}
-\newcommand{\EphemeralPrivatePre}{\mathsf{pre\_esk}}
-\newcommand{\TransmitPublic}{\mathsf{pk_{enc}}}
-\newcommand{\TransmitPublicSup}[1]{\mathsf{pk}^{#1}_\mathsf{enc}}
-\newcommand{\TransmitPublicNew}[1]{\mathsf{pk^{new}_{\enc,\mathnormal{#1}}}}
-\newcommand{\TransmitPublicSub}[1]{\mathsf{pk_{\enc,\mathnormal{#1}}}}
-\newcommand{\TransmitPrivate}{\mathsf{sk_{enc}}}
-\newcommand{\TransmitPrivateSup}[1]{\mathsf{sk}^{#1}_\mathsf{enc}}
-\newcommand{\TransmitBase}{\mathsf{g}}
 
 % Sapling and Orchard protocols
 
-\newcommand{\Protocol}{\mathsf{protocol}}
-\newcommand{\Pool}{\pooltype{pool}}
-\newcommand{\Internal}[1]{{#1}_{\mathsf{internal}}}
-\newcommand{\SpendingKey}{\mathsf{sk}}
-\newcommand{\SpendingKeyLength}{\mathsf{\ell_{\SpendingKey}}}
-\newcommand{\SpendingKeyType}{\bitseq{\SpendingKeyLength}}
-\newcommand{\AuthSignPrivate}{\mathsf{ask}}
-\newcommand{\AuthSignBase}[1]{\mathcal{G}^{\mathsf{#1}\!}}
-\newcommand{\AuthSignPublic}{\mathsf{ak}}
-\newcommand{\AuthSignPublicPoint}{\mathsf{ak}^\GroupP}
-\newcommand{\AuthSignPublicRepr}{{\AuthSignPublic\Repr}}
-\newcommand{\AuthSignPublicTypeOrchard}{\range{1}{\ParamP{q}-1}}
-\newcommand{\AuthSignRandomizedPublic}{\mathsf{rk}}
-\newcommand{\AuthSignRandomizedPublicRepr}{{\AuthSignRandomizedPublic\Repr}}
-\newcommand{\AuthSignRandomizedPrivate}{\mathsf{rsk}}
-\newcommand{\AuthSignRandomizer}{\alpha}
-\newcommand{\AuthSignRandomizerRepr}{{\AuthSignRandomizer\Repr}}
-\newcommand{\AuthProvePrivate}{\mathsf{nsk}}
-\newcommand{\AuthProvePrivateRepr}{{\AuthProvePrivate\Repr}}
-\newcommand{\AuthProveBaseSapling}{\mathcal{H}^{\SaplingProto}}
-\newcommand{\NullifierKey}{\mathsf{nk}}
-\newcommand{\NullifierKeyRepr}{{\NullifierKey\Repr}}
-\newcommand{\NullifierKeyTypeOrchard}{\GF{\ParamP{q}}}
-\newcommand{\NullifierBaseOrchard}{\mathcal{K}^{\OrchardProto}}
-\newcommand{\NullifierTypeOrchard}{\GF{\ParamP{q}}}
-\newcommand{\OutViewingKey}{\mathsf{ovk}}
-\newcommand{\OutViewingKeyLength}{\mathsf{\ell_{\OutViewingKey}}}
-\newcommand{\OutViewingKeyType}{\byteseq{\OutViewingKeyLength/8}}
-\newcommand{\QuantumSpendingKey}{\mathsf{qsk}}
-\newcommand{\QuantumSpendingKeyLength}{\mathsf{\ell_{\QuantumSpendingKey}}}
-\newcommand{\QuantumSpendingKeyType}{\byteseq{\QuantumSpendingKeyLength/8}}
-\newcommand{\QuantumIntermediateKey}{\mathsf{qk}}
-\newcommand{\QuantumIntermediateKeyLength}{\mathsf{\ell_{\QuantumIntermediateKey}}}
-\newcommand{\QuantumIntermediateKeyType}{\byteseq{\QuantumIntermediateKeyLength/8}}
-\newcommand{\UseQsk}{\mathsf{use\_qsk}}
-\newcommand{\OutCipherKey}{\mathsf{ock}}
-\newcommand{\NotePosition}{\mathsf{pos}}
-\newcommand{\NotePositionRepr}{{\NotePosition\Repr}}
-\newcommand{\NotePositionBaseSapling}{\mathcal{J}^{\SaplingProto}}
-\newcommand{\NotePositionType}[1]{\binaryrange{\MerkleDepth{#1}}}
-\newcommand{\Diversifier}{\mathsf{d}}
-\newcommand{\DiversifierLength}{\mathsf{\ell_{\Diversifier}}}
-\newcommand{\DiversifierType}{\bitseq{\DiversifierLength}}
-\newcommand{\DiversifierKey}{\mathsf{dk}}
-\newcommand{\DiversifierKeyLength}{\mathsf{\ell_{\DiversifierKey}}}
-\newcommand{\DiversifierKeyType}{\byteseq{\DiversifierKeyLength/8}}
-\newcommand{\DiversifierIndex}{\mathsf{index}}
-\newcommand{\FVK}{\mathsf{FVK}}
-\newcommand{\DeriveInternalFVKOrchard}{\mathsf{DeriveInternalFVK}^{\OrchardProto}}
-\newcommand{\DeriveDkAndOvkOrchard}{\mathsf{DeriveDkAndOvk}^{\OrchardProto}}
-\newcommand{\DiversifiedTransmitBase}{\mathsf{g_d}}
-\newcommand{\DiversifiedTransmitBaseRepr}{\mathsf{g\Repr_d}}
-\newcommand{\DiversifiedTransmitBaseOld}{\mathsf{g^{old}_d}}
-\newcommand{\DiversifiedTransmitBaseOldRepr}{\mathsf{g\Repr^{old}_d}}
-\newcommand{\DiversifiedTransmitBaseNew}{\mathsf{g^{new}_d}}
-\newcommand{\DiversifiedTransmitBaseNewRepr}{\mathsf{g\Repr^{new}_d}}
-\newcommand{\DiversifiedTransmitPublic}{\mathsf{pk_d}}
-\newcommand{\DiversifiedTransmitPublicRepr}{\mathsf{pk\Repr_d}}
-\newcommand{\DiversifiedTransmitPublicOld}{\mathsf{pk^{old}_d}}
-\newcommand{\DiversifiedTransmitPublicOldRepr}{\mathsf{pk\Repr^{old}_d}}
-\newcommand{\DiversifiedTransmitPublicNew}{\mathsf{pk^{new}_d}}
-\newcommand{\DiversifiedTransmitPublicNewRepr}{\mathsf{pk\Repr^{new}_d}}
-\newcommand{\vOldRepr}{\MakeRepr{\mathsf{v}}{\mathsf{old}}}
 
 % PRFs
 
-\newcommand{\PRF}[2]{\mathsf{{PRF}^{#2}_\mathnormal{#1}}}
-\newcommand{\PRFaddr}[1]{\PRF{#1}{addr}}
-\newcommand{\PRFexpand}[1]{\PRF{#1}{expand}}
-\newcommand{\PRFock}[2]{\PRF{#2}{ock#1}}
-\newcommand{\PRFnf}[2]{\PRF{#2}{nf\kern-0.01em #1}}
-\newcommand{\PRFsn}[1]{\PRF{#1}{sn}}
-\newcommand{\PRFpk}[1]{\PRF{#1}{pk}}
-\newcommand{\PRFrho}[1]{\PRF{#1}{\NoteUniqueRand}}
-\newcommand{\PRFOutputLengthSprout}{\mathsf{\ell^{Sprout}_{PRF}}}
-\newcommand{\PRFOutputSprout}{\bitseq{\PRFOutputLengthSprout}}
-\newcommand{\PRFOutputLengthNfSapling}{\mathsf{\ell_{PRFnfSapling}}}
-\newcommand{\PRFOutputNfSapling}{\byteseq{\PRFOutputLengthNfSapling/8}}
-\newcommand{\PRFOutputNfOrchard}{\GF{\ParamP{q}}}
-\newcommand{\PRFOutputLengthExpand}{\mathsf{\ell_{PRFexpand}}}
-\newcommand{\PRFOutputExpand}{\byteseq{\PRFOutputLengthExpand/8}}
-\newcommand{\PRFInputExpand}{\byteseqs}
 
 % PRPs
 
-\newcommand{\PRP}[2]{\mathsf{{PRP}^{#2}_\mathnormal{#1}}}
-\newcommand{\PRPd}[1]{\PRP{#1}{d}}
 
 % Commitments
 
-\newcommand{\Uncommitted}[1]{\mathsf{Uncommitted}^\mathsf{#1\kern-0.1em}}
-\newcommand{\NoteCommitment}[1]{\mathsf{NoteCommitment}^\mathsf{#1\kern-0.1em}}
 
-\newcommand{\CommitAlg}{\mathsf{COMM}}
-\newcommand{\Commit}[1]{\CommitAlg_{#1}}
-\newcommand{\CommitTrapdoor}{\CommitAlg\mathsf{.Trapdoor}}
-\newcommand{\CommitGenTrapdoor}{\CommitAlg\mathsf{.GenTrapdoor}}
-\newcommand{\CommitInput}{\CommitAlg\mathsf{.Input}}
-\newcommand{\CommitOutput}{\CommitAlg\mathsf{.Output}}
-\newcommand{\NoteCommitAlg}[1]{\mathsf{NoteCommit}^\mathsf{#1\kern-0.1em}}
-\newcommand{\NoteCommit}[2]{\NoteCommitAlg{#1}_{\vphantom{l}#2}}
-\newcommand{\NoteCommitTrapdoor}[1]{\NoteCommitAlg{#1}\mathsf{.Trapdoor}}
-\newcommand{\NoteCommitTrapdoorBytes}{\byteseq{32}}
-\newcommand{\NoteCommitGenTrapdoor}[1]{\NoteCommitAlg{#1}\mathsf{.GenTrapdoor}}
-\newcommand{\NoteCommitInput}[1]{\NoteCommitAlg{#1}\mathsf{.Input}}
-\newcommand{\NoteCommitOutput}[1]{\NoteCommitAlg{#1}\mathsf{.Output}}
-\newcommand{\CommitPrimeAlg}{\mathsf{COMM}'}
-\newcommand{\CommitPrime}[1]{\CommitPrimeAlg_{#1}}
-\newcommand{\ValueCommitAlg}[1]{\mathsf{ValueCommit}^\mathsf{#1\kern-0.1em}}
-\newcommand{\ValueCommit}[2]{\ValueCommitAlg{#1}_{#2}}
-\newcommand{\ValueCommitTrapdoor}[1]{\ValueCommitAlg{#1}\mathsf{.Trapdoor}}
-\newcommand{\ValueCommitGenTrapdoor}[1]{\ValueCommitAlg{#1}\mathsf{.GenTrapdoor}}
-\newcommand{\ValueCommitInput}[1]{\ValueCommitAlg{#1}\mathsf{.Input}}
-\newcommand{\ValueCommitOutput}[1]{\ValueCommitAlg{#1}\mathsf{.Output}}
-\newcommand{\ValueCommitValueBase}[1]{\mathcal{V}^\mathsf{#1\kern-0.1em}}
-\newcommand{\ValueCommitRandBase}[1]{\mathcal{R}^\mathsf{#1\kern-0.1em}}
-\newcommand{\CommitIvkAlg}{\mathsf{Commit}^{\InViewingKey}}
-\newcommand{\CommitIvk}[1]{\CommitIvkAlg_{#1}}
-\newcommand{\CommitIvkTrapdoor}{\CommitIvkAlg\mathsf{.Trapdoor}}
-\newcommand{\CommitIvkGenTrapdoor}{\CommitIvkAlg\mathsf{.GenTrapdoor}}
-\newcommand{\CommitIvkInput}{\CommitIvkAlg\mathsf{.Input}}
-\newcommand{\CommitIvkOutput}{\CommitIvkAlg\mathsf{.Output}}
-\newcommand{\CommitIvkOutputType}{\maybe{\range{0}{\ParamP{q}-1}}}
-\newcommand{\DeriveNullifierAlg}{\mathsf{DeriveNullifier}}
-\newcommand{\DeriveNullifier}[1]{\DeriveNullifierAlg_{#1}}
-\newcommand{\DeriveNoteCommitRandAlg}{\mathsf{Derive\_rcm}}
-\newcommand{\DeriveNoteCommitRand}[2]{\DeriveNoteCommitRandAlg^{#1}_{#2}}
-\newcommand{\HAsk}{\mathsf{H}^{\AuthSignPrivate}}
-\newcommand{\HNk}{\mathsf{H}^{\NullifierKey}}
-\newcommand{\HRivk}{\mathsf{H}^{\CommitIvkRand}}
-\newcommand{\HQsk}{\mathsf{H}^{\QuantumSpendingKey}}
-\newcommand{\HQk}{\mathsf{H}^{\QuantumIntermediateKey}}
-\newcommand{\HRivkExt}[1]{\mathsf{H}^{\mathsf{rivk\_ext}}_{#1}}
-\newcommand{\HRcm}[2]{\mathsf{H}^{\mathsf{rcm,#1}}_{#2}}
-\newcommand{\HEsk}[2]{\mathsf{H}^{\mathsf{esk,#1}}_{#2}}
-\newcommand{\HPsi}[2]{\mathsf{H}^{\uppsi,\mathsf{#1}}_{#2}}
 
 % Symmetric encryption
 
-\newcommand{\Sym}{\mathsf{Sym}}
-\newcommand{\SymEncrypt}[1]{\Sym\mathsf{.Encrypt}_{#1}}
-\newcommand{\SymDecrypt}[1]{\Sym\mathsf{.Decrypt}_{#1}}
-\newcommand{\SymSpecific}{\mathsf{AEAD\_CHACHA20\_POLY1305}}
-\newcommand{\SymCipher}{\mathsf{ChaCha20}}
-\newcommand{\SymAuth}{\mathsf{Poly1305}}
-\newcommand{\Ptext}{\mathsf{P}}
-\newcommand{\Plaintext}{\mathsf{Sym.}\mathbf{P}}
-\newcommand{\Ctext}{\mathsf{C}}
-\newcommand{\Ciphertext}{\mathsf{Sym.}\mathbf{C}}
-\newcommand{\Key}{\mathsf{K}}
-\newcommand{\Keyspace}{\mathsf{Sym.}\mathbf{K}}
-\newcommand{\TransmitPlaintext}[1]{\Ptext^\enc_{#1}}
-\newcommand{\TransmitCiphertext}[1]{\Ctext^\enc_{#1}}
-\newcommand{\TransmitKey}[1]{\Key^\enc_{#1}}
-\newcommand{\OutCiphertext}{\Ctext^\mathsf{out}}
-\newcommand{\Extractor}[1]{\mathcal{E}_{\kern-0.05em{#1}}}
-\newcommand{\Adversary}{\mathcal{A}}
-\newcommand{\Oracle}{\mathsf{O}}
-\newcommand{\CryptoBoxSeal}{\mathsf{crypto\_box\_seal}}
 
-\newcommand{\FFOne}{\mathsf{FF1}}
-\newcommand{\FFOneAESAlg}{\mathsf{FF1\mhyphen{}AES256}}
-\newcommand{\FFOneAES}[1]{\FFOneAESAlg_{#1}}
-\newcommand{\AES}{\mathsf{AES}}
 
 % Key agreement
 
-\newcommand{\KA}[1]{\mathsf{KA}^\mathsf{#1\kern-0.1em}}
-\newcommand{\KAPublic}[1]{\KA{#1}\mathsf{.Public}}
-\newcommand{\KAPublicPrimeOrder}[1]{\KA{#1}\mathsf{.PublicPrimeOrder}}
-\newcommand{\KAPrivate}[1]{\KA{#1}\mathsf{.Private}}
-\newcommand{\KASharedSecret}[1]{\KA{#1}\mathsf{.SharedSecret}}
-\newcommand{\KAFormatPrivate}[1]{\KA{#1}\mathsf{.FormatPrivate}}
-\newcommand{\KADerivePublic}[1]{\KA{#1}\mathsf{.DerivePublic}}
-\newcommand{\KAAgree}[1]{\KA{#1}\mathsf{.Agree}}
-\newcommand{\KABase}[1]{\KA{#1}\mathsf{.Base}}
 
-\newcommand{\KASproutCurve}{\mathsf{Curve25519}}
-\newcommand{\KASproutCurveMultiply}{\mathsf{Curve25519}}
-\newcommand{\KASproutCurveBase}{\bytes{9}}
-\newcommand{\KASproutCurveClamp}{\mathsf{clamp_{Curve25519}}}
 
 % KDF
 
-\newcommand{\KDF}[1]{\mathsf{KDF}^\mathsf{#1\kern-0.1em}}
-\newcommand{\kdftag}{\mathsf{kdftag}}
-\newcommand{\kdfinput}{\mathsf{kdfinput}}
 
 % Notes
 
-\newcommand{\Value}{\mathsf{v}}
-\newcommand{\ValueNew}[1]{\Value^\mathsf{new}_{#1}}
-\newcommand{\ValueOld}[1]{\Value^\mathsf{old}_{#1}}
-\newcommand{\ValueNet}[1]{\Value^\mathsf{net}_{#1}}
-\newcommand{\ValueLength}{\ell_{\mathsf{value}}}
-\newcommand{\ValueType}{\binaryrange{\ValueLength}}
-\newcommand{\SignedValueFieldType}{\range{-2^{63}}{2^{63}-1}}
-\newcommand{\SignedValueDifferenceType}{\range{-2^{64}+1}{2^{64}-1}}
-\newcommand{\ValueCommitTypeSapling}{\bigrange{-\SignedScalarLimitJ}{\SignedScalarLimitJ}}
-\newcommand{\ValueCommitTypeOrchard}{\bigrange{-\SignedScalarLimitP}{\SignedScalarLimitP}}
-\newcommand{\ValueCommitRand}{\mathsf{rcv}}
-\newcommand{\ValueCommitRandRepr}{{\ValueCommitRand\Repr}}
-\newcommand{\ValueCommitRandLength}{\mathsf{\ell_{\ValueCommitRand}}}
-\newcommand{\ValueCommitRandOld}[1]{\ValueCommitRand^\mathsf{old}_{#1}}
-\newcommand{\ValueCommitRandNew}[1]{\ValueCommitRand^\mathsf{new}_{#1}}
-\newcommand{\ValueCommitRandNet}[1]{\ValueCommitRand^\mathsf{net}_{#1}}
-\newcommand{\NoteTuple}[1]{\mathbf{n}_{#1}}
-\newcommand{\NoteType}[1]{\mathsf{Note}^\mathsf{#1\kern-0.1em}}
-\newcommand{\NotePlaintext}[1]{\mathbf{np}_{#1}}
-\newcommand{\OutPlaintext}{\mathbf{op}}
-\newcommand{\NoteSeedBytes}{\mathsf{rseed}}
-\newcommand{\NoteSeedBytesType}{\byteseq{32}}
-\newcommand{\NoteCommitRand}{\mathsf{rcm}}
-\newcommand{\NoteCommitRandRepr}{{\NoteCommitRand\Repr}}
-\newcommand{\NoteCommitRandBytes}{\bytes{\NoteCommitRand}}
-\newcommand{\NoteCommitRandLengthSprout}{\mathsf{\ell^{Sprout}_{\NoteCommitRand}}}
-\newcommand{\NoteCommitRandOld}[1]{\NoteCommitRand^\mathsf{old}_{#1}}
-\newcommand{\NoteCommitRandNew}[1]{\NoteCommitRand^\mathsf{new}_{#1}}
-\newcommand{\NoteCommitRandBytesOrSeedBytes}{\notcanopy{\NoteCommitRandBytes}\canopy{\NoteSeedBytes}}
-\newcommand{\NoteCommitRandPre}{\mathsf{pre\_rcm}}
-\newcommand{\NoteUniqueRand}{\mathsf{\uprho}}
-\newcommand{\NoteUniqueRandText}{\texorpdfstring{$\NoteUniqueRand$}{ρ}}
-\newcommand{\NoteUniqueRandPoint}{\NoteUniqueRand^{\GroupP}}
-\newcommand{\NoteUniqueRandRepr}{{\NoteUniqueRand\Repr}}
-\newcommand{\NoteUniqueRandBytes}{\bytes{\NoteUniqueRand}}
-\newcommand{\NoteUniqueRandOld}[1]{\NoteUniqueRand^\mathsf{old}_{#1}}
-\newcommand{\NoteUniqueRandNew}[1]{\NoteUniqueRand^\mathsf{new}_{#1}}
-\newcommand{\NoteUniqueRandTypeOrchard}{\GF{\ParamP{q}}}
-\newcommand{\NoteUniquePreRand}{\mathsf{\upvarphi}}
-\newcommand{\NoteUniquePreRandLength}{\mathsf{\ell^{Sprout}_{\NoteUniquePreRand}}}
-\newcommand{\NoteNullifierRand}{\mathsf{\uppsi}}
-\newcommand{\NoteNullifierRandOld}{\mathsf{\uppsi^{old}}}
-\newcommand{\NoteNullifierRandNew}{\mathsf{\uppsi^{new}}}
-\newcommand{\NoteNullifierRandType}{\GF{\ParamP{q}}}
-\newcommand{\NoteNullifierRandPre}{\mathsf{pre\_}\NoteNullifierRand}
-\newcommand{\NoteCommitS}{\mathsf{s}}
-\newcommand{\CommitIvkRand}{\mathsf{rivk}}
-\newcommand{\CommitIvkRandType}{\GF{\ParamP{r}}}
-\newcommand{\cv}{\mathsf{cv}}
-\newcommand{\cvOld}[1]{\cv^\mathsf{old}_{#1}}
-\newcommand{\cvNew}[1]{\cv^\mathsf{new}_{#1}}
-\newcommand{\cvNet}[1]{\cv^\mathsf{net}_{#1}}
-\newcommand{\cm}{\mathsf{cm}}
-\newcommand{\cmU}{\cm_{\kern -0.06em u}}
-\newcommand{\cmX}{\cm_{\kern -0.06em x}}
-\newcommand{\cmstar}{\cm_{\kern -0.06em \ast}}
-\newcommand{\cmOld}[1]{\cm^\mathsf{old}_{#1}}
-\newcommand{\cmNew}[1]{\cm^\mathsf{new}_{#1}}
-\newcommand{\snOld}[1]{\mathsf{sn}^\mathsf{old}_{#1}}
-\newcommand{\nf}{\mathsf{nf}}
-\newcommand{\nfOld}[1]{\nf^\mathsf{old}_{#1}}
-\newcommand{\nfOldRepr}[1]{{\MakeRepr{\nf}{\mathsf{old}}}_{#1}}
-\newcommand{\enableSpends}{\mathsf{enableSpends}}
-\newcommand{\enableOutputs}{\mathsf{enableOutputs}}
-\newcommand{\enableCrossAddress}{\mathsf{enableCrossAddress}}
-\newcommand{\disableCrossAddress}{\mathsf{disableCrossAddress}}
-\newcommand{\Memo}{\mathsf{memo}}
-\newcommand{\MemoByteLength}{512}
-\newcommand{\MemoType}{\byteseq{\MemoByteLength}}
-\newcommand{\ExtractNote}[1]{\mathsf{ExtractNote^{#1}}}
-\newcommand{\ReplacementCharacter}{\textsf{U+FFFD}}
-\newcommand{\maybeSapling}{\notnufive{Sapling}}
 
 % Money supply
 
-\newcommand{\MAXMONEY}{\mathsf{MAX\_MONEY}}
-\newcommand{\BlockSubsidy}{\mathsf{BlockSubsidy}}
-\newcommand{\MinerSubsidy}{\mathsf{MinerSubsidy}}
-\newcommand{\FoundersReward}{\mathsf{FoundersReward}}
-\newcommand{\FundingStreams}{\mathsf{FundingStreams}}
-\newcommand{\fs}{\mathsf{fs}}
-\newcommand{\fsNumerator}{\fs\mathsf{.Numerator}}
-\newcommand{\fsDenominator}{\fs\mathsf{.Denominator}}
-\newcommand{\fsStartHeight}{\fs\mathsf{.StartHeight}}
-\newcommand{\fsEndHeight}{\fs\mathsf{.EndHeight}}
-\newcommand{\fsValue}{\fs\mathsf{.Value}}
-\newcommand{\fsRecipient}{\fs\mathsf{.Recipient}}
-\newcommand{\fsRecipients}{\fs\mathsf{.Recipients}}
-\newcommand{\fsRecipientIndex}{\fs\mathsf{.RecipientIndex}}
-\newcommand{\fsNumRecipients}{\fs\mathsf{.NumRecipients}}
-\newcommand{\fsRedeemScriptHash}{\fs\mathsf{.RedeemScriptHash}}
-\newcommand{\fsPubKeyHash}{\fs\mathsf{.PubKeyHash}}
-\newcommand{\SlowStartInterval}{\mathsf{SlowStartInterval}}
-\newcommand{\SlowStartShift}{\mathsf{SlowStartShift}}
-\newcommand{\SlowStartRate}{\mathsf{SlowStartRate}}
-\newcommand{\BlossomAdjustment}{\mathsf{BlossomAdjustment}}
-\newcommand{\NUSevenAdjustment}{\mathsf{NU7Adjustment}}
-\newcommand{\PreBlossomHalvingInterval}{\mathsf{\notbeforeblossom{PreBlossom}HalvingInterval}}
-\newcommand{\PostBlossomHalvingInterval}{\mathsf{PostBlossomHalvingInterval}}
-\newcommand{\MaxBlockSubsidy}{\mathsf{MaxBlockSubsidy}}
-\newcommand{\NumFounderAddresses}{\mathsf{NumFounderAddresses}}
-\newcommand{\FounderAddressChangeInterval}{\mathsf{FounderAddressChangeInterval}}
-\newcommand{\FoundersFraction}{\mathsf{FoundersFraction}}
-\newcommand{\FSRecipientChangeInterval}{\mathsf{FSRecipientChangeInterval}}
-\newcommand{\FSRecipientPeriod}{\mathsf{FSRecipientPeriod}}
-\newcommand{\PreNUSevenEquivalentHeight}{\mathsf{PreNU7EquivalentHeight}}
-\newcommand{\BlockHeight}{\mathsf{height}}
-\newcommand{\FounderAddressAdjustedHeight}{\mathsf{FounderAddressAdjustedHeight}}
-\newcommand{\FoundersRewardLastBlockHeight}{\mathsf{FoundersRewardLastBlockHeight}}
-\newcommand{\Halving}{\mathsf{Halving}}
-\newcommand{\HalvingNum}{\mathsf{halving}}
-\newcommand{\HeightForHalving}{\mathsf{HeightForHalving}}
-\newcommand{\FounderAddress}{\mathsf{FounderAddress}}
-\newcommand{\FounderAddressList}{\mathsf{FounderAddressList}}
-\newcommand{\FounderAddressIndex}{\mathsf{FounderAddressIndex}}
-\newcommand{\FounderRedeemScriptHash}{\mathsf{FounderRedeemScriptHash}}
-\newcommand{\heightBytes}{\mathsf{heightBytes}}
-\newcommand{\ChainValuePoolBalance}[1]{\ensuremath{\mathsf{ChainValuePoolBalance}^{#1}}}
-\newcommand{\IssuedSupply}{\mathsf{IssuedSupply}}
-\newcommand{\TransactionFees}{\mathsf{TransactionFees}}
-\newcommand{\NSMFeeContribution}{\mathsf{NSMFeeContribution}}
-\newcommand{\MinerFees}{\mathsf{MinerFees}}
-\newcommand{\ScheduledBlockSubsidy}{\mathsf{ScheduledBlockSubsidy}}
-\newcommand{\AdditionalBlockSubsidy}{\mathsf{AdditionalBlockSubsidy}}
-\newcommand{\HalvingIntervalFunc}{\mathsf{HalvingInterval}}
-\newcommand{\BlockSubsidyFraction}{\mathsf{BLOCK\_SUBSIDY\_FRACTION}}
-\newcommand{\LNTwoScaled}{\mathsf{LN2\_SCALED}}
-\newcommand{\InitialNSMValueBalance}{\mathsf{INITIAL\_NSM\_VALUE\_BALANCE}}
-\newcommand{\NSMReissuanceHeight}{\mathsf{NSM\_REISSUANCE\_HEIGHT}}
-\newcommand{\NSMValueBalance}{\mathsf{NSMValueBalance}}
-\newcommand{\NSMValueRemoved}{\mathsf{NSMValueRemoved}}
 
-\newcommand{\blockSubsidy}{\term{block subsidy}}
-\newcommand{\minerSubsidy}{\term{miner subsidy}}
-\newcommand{\foundersReward}{\term{Founders' Reward}}
-\newcommand{\slowStartPeriod}{\term{slow-start period}}
-\newcommand{\halvingInterval}{\term{halving interval}}
-\newcommand{\halving}{\term{halving}}
-\newcommand{\halvings}{\terms{halving}}
-\newcommand{\utxoSet}{\termandindex{UTXO set}{UTXO (unspent transaction output) set}}
-\newcommand{\utxoSetFull}{\term{UTXO (unspent transaction output) set}}
-\newcommand{\utxo}{\termandindex{UTXO}{UTXO (unspent transaction output)}}
-\newcommand{\utxos}{\termandindex{UTXOs}{UTXO (unspent transaction output)}}
-\newcommand{\utxosFull}{\termandindex{UTXOs (unspent transaction outputs)}{UTXO (unspent transaction output)}}
-\newcommand{\fundingStream}{\term{funding stream}}
-\newcommand{\fundingStreams}{\terms{funding stream}}
-\newcommand{\quotedPrescribedWay}{\quotedtermandindex{prescribed way}{prescribed way (to pay a funding recipient)}}
-\newcommand{\prescribedWay}{\termandindex{prescribed way}{prescribed way (to pay a funding recipient)}}
 
-\newcommand{\BlossomActivationHeight}{\mathsf{BlossomActivationHeight}}
-\newcommand{\IsBlossomActivated}{\mathsf{IsBlossomActivated}}
-\newcommand{\NUSevenActivationHeight}{\mathsf{NU7ActivationHeight}}
-\newcommand{\IsNUSevenActivated}{\mathsf{IsNU7Activated}}
-\newcommand{\PostNUSevenHalvingInterval}{\mathsf{PostNU7HalvingInterval}}
-\newcommand{\CanopyActivationHeight}{\mathsf{CanopyActivationHeight}}
-\newcommand{\ZIPTwoOneTwoGracePeriod}{\mathsf{ZIP212GracePeriod}}
-\newcommand{\ZIPTwoSevenOneActivationHeight}{\mathsf{ZIP271ActivationHeight}}
-\newcommand{\ZIPTwoSevenOneDisbursementAmount}{\mathsf{ZIP271DisbursementAmount}}
-\newcommand{\ZIPTwoSevenOneDisbursementChunks}{\mathsf{ZIP271DisbursementChunks}}
-\newcommand{\ZIPTwoSevenOneDisbursementAddress}{\mathsf{ZIP271DisbursementAddress}}
 
-\newcommand{\PoWLimit}{\mathsf{PoWLimit}}
-\newcommand{\PoWAveragingWindow}{\mathsf{PoWAveragingWindow}}
-\newcommand{\PreNUSevenPoWAveragingWindow}{\mathsf{PreNU7PoWAveragingWindow}}
-\newcommand{\PostNUSevenPoWAveragingWindow}{\mathsf{PostNU7PoWAveragingWindow}}
-\newcommand{\GlobalShieldedBudget}{\mathsf{GlobalShieldedBudget}}
-\newcommand{\OrchardProtocolBlockActionLimit}{\mathsf{OrchardProtocolBlockActionLimit}}
-\newcommand{\SaplingBlockIOLimit}{\mathsf{SaplingBlockIOLimit}}
-\newcommand{\SproutBlockJoinSplitLimit}{\mathsf{SproutBlockJoinSplitLimit}}
-\newcommand{\PoWMedianBlockSpan}{\mathsf{PoWMedianBlockSpan}}
-\newcommand{\PoWMaxAdjustDown}{\mathsf{PoWMaxAdjustDown}}
-\newcommand{\PoWMaxAdjustUp}{\mathsf{PoWMaxAdjustUp}}
-\newcommand{\PoWDampingFactor}{\mathsf{PoWDampingFactor}}
-\newcommand{\PreBlossomPoWTargetSpacing}{\mathsf{\notbeforeblossom{PreBlossom}PoWTargetSpacing}}
-\newcommand{\PostBlossomPoWTargetSpacing}{\mathsf{PostBlossomPoWTargetSpacing}}
-\newcommand{\BlossomPoWTargetSpacingRatio}{\mathsf{BlossomPoWTargetSpacingRatio}}
-\newcommand{\PostNUSevenPoWTargetSpacing}{\mathsf{PostNU7PoWTargetSpacing}}
-\newcommand{\NUSevenPoWTargetSpacingRatio}{\mathsf{NU7PoWTargetSpacingRatio}}
-\newcommand{\CombinedPoWTargetSpacingRatio}{\mathsf{CombinedPoWTargetSpacingRatio}}
-\newcommand{\PoWTargetSpacingFunc}{\mathsf{PoWTargetSpacing}}
-\newcommand{\MeanTarget}{\mathsf{MeanTarget}}
-\newcommand{\MedianTime}{\mathsf{MedianTime}}
-\newcommand{\AveragingWindowTimespan}{\mathsf{AveragingWindowTimespan}}
-\newcommand{\MinActualTimespan}{\mathsf{MinActualTimespan}}
-\newcommand{\MaxActualTimespan}{\mathsf{MaxActualTimespan}}
-\newcommand{\ActualTimespan}{\mathsf{ActualTimespan}}
-\newcommand{\ActualTimespanDamped}{\mathsf{ActualTimespanDamped}}
-\newcommand{\ActualTimespanBounded}{\mathsf{ActualTimespanBounded}}
-\newcommand{\Threshold}{\mathsf{Threshold}}
-\newcommand{\ThresholdBits}{\mathsf{ThresholdBits}}
 
-\newcommand{\targetThreshold}{\term{target threshold}}
-\newcommand{\targetThresholds}{\terms{target threshold}}
 
 % Signatures
 
-\newcommand{\Sig}{\mathsf{Sig}}
-\newcommand{\SigPublic}{\Sig\mathsf{.Public}}
-\newcommand{\SigPrivate}{\Sig\mathsf{.Private}}
-\newcommand{\SigMessage}{\Sig\mathsf{.Message}}
-\newcommand{\SigSignature}{\Sig\mathsf{.Signature}}
-\newcommand{\SigGenPrivate}{\Sig\mathsf{.GenPrivate}}
-\newcommand{\SigGen}{\Sig\mathsf{.Gen}}
-\newcommand{\SigDerivePublic}{\Sig\mathsf{.DerivePublic}}
-\newcommand{\SigSign}[1]{\Sig\mathsf{.Sign}_{#1}}
-\newcommand{\SigValidate}[1]{\Sig\mathsf{.Validate}_{#1}}
-\newcommand{\SigRandom}{\Sig\mathsf{.Random}}
-\newcommand{\SigGenRandom}{\Sig\mathsf{.GenRandom}}
-\newcommand{\SigRandomizePublic}{\Sig\mathsf{.RandomizePublic}}
-\newcommand{\SigRandomizePrivate}{\Sig\mathsf{.RandomizePrivate}}
-\newcommand{\SigRandomizerId}{\Zero_{\SigRandom}}
-\newcommand{\SigRandomizer}{\alpha}
-\newcommand{\Entry}[1]{\mathsf{entry}_{#1}}
 
-\newcommand{\RedDSA}{\mathsf{RedDSA}}
-\newcommand{\RedDSAPublic}{\RedDSA\mathsf{.Public}}
-\newcommand{\RedDSAPrivate}{\RedDSA\mathsf{.Private}}
-\newcommand{\RedDSAMessage}{\RedDSA\mathsf{.Message}}
-\newcommand{\RedDSASignature}{\RedDSA\mathsf{.Signature}}
-\newcommand{\RedDSAGenPrivate}{\RedDSA\mathsf{.GenPrivate}}
-\newcommand{\RedDSADerivePublic}{\RedDSA\mathsf{.DerivePublic}}
-\newcommand{\RedDSASign}[1]{\RedDSA\mathsf{.Sign}_{#1}}
-\newcommand{\RedDSAValidate}[1]{\RedDSA\mathsf{.Validate}_{#1}}
-\newcommand{\RedDSABatchValidate}{\RedDSA\mathsf{.BatchValidate}}
-\newcommand{\RedDSABatchEntry}{\RedDSA\mathsf{.BatchEntry}}
-\newcommand{\RedDSARandom}{\RedDSA\mathsf{.Random}}
-\newcommand{\RedDSAGenRandom}{\RedDSA\mathsf{.GenRandom}}
-\newcommand{\RedDSARandomizePublic}{\RedDSA\mathsf{.RandomizePublic}}
-\newcommand{\RedDSARandomizePrivate}{\RedDSA\mathsf{.RandomizePrivate}}
-\newcommand{\RedDSARandomizerId}{\Zero_{\RedDSARandom}}
-\newcommand{\RedDSARandomizer}{\alpha}
-\newcommand{\RedDSASigR}[1]{R_{#1}}
-\newcommand{\RedDSASigS}[1]{S_{#1}}
-\newcommand{\RedDSAReprR}[1]{\bytes{\RedDSASigR{#1}}}
-\newcommand{\RedDSAReprS}[1]{\bytes{\RedDSASigS{#1}}}
-\newcommand{\RedDSASigc}[1]{c_{#1}}
-\newcommand{\RedDSAHash}{\mathsf{H}}
-\newcommand{\RedDSAHashToScalar}{\RedDSAHash^{\circledast}}
-\newcommand{\RedDSAHashLength}{\ell_{\RedDSAHash}}
-\newcommand{\RedDSAText}{\texorpdfstring{$\RedDSA$}{RedDSA}}
-\newcommand{\RedJubjub}{\mathsf{RedJubjub}}
-\newcommand{\RedJubjubText}{\texorpdfstring{$\RedJubjub$}{RedJubjub}}
-\newcommand{\RedJubjubHashName}{\BlakeTwob{512}}
-\newcommand{\RedPallas}{\mathsf{RedPallas}}
-\newcommand{\RedPallasText}{\texorpdfstring{$\RedPallas$}{RedPallas}}
-\newcommand{\RedPallasHashName}{\BlakeTwob{512}}
 
-\newcommand{\EdSpecific}{\termsf{Ed25519}}
-\newcommand{\EdSpecificAlg}{\mathsf{Ed25519}}
-\newcommand{\GroupEdSpecific}{\mathsf{Ed25519}}
-\newcommand{\EdSpecificText}{\texorpdfstring{$\EdSpecificAlg$}{Ed25519}}
-\newcommand{\EdDSASigR}[1]{R_{#1}}
-\newcommand{\EdDSASigS}[1]{S_{#1}}
-\newcommand{\EdDSASigA}[1]{A_{#1}}
-\newcommand{\EdDSAReprR}[1]{\bytes{\EdDSASigR{#1}}}
-\newcommand{\EdDSAReprS}[1]{\bytes{\EdDSASigS{#1}}}
-\newcommand{\EdDSAReprA}[1]{\bytes{\EdDSASigA{#1}}}
-\newcommand{\EdDSASigc}[1]{c_{#1}}
-\newcommand{\EdDSABase}{B}
-\newcommand{\EdSpecificPublic}{\EdSpecificAlg\mathsf{.Public}}
-\newcommand{\EdSpecificPrivate}{\EdSpecificAlg\mathsf{.Private}}
-\newcommand{\EdSpecificMessage}{\EdSpecificAlg\mathsf{.Message}}
-\newcommand{\EdSpecificSignature}{\EdSpecificAlg\mathsf{.Signature}}
-\newcommand{\EdSpecificBatchValidate}{\EdSpecificAlg\mathsf{.BatchValidate}}
-\newcommand{\EdSpecificBatchEntry}{\EdSpecificAlg\mathsf{.BatchEntry}}
-\newcommand{\PreCanopyExcludedPointEncodings}{\mathsf{PreCanopyExcludedPointEncodings}}
-\newcommand{\reprBytesEdSpecific}{\reprBytes_{\GroupEdSpecific}}
-\newcommand{\abstBytesEdSpecific}{\abstBytes_{\GroupEdSpecific}}
-\newcommand{\ReprEdSpecificBytes}{\byteseq{32}}
 
-\newcommand{\ECDSA}{\termsf{ECDSA}}
 
-\newcommand{\JoinSplitSig}{\mathsf{JoinSplitSig}}
-\newcommand{\JoinSplitSigPublic}{\JoinSplitSig\mathsf{.Public}}
-\newcommand{\JoinSplitSigPrivate}{\JoinSplitSig\mathsf{.Private}}
-\newcommand{\JoinSplitSigMessage}{\JoinSplitSig\mathsf{.Message}}
-\newcommand{\JoinSplitSigSignature}{\JoinSplitSig\mathsf{.Signature}}
-\newcommand{\JoinSplitSigGenPrivate}{\JoinSplitSig\mathsf{.GenPrivate}}
-\newcommand{\JoinSplitSigDerivePublic}{\JoinSplitSig\mathsf{.DerivePublic}}
-\newcommand{\JoinSplitSigSign}[1]{\JoinSplitSig\mathsf{.Sign}_{#1}}
-\newcommand{\JoinSplitSigValidate}[1]{\JoinSplitSig\mathsf{.Validate}_{#1}}
 
-\newcommand{\SpendAuthSig}[1]{\mathsf{SpendAuthSig}^\mathsf{#1\kern-0.1em}}
-\newcommand{\SpendAuthSigPublic}[1]{\SpendAuthSig{#1}\mathsf{.Public}}
-\newcommand{\SpendAuthSigPrivate}[1]{\SpendAuthSig{#1}\mathsf{.Private}}
-\newcommand{\SpendAuthSigMessage}[1]{\SpendAuthSig{#1}\mathsf{.Message}}
-\newcommand{\SpendAuthSigSignature}[1]{\SpendAuthSig{#1}\mathsf{.Signature}}
-\newcommand{\SpendAuthSigGenPrivate}[1]{\SpendAuthSig{#1}\mathsf{.GenPrivate}}
-\newcommand{\SpendAuthSigDerivePublic}[1]{\SpendAuthSig{#1}\mathsf{.DerivePublic}}
-\newcommand{\SpendAuthSigSign}[2]{\SpendAuthSig{#1}\mathsf{.Sign}_{#2}}
-\newcommand{\SpendAuthSigValidate}[2]{\SpendAuthSig{#1}\mathsf{.Validate}_{#2}}
-\newcommand{\SpendAuthSigRandom}[1]{\SpendAuthSig{#1}\mathsf{.Random}}
-\newcommand{\SpendAuthSigGenRandom}[1]{\SpendAuthSig{#1}\mathsf{.GenRandom}}
-\newcommand{\SpendAuthSigRandomizePublic}[1]{\SpendAuthSig{#1}\mathsf{.RandomizePublic}}
-\newcommand{\SpendAuthSigRandomizePrivate}[1]{\SpendAuthSig{#1}\mathsf{.RandomizePrivate}}
-\newcommand{\SpendAuthSigRandomizerId}[1]{\SpendAuthSig{#1}\mathsf{.Id}}
-\newcommand{\SpendAuthSigRandomizer}{\alpha}
-\newcommand{\spendAuthSig}{\mathsf{spendAuthSig}}
 
-\newcommand{\BindingSig}[1]{\mathsf{BindingSig}^\mathsf{#1\kern-0.1em}}
-\newcommand{\BindingSigPublic}[1]{\BindingSig{#1}\mathsf{.Public}}
-\newcommand{\BindingSigPrivate}[1]{\BindingSig{#1}\mathsf{.Private}}
-\newcommand{\BindingSigMessage}[1]{\BindingSig{#1}\mathsf{.Message}}
-\newcommand{\BindingSigSignature}[1]{\BindingSig{#1}\mathsf{.Signature}}
-\newcommand{\BindingSigGenPrivate}[1]{\BindingSig{#1}\mathsf{.GenPrivate}}
-\newcommand{\BindingSigDerivePublic}[1]{\BindingSig{#1}\mathsf{.DerivePublic}}
-\newcommand{\BindingSigSign}[2]{\BindingSig{#1}\mathsf{.Sign}_{#2}}
-\newcommand{\BindingSigValidate}[2]{\BindingSig{#1}\mathsf{.Validate}_{#2}}
-\newcommand{\BindingPublic}[1]{\mathsf{bvk}^\mathsf{#1}}
-\newcommand{\BindingPrivate}[1]{\mathsf{bsk}^\mathsf{#1}}
 
-\newcommand{\RandomSeedLength}{\mathsf{\ell_{Seed}}}
-\newcommand{\RandomSeedType}{\bitseq{\mathsf{\ell_{Seed}}}}
-\newcommand{\pksig}{\mathsf{pk_{sig}}}
-\newcommand{\sk}{\mathsf{sk}}
-\newcommand{\hSigInput}{\mathsf{hSigInput}}
-\newcommand{\crhInput}{\mathsf{crhInput}}
-\newcommand{\ockInput}{\mathsf{ockInput}}
-\newcommand{\dataToBeSigned}{\mathsf{dataToBeSigned}}
-\newcommand{\vBalance}[1]{\mathsf{v}^{\text{#1\pooltype{Balance}}}}
-\newcommand{\vBalanceOrchardLikePoolId}{\mathsf{v}^{\text{\notnusixthree{\OrchardPoolId}\nusixthree{\Pool Balance}}}}
-\newcommand{\vBad}{\mathsf{v^{bad}}}
-\newcommand{\vSum}{\mathsf{v^{*}}}
-\newcommand{\totalDeferredOutput}{\mathsf{totalDeferredOutput}}
-\newcommand{\totalDeferredInput}{\mathsf{totalDeferredInput}}
-\newcommand{\DeferredPoolRecipient}{\mathsf{DEFERRED\_POOL}}
-\newcommand{\OracleNewAddress}{\Oracle^{\mathsf{NewAddress}}}
-\newcommand{\OracleDH}{\Oracle^{\mathsf{DH}}}
 
 % Merkle tree
 
-\newcommand{\MerkleDepth}[1]{\mathsf{MerkleDepth}^\mathsf{#1\kern-0.1em}}
-\newcommand{\MerkleNode}[2]{\mathsf{M}^{#1}_{#2}}
-\newcommand{\MerkleSibling}{\mathsf{sibling}}
-\newcommand{\MerkleCRH}[1]{\mathsf{MerkleCRH}^\mathsf{#1\kern-0.1em}}
-\newcommand{\MerkleHashLength}[1]{\mathsf{\ell}^\mathsf{#1\vphantom{p}}_\mathsf{Merkle}}
-\newcommand{\MerkleHash}[1]{\bitseq{\MerkleHashLength{#1}}}
-\newcommand{\MerkleHashOrchard}{\range{0}{\ParamP{q}-1}}
-\newcommand{\MerkleLayer}[1]{\range{0}{\MerkleDepth{#1}-1}}
-\newcommand{\hash}{\mathsf{hash}}
-\newcommand{\layerInput}{\mathsf{layer}}
-\newcommand{\layerRepr}{{l\Repr}}
-\newcommand{\leftInput}{\mathsf{left}}
-\newcommand{\leftRepr}{{\leftInput\Repr}}
-\newcommand{\rightInput}{\mathsf{right}}
-\newcommand{\rightRepr}{{\rightInput\Repr}}
 
 % Transactions
 
-\newcommand{\headerField}{\mathtt{header}}
-\newcommand{\fOverwintered}{\mathtt{fOverwintered}}
-\newcommand{\versionField}{\mathtt{version}}
-\newcommand{\effectiveVersion}{\mathsf{effectiveVersion}}
-\newcommand{\nVersionGroupId}{\mathtt{nVersionGroupId}}
-\newcommand{\nConsensusBranchId}{\mathtt{nConsensusBranchId}}
-\newcommand{\txInCount}{\mathtt{tx\_in\_count}}
-\newcommand{\txIn}{\mathtt{tx\_in}}
-\newcommand{\prevoutField}{\mathtt{prevout}}
-\newcommand{\txOutCount}{\mathtt{tx\_out\_count}}
-\newcommand{\txOut}{\mathtt{tx\_out}}
-\newcommand{\lockTime}{\mathtt{lock\_time}}
-\newcommand{\nExpiryHeight}{\mathtt{nExpiryHeight}}
-\newcommand{\nJoinSplit}{\mathtt{nJoinSplit}}
-\newcommand{\vJoinSplit}{\mathtt{vJoinSplit}}
-\newcommand{\valueBalance}[1]{\mathtt{valueBalance#1}}
-\newcommand{\nShieldedSpend}{\mathtt{nShieldedSpend}}
-\newcommand{\vShieldedSpend}{\mathtt{vShieldedSpend}}
-\newcommand{\nShieldedOutput}{\mathtt{nShieldedOutput}}
-\newcommand{\vShieldedOutput}{\mathtt{vShieldedOutput}}
-\newcommand{\nSpendsSapling}{\mathtt{nSpendsSapling}}
-\newcommand{\vSpendsSapling}{\mathtt{vSpendsSapling}}
-\newcommand{\nOutputsSapling}{\mathtt{nOutputsSapling}}
-\newcommand{\vOutputsSapling}{\mathtt{vOutputsSapling}}
-\newcommand{\vSpendProofsSapling}{\mathtt{vSpendProofsSapling}}
-\newcommand{\vSpendAuthSigs}[1]{\mathtt{vSpendAuthSigs{#1}}}
-\newcommand{\vOutputProofsSapling}{\mathtt{vOutputProofsSapling}}
-\newcommand{\OrchardLike}{Orchard\nusixthree{/Ironwood}}
-\newcommand{\nActionsField}[1]{\mathtt{nActions#1}}
-\newcommand{\vActionsField}[1]{\mathtt{vActions#1}}
-\newcommand{\flagsField}[1]{\mathtt{flags#1}}
-\newcommand{\enableSpendsField}[1]{\mathtt{enableSpends#1}}
-\newcommand{\enableOutputsField}[1]{\mathtt{enableOutputs#1}}
-\newcommand{\enableCrossAddressField}{\mathtt{enableCrossAddress}}
-\newcommand{\enableOutputsFieldOrchardLike}{\enableOutputsField{Orchard}{\nusixthree{/}}\nusixthree{\linebreak[2]\mathtt{Ironwood}}\xspace}
-\newcommand{\sizeProofsField}[1]{\mathtt{sizeProofs#1}}
-\newcommand{\proofsField}[1]{\mathtt{proofs#1}}
-\newcommand{\vpubOldField}{\mathtt{vpub\_old}}
-\newcommand{\vpubNewField}{\mathtt{vpub\_new}}
-\newcommand{\anchorField}[1]{\mathtt{anchor#1}}
-\newcommand{\joinSplitSig}{\mathtt{joinSplitSig}}
-\newcommand{\joinSplitPrivKey}{\mathtt{joinSplitPrivKey}}
-\newcommand{\joinSplitPubKey}{\mathtt{joinSplitPubKey}}
-\newcommand{\bindingSig}[1]{\mathtt{bindingSig#1}}
-\newcommand{\nullifierField}{\mathtt{nullifier}}
-\newcommand{\nullifiersField}{\mathtt{nullifiers}}
-\newcommand{\rkField}{\mathtt{rk}}
-\newcommand{\cvField}{\mathtt{cv}}
-\newcommand{\cmstarField}{\mathtt{cm*}}
-\newcommand{\cmuField}{\mathtt{cmu}}
-\newcommand{\cmxField}{\mathtt{cmx}}
-\newcommand{\commitmentsField}{\mathtt{commitments}}
-\newcommand{\ephemeralKey}{\mathtt{ephemeralKey}}
-\newcommand{\encCiphertext}{\mathtt{encCiphertext}}
-\newcommand{\encCiphertexts}{\mathtt{encCiphertexts}}
-\newcommand{\outCiphertext}{\mathtt{outCiphertext}}
-\newcommand{\randomSeed}{\mathtt{randomSeed}}
-\newcommand{\spendAuthSigField}{\mathtt{spendAuthSig}}
-\newcommand{\Varies}{\textit{\!Varies}}
-\newcommand{\heading}[1]{\multicolumn{1}{c|}{#1}}
-\newcommand{\type}[1]{\texttt{#1}}
-\newcommand{\overwintertype}[1]{\type{#1}}
-\newcommand{\saplingtype}[1]{\textcolor{\saplingcolor}{\type{#1}}}
-\newcommand{\nufivetype}[1]{\textcolor{\nufivecolor}{\type{#1}}}
-\newcommand{\nusixthreetype}[1]{\textcolor{\nusixthreecolor}{\type{#1}}}
-\newcommand{\nuseventype}[1]{\textcolor{\nusevencolor}{\type{#1}}}
-\newcommand{\typecodeField}{\mathtt{typecode}}
-\newcommand{\lengthField}{\mathtt{length}}
-\newcommand{\addrField}{\mathtt{addr}}
 
 % Tx hashing and scripts
 
-\newcommand{\sighashAlgorithm}{\term{SIGHASH algorithm}}
-\newcommand{\sighashAlgorithms}{\terms{SIGHASH algorithm}}
-\newcommand{\sighashTxHash}{\term{SIGHASH transaction hash}}
-\newcommand{\sighashTxHashes}{\termes{SIGHASH transaction hash}}
-\newcommand{\sighashType}{\term{SIGHASH type}}
-\newcommand{\sighashTypes}{\terms{SIGHASH type}}
-\newcommand{\SIGHASHALL}{\mathsf{SIGHASH\_ALL}}
-\newcommand{\SIGHASHSINGLE}{\mathsf{SIGHASH\_SINGLE}}
-\newcommand{\SigHash}{\mathsf{SigHash}}
-\newcommand{\scriptSig}{\mathtt{scriptSig}}
-\newcommand{\scriptPubKey}{\mathtt{scriptPubKey}}
 \newcommand{\ScriptOP}[1]{\texttt{OP\_{#1}}}
 
 % Equihash and block headers
 
 \newcommand{\Equihash}{\term{Equihash}}
-\newcommand{\validEquihashSolution}{\term{valid Equihash solution}}
-\newcommand{\powtag}{\mathsf{powtag}}
-\newcommand{\powheader}{\mathsf{powheader}}
-\newcommand{\powcount}{\mathsf{powcount}}
-\newcommand{\nVersion}{\mathtt{nVersion}}
-\newcommand{\hashPrevBlock}{\mathtt{hashPrevBlock}}
-\newcommand{\hashMerkleRoot}{\mathtt{hashMerkleRoot}}
-\newcommand{\hashReserved}{\mathtt{hashReserved}}
-\newcommand{\hashFinalSaplingRoot}{\mathtt{hashFinalSaplingRoot}}
-\newcommand{\hashLightClientRoot}{\mathtt{hashLightClientRoot}}
-\newcommand{\hashChainHistoryRoot}{\mathtt{hashChainHistoryRoot}}
-\newcommand{\hashBlockCommitments}{\mathtt{hashBlockCommitments}}
-\newcommand{\nTimeField}{\mathtt{nTime}}
-\newcommand{\nTime}{\mathsf{nTime}}
-\newcommand{\nBitsField}{\mathtt{nBits}}
-\newcommand{\nBits}{\mathsf{nBits}}
-\newcommand{\nNonce}{\mathtt{nNonce}}
-\newcommand{\solutionSize}{\mathtt{solutionSize}}
-\newcommand{\solution}{\mathtt{solution}}
 
 % Proving system
 
-\newcommand{\ZK}{\mathsf{ZK}}
-\newcommand{\ZKProvingKey}{\mathsf{ZK.ProvingKey}}
-\newcommand{\ZKVerifyingKey}{\mathsf{ZK.VerifyingKey}}
-\newcommand{\pk}{\mathsf{pk}}
-\newcommand{\vk}{\mathsf{vk}}
-\newcommand{\vkBytes}[1]{\bytes{\vk_{#1}}}
-\newcommand{\ZKGen}{\mathsf{ZK.Gen}}
-\newcommand{\ZKProof}{\mathsf{ZK.Proof}}
-\newcommand{\ZKPrimary}{\mathsf{ZK.PrimaryInput}}
-\newcommand{\ZKAuxiliary}{\mathsf{ZK.AuxiliaryInput}}
-\newcommand{\ZKSatisfying}{\mathsf{ZK.SatisfyingInputs}}
-\newcommand{\ZKProve}[1]{\mathsf{ZK.}\mathtt{Prove}_{#1}}
-\newcommand{\ZKVerify}[1]{\mathsf{ZK.}\mathtt{Verify}_{#1}}
-\newcommand{\Simulator}{\mathcal{S}}
-\newcommand{\Distinguisher}{\mathcal{D}}
-\newcommand{\JoinSplit}{\mathsf{ZKJoinSplit}}
-\newcommand{\JoinSplitVerify}{\JoinSplit\mathsf{.Verify}}
-\newcommand{\JoinSplitProve}{\JoinSplit\mathsf{.Prove}}
-\newcommand{\JoinSplitProof}{\JoinSplit\mathsf{.Proof}}
-\newcommand{\Spend}{\mathsf{ZKSpend}}
-\newcommand{\SpendVerify}{\Spend\mathsf{.Verify}}
-\newcommand{\SpendProve}{\Spend\mathsf{.Prove}}
-\newcommand{\SpendProof}{\Spend\mathsf{.Proof}}
-\newcommand{\Output}{\mathsf{ZKOutput}}
-\newcommand{\OutputVerify}{\Output\mathsf{.Verify}}
-\newcommand{\OutputProve}{\Output\mathsf{.Prove}}
-\newcommand{\OutputProof}{\Output\mathsf{.Proof}}
-\newcommand{\Action}{\mathsf{ZKAction}}
-\newcommand{\ActionVerify}{\Action\mathsf{.Verify}}
-\newcommand{\ActionProve}{\Action\mathsf{.Prove}}
-\newcommand{\ActionProof}[1]{\Action\mathsf{.Proof}_{#1}}
-\newcommand{\Proof}[1]{\pi_{\kern-0.1em{#1}}}
-\newcommand{\ProofJoinSplit}{\pi_\JoinSplit}
-\newcommand{\ProofSpend}{\pi_\Spend}
-\newcommand{\ProofOutput}{\pi_\Output}
-\newcommand{\ProofAction}[1]{\pi_\Action^{#1}}
-\newcommand{\ProofOrchardLike}{\notnusixthree{\Proof{}}\nusixthree{\Proof{}^{\OrchardLikePoolId}}}
-\newcommand{\zkproof}{\mathtt{zkproof}}
-\newcommand{\POUR}{\texttt{POUR}}
-\newcommand{\Prob}[2]{\mathrm{Pr}\scalebox{0.88}{\ensuremath{
-  \left[\!\!\begin{array}{c}#1\end{array} \middle| \begin{array}{l}#2\end{array}\!\!\right]
-}}}
-\newcommand{\BNImpl}{\mathtt{ALT\_BN128}}
 
 % JoinSplit
 
-\newcommand{\hSig}{\mathsf{h_{Sig}}}
-\newcommand{\hSigText}{\texorpdfstring{$\hSig$}{hSig}}
-\newcommand{\h}[1]{\mathsf{h_{\mathnormal{#1}}}}
-\newcommand{\rmN}{\mathrm{N}}
-\newcommand{\NOld}{\rmN^\mathsf{old}}
-\newcommand{\NNew}{\rmN^\mathsf{new}}
-\newcommand{\allN}[1]{\oneto{\rmN^\mathsf{#1}}}
-\newcommand{\allOld}{\allN{old}}
-\newcommand{\allNew}{\allN{new}}
-\newcommand{\setofOld}{\setof{\allOld}}
-\newcommand{\setofNew}{\setof{\allNew}}
-\newcommand{\vmacs}{\mathtt{vmacs}}
-\newcommand{\vpubOld}{\mathsf{v_{pub}^{old}}}
-\newcommand{\vpubNew}{\mathsf{v_{pub}^{new}}}
-\newcommand{\nOld}[1]{\NoteTuple{#1}^\mathsf{old}}
-\newcommand{\nNew}[1]{\NoteTuple{#1}^\mathsf{new}}
-\newcommand{\vOld}[1]{\mathsf{v}_{#1}^\mathsf{old}}
-\newcommand{\vNew}[1]{\mathsf{v}_{#1}^\mathsf{new}}
-\newcommand{\vNet}[1]{\mathsf{v}_{#1}^\mathsf{net}}
-\newcommand{\RandomSeed}{\mathsf{randomSeed}}
-\newcommand{\rt}[1]{\mathsf{rt}^\mathsf{#1}}
-\newcommand{\TreePath}[1]{\mathsf{path}_{#1}}
-\newcommand{\Receive}{\mathsf{Receive}}
-\newcommand{\EnforceMerklePath}[1]{\mathsf{enforceMerklePath}_{~\!\!#1}}
 
 % Elliptic curve stuff
 
-\newcommand{\Curve}{E}
-\newcommand{\Zero}{\mathcal{O}}
-\newcommand{\Generator}{\mathcal{P}}
-\newcommand{\Selectu}{\scalebox{1.53}{$u$}}
-\newcommand{\Selectv}{\scalebox{1.53}{$\varv$}}
-\newcommand{\Selectx}{\scalebox{1.53}{$x$}}
-\newcommand{\Selecty}{\scalebox{1.53}{$y$}}
-\newcommand{\subgroupr}{(\kern-0.075emr\kern-0.075em)}
-\newcommand{\Extract}{\mathsf{Extract}}
-\newcommand{\GroupHash}{\mathsf{GroupHash}}
-\newcommand{\FindGroupHash}{\mathsf{FindGroupHash}}
-\newcommand{\Accum}[1]{\mathsf{Accum}_{#1}}
 
-\newcommand{\bbPair}{\mbox{$\mathbb{P}\kern -0.1em\overlap{0.0001em}{\scalebox{0.7}{$\mathbb{AIR}$}}$}}
-\newcommand{\sbbPair}{\scalebox{0.7}{\bbPair}}
-\newcommand{\ParamPair}[1]{{{#1}_{\sbbPair}}}
-\newcommand{\ParamPairexp}[2]{{{#1}_{\sbbPair\!}}^{#2}}
-\newcommand{\GroupPair}[1]{\bbPair_{#1}}
-\newcommand{\GroupPairstar}[1]{\GroupPair{#1}^{\ast}}
-\newcommand{\SubgroupPair}[1]{\GroupPair{#1}^{\subgroupr}}
-\newcommand{\SubgroupPairstar}[1]{\GroupPair{#1}^{\subgroupr\ast}}
-\newcommand{\SubgroupReprPair}{\MakeRepr{\GroupPair{}}{\subgroupr}}
-\newcommand{\CurvePair}[1]{\Curve_{\GroupPair{#1}}}
-\newcommand{\ZeroPair}[1]{\Zero_{\GroupPair{#1}}}
-\newcommand{\OnePair}{\ParamPair{\mathbf{1}}}
-\newcommand{\GenPair}[1]{\Generator_{\GroupPair{#1}}}
-\newcommand{\ellPair}[1]{\ell_{\GroupPair{#1}}}
-\newcommand{\reprPair}[1]{\repr_{\GroupPair{#1}}}
-\newcommand{\abstPair}[1]{\abst_{\GroupPair{#1}}}
-\newcommand{\PairingPair}{\ParamPair{\hat{e}}}
 
-\newcommand{\ParamG}[1]{{{#1}_\mathbb{G}}}
-\newcommand{\ParamGexp}[2]{{{#1}_\mathbb{G}\!}^{#2}}
-\newcommand{\GroupG}[1]{\mathbb{G}_{#1}}
-\newcommand{\GroupGstar}[1]{\GroupG{#1}^{\ast}}
-\newcommand{\SubgroupG}[1]{\GroupG{#1}^{\subgroupr}}
-\newcommand{\SubgroupGstar}[1]{\GroupG{#1}^{\subgroupr\ast}}
-\newcommand{\SubgroupReprG}{\MakeRepr{\GroupG{}}{\subgroupr}}
-\newcommand{\CurveG}[1]{\Curve_{\GroupG{#1}}}
-\newcommand{\ZeroG}[1]{\Zero_{\GroupG{#1}}}
-\newcommand{\OneG}{\ParamG{\mathbf{1}}}
-\newcommand{\GenG}[1]{\Generator_{\GroupG{#1}}}
-\newcommand{\ellG}[1]{\ell_{\GroupG{#1}}}
-\newcommand{\ReprG}[1]{\bitseq{\ellG{#1}}}
-\newcommand{\reprG}[1]{\repr_{\GroupG{#1}}}
-\newcommand{\abstG}[1]{\abst_{\GroupG{#1}}}
-\newcommand{\PairingG}{\ParamG{\hat{e}}}
 
-\newcommand{\ExtractG}{\Extract_{\SubgroupG{}}}
-\newcommand{\SubgroupGHash}[1]{\GroupHash^{\SubgroupG{}}_{#1}}
-\newcommand{\SubgroupGHashURSType}{\SubgroupGHash{}\mathsf{.URSType}}
-\newcommand{\SubgroupGHashInput}{\SubgroupGHash{}\mathsf{.Input}}
-\newcommand{\URS}{\mathsf{URS}}
-\newcommand{\GroupGHash}{\GroupHash^{\GroupG{}}}
-\newcommand{\GroupGHashURSType}{\GroupGHash\mathsf{.URSType}}
-\newcommand{\GroupGHashInput}{\GroupGHash\mathsf{.Input}}
 
-\newcommand{\ParamIsoG}[1]{{{#1}_{\GroupIsoG}}}
-\newcommand{\ParamIsoGexp}[2]{{{#1}_{\GroupIsoG\!}^{#2}}}
-\newcommand{\GroupIsoG}{\mathsf{iso}\mhyphen\kern-0.05em\mathbb{G}}
-\newcommand{\GroupIsoGstar}{\GroupIsoG^{\ast}}
-\newcommand{\CurveIsoG}{\Curve_{\GroupIsoG}}
-\newcommand{\ZeroIsoG}{\Zero_{\GroupIsoG}}
-\newcommand{\IsoMapG}{\mathsf{iso\_map}^{\GroupG{}}}
-\newcommand{\IsoConstG}[1]{\mathcal{C}^{\GroupG{}}_{#1}}
 
-\newcommand{\ParamS}[1]{{{#1}_\mathbb{\hskip 0.03em S}}}
-\newcommand{\ParamSexp}[2]{{{#1}_\mathbb{\hskip 0.03em S}\!}^{#2}}
-\newcommand{\GroupS}[1]{\mathbb{S}_{#1}}
-\newcommand{\GroupSstar}[1]{\GroupS{#1}^{\ast}}
-\newcommand{\SubgroupS}[1]{\GroupS{#1}^{\subgroupr}}
-\newcommand{\SubgroupSstar}[1]{\GroupS{#1}^{\subgroupr\ast}}
-\newcommand{\SubgroupReprS}{\MakeRepr{\GroupS{}}{\subgroupr}}
-\newcommand{\CurveS}[1]{\Curve_{\GroupS{#1}}}
-\newcommand{\ZeroS}[1]{\Zero_{\GroupS{#1}}}
-\newcommand{\OneS}{\ParamS{\mathbf{1}}}
-\newcommand{\GenS}[1]{\Generator_{\GroupS{#1}}}
-\newcommand{\ellS}[1]{\ell_{\GroupS{#1}}}
-\newcommand{\reprS}[1]{\repr_{\GroupS{#1}}}
-\newcommand{\abstS}[1]{\abst_{\GroupS{#1}}}
-\newcommand{\PairingS}{\ParamS{\hat{e}}}
-\newcommand{\MillerLoopS}{\ParamS{\mathsf{MillerLoop}}}
-\newcommand{\FinalExpS}{\ParamS{\mathsf{FinalExp}}}
-\newcommand{\GrothS}{\mathsf{Groth16}_{\kern 0.05em\mathbb{S}}}
-\newcommand{\GrothSProof}{\GrothS\mathsf{.Proof}}
-\newcommand{\GrothSPrimaryInput}{\GrothS\mathsf{.PrimaryInput}}
-\newcommand{\GrothSBatchEntry}{\GrothS\mathsf{.BatchEntry}}
-\newcommand{\GrothSBatchVerify}{\GrothS\mathsf{.BatchVerify}}
 
-\newcommand{\ParamJ}[1]{{{#1}_\mathbb{\hskip 0.01em J}}}
-\newcommand{\ParamJexp}[2]{{{#1}_\mathbb{\hskip 0.01em J}\!}^{#2}}
-\newcommand{\GroupJ}{\mathbb{J}}
-\newcommand{\SubgroupJ}{\GroupJ^{\subgroupr}}
-\newcommand{\SubgroupJstar}{\GroupJ^{\subgroupr\ast}}
-\newcommand{\SubgroupReprJ}{\MakeRepr{\GroupJ}{\subgroupr}}
-\newcommand{\CurveJ}{\Curve_{\GroupJ}}
-\newcommand{\ZeroJ}{\Zero_{\GroupJ}}
-\newcommand{\GenJ}{\Generator_{\GroupJ}}
-\newcommand{\ellJ}{\ell_{\GroupJ}}
-\newcommand{\ReprJ}{\bitseq{\ellJ}}
-\newcommand{\ReprJBytes}{\byteseq{\ellJ/8}}
-\newcommand{\reprJ}{\repr_{\GroupJ}}
-\newcommand{\reprMaybeJ}{\notnufive{\repr_{\GroupJ}}\nufive{\repr}}
-\newcommand{\abstJ}{\abst_{\GroupJ}}
-\newcommand{\abstMaybeJ}{\notnufive{\abst_{\GroupJ}}\nufive{\abst}}
-\newcommand{\SignedScalarLimitJ}{\frac{\ParamJ{r}-1}{2}}
 
-\newcommand{\ExtractJ}{\Extract_{\SubgroupJ}}
-\newcommand{\GroupJHash}[1]{\GroupHash^{\SubgroupJstar}_{#1}}
-\newcommand{\GroupJHashURSType}{\GroupJHash{}\mathsf{.URSType}}
-\newcommand{\GroupJHashInput}{\GroupJHash{}\mathsf{.Input}}
-\newcommand{\HashOutput}{\bytes{H}}
-\newcommand{\FindGroupJHash}{\FindGroupHash^{\SubgroupJstar}}
 
-\newcommand{\MontCurve}{\mathbb{M}}
-\newcommand{\ParamM}[1]{{{#1}_\mathbb{\hskip 0.03em M}}}
-\newcommand{\ParamMexp}[2]{{{#1}_\mathbb{\hskip 0.03em M}\!}^{#2}}
 
-\newcommand{\ParamP}[1]{{{#1}_\mathbb{\hskip 0.01em P}}}
-\newcommand{\ParamPexp}[2]{{{#1}_\mathbb{\hskip 0.01em P}\!}^{#2}}
-\newcommand{\GroupP}{\mathbb{P}}
-\newcommand{\GroupPstar}{\GroupP^{\ast}}
-\newcommand{\CurveP}{\Curve_{\GroupP}}
-\newcommand{\ZeroP}{\Zero_{\GroupP}}
-\newcommand{\ellP}{\ell_{\GroupP}}
-\newcommand{\ReprP}{\bitseq{\ellP}}
-\newcommand{\ReprPBytes}{\byteseq{\ellP/8}}
-\newcommand{\reprP}{\repr_{\GroupP}}
-\newcommand{\gdStar}{\mathsf{g}\mathord{\star}_{\mathsf{d}}}
-\newcommand{\pkdStar}{\mathsf{pk}\mathord{\star}_{\mathsf{d}}}
-\newcommand{\abstP}{\abst_{\GroupP}}
-\newcommand{\SignedScalarLimitP}{\frac{\ParamP{r}-1}{2}}
 
-\newcommand{\ParamIsoP}[1]{{{#1}_{\GroupIsoP}}}
-\newcommand{\ParamIsoPexp}[2]{{{#1}_{\GroupIsoP\!}^{#2}}}
-\newcommand{\GroupIsoP}{\mathsf{iso}\mhyphen\kern-0.05em\mathbb{P}}
-\newcommand{\GroupIsoPstar}{\GroupIsoP^{\ast}}
-\newcommand{\CurveIsoP}{\Curve_{\GroupIsoP}}
-\newcommand{\ZeroIsoP}{\Zero_{\GroupIsoP}}
-\newcommand{\IsoMapP}{\mathsf{iso\_map}^{\GroupP}}
-\newcommand{\IsoConstP}[1]{\mathcal{C}^{\GroupP}_{#1}}
 
-\newcommand{\ExtractP}{\Extract_{\GroupP}}
-\newcommand{\ExtractPbot}{\Extract^{\kern-0.03em\scalebox{0.65}{$\bot$}}_{\GroupP}}
-\newcommand{\GroupPHash}{\GroupHash^{\GroupP}}
-\newcommand{\GroupPHashInput}{\GroupPHash{}\mathsf{.Input}}
-\newcommand{\GroupPHashURSType}{\GroupPHash{}\mathsf{.URSType}}
 
-\newcommand{\ParamV}[1]{{{#1}_\mathbb{\hskip 0.01em V}}}
-\newcommand{\ParamVexp}[2]{{{#1}_\mathbb{\hskip 0.01em V}\!}^{#2}}
-\newcommand{\GroupV}{\mathbb{V}}
-\newcommand{\GroupVstar}{\GroupV^{\ast}}
-\newcommand{\CurveV}{\Curve_{\GroupV}}
-\newcommand{\ZeroV}{\Zero_{\GroupV}}
-\newcommand{\ellV}{\ell_{\GroupV}}
-\newcommand{\ReprV}{\bitseq{\ellV}}
-\newcommand{\ReprVBytes}{\byteseq{\ellV/8}}
-\newcommand{\reprV}{\repr_{\GroupV}}
-\newcommand{\abstV}{\abst_{\GroupV}}
-\newcommand{\SignedScalarLimitV}{\frac{\ParamV{r}-1}{2}}
 
-\newcommand{\ParamIsoV}[1]{{{#1}_{\GroupIsoV}}}
-\newcommand{\ParamIsoVexp}[2]{{{#1}_{\GroupIsoV\!}^{#2}}}
-\newcommand{\GroupIsoV}{\mathsf{iso}\mhyphen\kern-0.15em\mathbb{V}}
-\newcommand{\GroupIsoVstar}{\GroupIsoV^{\ast}}
-\newcommand{\CurveIsoV}{\Curve_{\GroupIsoV}}
-\newcommand{\ZeroIsoV}{\Zero_{\GroupIsoV}}
-\newcommand{\IsoMapV}{\mathsf{iso\_map}^{\GroupV}}
-\newcommand{\IsoConstV}[1]{\mathcal{C}^{\GroupV}_{#1}}
 
-\newcommand{\ExtractV}{\Extract_{\GroupV}}
-\newcommand{\GroupVHash}{\GroupHash^{\GroupV}}
-\newcommand{\GroupVHashInput}{\GroupVHash\mathsf{.Input}}
-\newcommand{\GroupVHashURSType}{\GroupVHash\mathsf{.URSType}}
 
-\newcommand{\ctEdwards}[1]{E_{\kern 0.03em\mathsf{ctEdwards}({#1})}}
-\newcommand{\Edwards}[1]{E_{\kern 0.03em\mathsf{Edwards}({#1})}} % only in history
-\newcommand{\Montgomery}[1]{E_{\mathsf{Mont}({#1})}}
-\newcommand{\ShortWeierstrass}[1]{E_{\mathsf{SW}({#1})}}
 
-\newcommand{\curveNameG}{\ParamG{\mathsf{curveName}}}
-\newcommand{\sqrtratioG}{\mathsf{sqrt\_ratio}_{\GF{\ParamG{q}}}\!}
-\newcommand{\num}{\mathsf{num}}
-\newcommand{\xdiv}{\mathsf{div}}
-\newcommand{\expandmessage}{\mathsf{expand\_message}}
-\newcommand{\expandmessagexmd}{\mathsf{expand\_message\_xmd}}
-\newcommand{\hashtofield}{\mathsf{hash\_to\_field}}
-\newcommand{\hashtocurve}{\mathsf{hash\_to\_curve}}
-\newcommand{\maptocurvesimpleswuIsoG}{\mathsf{map\_to\_curve\_simple\_swu}^{\GroupIsoG}}
-\newcommand{\clearcofactor}{\mathsf{clear\_cofactor}}
 
-\newcommand{\pack}{\mathsf{pack}}
 
-\newcommand{\Acc}{\mathsf{Acc}}
-\newcommand{\Base}{\mathsf{Base}}
-\newcommand{\Addend}{\mathsf{Addend}}
-\newcommand{\Sum}{\mathsf{Sum}}
-\newcommand{\Ainv}{A_{\mathsf{inv}}}
-\newcommand{\Inv}[1]{{#1}_{\mathsf{inv}}}
 
-\newcommand{\repr}{\mathsf{repr}}
-\newcommand{\abst}{\mathsf{abst}}
-\newcommand{\reprBytes}{\mathsf{reprBytes}}
-\newcommand{\abstBytes}{\mathsf{abstBytes}}
-\newcommand{\xP}{{x_{\hspace{-0.12em}P}}}
-\newcommand{\yP}{{y_{\hspace{-0.03em}P}}}
 
 % Conversions
 
-\newcommand{\ECtoOSP}{\mathsf{EC2OSP}}
-\newcommand{\ECtoOSPXL}{\mathsf{EC2OSP\mhyphen{}XL}}
-\newcommand{\ECtoOSPXS}{\mathsf{EC2OSP\mhyphen{}XS}}
-\newcommand{\FEtoIP}{\mathsf{FE2IP}}
-\newcommand{\FEtoIPP}{\mathsf{FE2IPP}}
-\newcommand{\ItoLEBSP}[1]{\mathsf{I2LEBSP}_{#1}}
-\newcommand{\ItoLEBSPOf}[2]{\ItoLEBSP{#1}\!\left({#2}\right)}
-\newcommand{\ItoLEOSP}[1]{\mathsf{I2LEOSP}_{#1}}
-\newcommand{\ItoLEOSPOf}[2]{\ItoLEOSP{#1}\!\left({#2}\right)}
-\newcommand{\ItoBEBSP}[1]{\mathsf{I2BEBSP}_{#1}}
-\newcommand{\ItoBEBSPOf}[2]{\ItoBEBSP{#1}\!\left({#2}\right)}
-\newcommand{\LEBStoIP}[1]{\mathsf{LEBS2IP}_{#1}}
-\newcommand{\LEBStoIPOf}[2]{\LEBStoIP{#1}\!\left({#2}\right)}
-\newcommand{\LEOStoIP}[1]{\mathsf{LEOS2IP}_{#1}}
-\newcommand{\LEOStoIPOf}[2]{\LEOStoIP{#1}\!\left({#2}\right)}
-\newcommand{\LEBStoOSP}[1]{\mathsf{LEBS2OSP}_{#1}}
-\newcommand{\LEBStoOSPOf}[2]{\LEBStoOSP{#1}\!\left({#2}\right)}
-\newcommand{\LEOStoBSP}[1]{\mathsf{LEOS2BSP}_{#1}}
-\newcommand{\LEOStoBSPOf}[2]{\LEOStoBSP{#1}\!\left({#2}\right)}
-\newcommand{\BEOStoIP}[1]{\mathsf{BEOS2IP}_{#1}}
-\newcommand{\BEOStoIPOf}[2]{\BEOStoIP{#1}\!\left({#2}\right)}
 
 % Sapling and Orchard circuits
 
-\newcommand{\DecompressValidate}{\mathsf{DecompressValidate}}
-\newcommand{\MontToCtEdwards}{\mathsf{MontToCtEdwards}}
-\newcommand{\CtEdwardsToMont}{\mathsf{CtEdwardsToMont}}
-\newcommand{\AffineCtEdwardsJubjub}{\mathsf{AffineCtEdwardsJubjub}}
-\newcommand{\AffineMontJubjub}{\mathsf{AffineMontJubjub}}
-\newcommand{\CompressedCtEdwardsJubjub}{\mathsf{CompressedCtEdwardsJubjub}}
-\newcommand{\AffineSWPallas}{\mathsf{AffineSWPallas}}
-\newcommand{\CompressedSWPallas}{\mathsf{CompressedSWPallas}}
-\newcommand{\AffineSWVesta}{\mathsf{AffineSWVesta}}
-\newcommand{\CompressedSWVesta}{\mathsf{CompressedSWVesta}}
-\newcommand{\PedersenHash}{\mathsf{PedersenHash}}
-\newcommand{\PedersenGen}{\mathcal{I}}
-\newcommand{\PedersenEncode}[1]{\langle{#1}\rangle}
-\newcommand{\PedersenEncodeSub}[2]{\langle{#2}\rangle_{\kern-0.1em{#1}\vphantom{S'}}}
-\newcommand{\PedersenEncodeNonneg}[1]{\langle{#1}\rangle^{\kern-0.1em\PedersenRangeOffset}}
-\newcommand{\PedersenHashToPoint}{\mathsf{PedersenHashToPoint}}
-\newcommand{\MixingPedersenHash}{\mathsf{MixingPedersenHash}}
-\newcommand{\WindowedPedersenCommitAlg}{\mathsf{WindowedPedersenCommit}}
-\newcommand{\WindowedPedersenCommit}[1]{\WindowedPedersenCommitAlg_{#1}}
-\newcommand{\HomomorphicPedersenCommitAlg}[1]{\mathsf{HomomorphicPedersenCommit}^\mathsf{#1\kern-0.1em}}
-\newcommand{\HomomorphicPedersenCommit}[2]{\HomomorphicPedersenCommitAlg{#1}_{#2}}
-\newcommand{\Digits}{\mathsf{Digits}}
-\newcommand{\PedersenRangeOffset}{\mathsf{\Delta}}
-\newcommand{\Sign}{\mathsf{\Theta}}
-\newcommand{\SinsemillaHash}{\mathsf{SinsemillaHash}}
-\newcommand{\SinsemillaGenInit}{\mathcal{Q}}
-\newcommand{\SinsemillaGenBase}{\mathcal{S}}
-\newcommand{\SinsemillaHashToPoint}{\mathsf{SinsemillaHashToPoint}}
-\newcommand{\SinsemillaCommitAlg}{\mathsf{SinsemillaCommit}}
-\newcommand{\SinsemillaCommit}[1]{\SinsemillaCommitAlg_{#1}}
-\newcommand{\SinsemillaShortCommitAlg}{\mathsf{SinsemillaShortCommit}}
-\newcommand{\SinsemillaShortCommit}[1]{\SinsemillaShortCommitAlg_{#1}}
-\newcommand{\pad}{\mathsf{pad}}
-\newcommand{\Mpadded}{M^{\mathsf{padded}}}
-\newcommand{\Mwords}{M^{\mathsf{words}}}
 
 % Consensus rules
 
-\newcommand{\consensusrule}[1]{\needspace{4ex}\vspace{2ex}\callout{}{Consensus rule:}{#1}}
 \newenvironment{consensusrules}{\introlist\callout{}{Consensus rules:}\begin{itemize}}{\end{itemize}}
 
-\newcommand{\prenusevenitem}[1]{\item \prenuseven{#1}}
-\newcommand{\nusevenonlyitem}[1]{\nuseven{\item {[\NUSeven only]}\, {#1}}}
-\newcommand{\nusevenonwarditem}[1]{\nuseven{\item {[\NUSeven onward]}\, {#1}}}
-\newcommand{\prenusixthreeitem}[1]{\item \prenusixthree{#1}}
-\newcommand{\nusixthreeonlyitem}[1]{\nusixthree{\item {[\NUSixThree only\notbeforenuseven{, pre-\NUSeven}]}\, {#1}}}
-\newcommand{\nusixthreeonwarditem}[1]{\nusixthree{\item {[\NUSixThree onward]}\, {#1}}}
-\newcommand{\prenusixtwoitem}[1]{\item \prenusixtwo{#1}}
-\newcommand{\nusixtwoonlyitem}[1]{\nusixtwo{\item {[\NUSixTwo only\notbeforenusixthree{, pre-\NUSixThree}]}\, {#1}}}
-\newcommand{\nusixtwoonwarditem}[1]{\nusixtwo{\item {[\NUSixTwo onward]}\, {#1}}}
-\newcommand{\nufiveprenusixthreeitem}[1]{\nufive{\item {[\NUFive onward\notbeforenusixthree{, pre-\NUSixThree}]}\, {#1}}}
-\newcommand{\prenusixoneitem}[1]{\item \prenusixone{#1}}
-\newcommand{\nusixoneonlyitem}[1]{\nusixone{\item {[\NUSixOne only\notbeforenusixtwo{, pre-\NUSixTwo}]}\, {#1}}}
-\newcommand{\nusixoneonwarditem}[1]{\nusixone{\item {[\NUSixOne onward]}\, {#1}}}
-\newcommand{\prenusixitem}[1]{\item \prenusix{#1}}
-\newcommand{\nusixonlyitem}[1]{\nusix{\item {[\NUSix only\notbeforenusixone{, pre-\NUSixOne}]}\, {#1}}}
-\newcommand{\nusixonwarditem}[1]{\nusix{\item {[\NUSix onward]}\, {#1}}}
-\newcommand{\prenufiveitem}[1]{\item \prenufive{#1}}
-\newcommand{\nufiveonlyitem}[1]{\nufive{\item {[\NUFive only\notbeforenusix{, pre-\NUSix}]}\, {#1}}}
-\newcommand{\nufiveonwarditem}[1]{\nufive{\item {[\NUFive onward]}\, {#1}}}
-\newcommand{\nufiveprenusixtwoitem}[1]{\nufive{\item {[\NUFive \notnusixtwo{onward}\notbeforenusixtwo{ to \NUSixOne inclusive, pre-\NUSixTwo}]}\, {#1}}}
-\newcommand{\precanopyitem}[1]{\item \precanopy{#1}}
-\newcommand{\canopyonlyitem}[1]{\canopy{\item {[\NUCanopy only\notbeforenufive{, pre-\NUFive}]}\, {#1}}}
-\newcommand{\canopyonwarditem}[1]{\canopy{\item {[\NUCanopy onward]}\, {#1}}}
-\newcommand{\preheartwooditem}[1]{\item \preheartwood{#1}}
-\newcommand{\heartwoodonlyitem}[1]{\heartwood{\item {[\NUHeartwood only\notbeforecanopy{, pre-\NUCanopy}]}\, {#1}}}
-\newcommand{\heartwoodonwarditem}[1]{\heartwood{\item {[\NUHeartwood onward]}\, {#1}}}
-\newcommand{\heartwoodandcanopyitem}[1]{\heartwood{\item \heartwoodandcanopy{#1}}}
-\newcommand{\preblossomitem}[1]{\item \preblossom{#1}}
-\newcommand{\blossomonlyitem}[1]{\blossom{\item {[\NUBlossom only\notbeforeheartwood{, pre-\NUHeartwood}]}\, {#1}}}
-\newcommand{\blossomonwarditem}[1]{\blossom{\item {[\NUBlossom onward]}\, {#1}}}
-\newcommand{\presaplingitem}[1]{\item \presapling{#1}}
-\newcommand{\saplingonlyitem}[1]{\sapling{\item {[\NUSapling only\notbeforeblossom{, pre-\NUBlossom}]}\, {#1}}}
-\newcommand{\saplingonwarditem}[1]{\sapling{\item {[\NUSapling onward]}\, {#1}}}
-\newcommand{\saplingandblossomitem}[1]{\sapling{\item \saplingandblossom{#1}}}
-\newcommand{\saplingprenufiveitem}[1]{\sapling{\item \saplingprenufive{#1}}}
-\newcommand{\preoverwinteritem}[1]{\item \preoverwinter{#1}}
-\newcommand{\overwinteronlyitem}[1]{\overwinter{\item {[\NUOverwinter only, pre-\NUSapling]}\, {#1}}}
-\newcommand{\overwinteronwarditem}[1]{\overwinter{\item {[\NUOverwinter onward]}\, {#1}}}
-\newcommand{\overwinterprenufiveitem}[1]{\overwinter{\item \overwinterprenufive{#1}}}
-\newcommand{\sproutspecificitem}[1]{\item \sproutspecific{#1}}
 
-\newcommand{\prenuseven}[1]{\notbeforenuseven{\nuseven{[Pre-\NUSeven\!]\,}} {#1}}
-\newcommand{\nusevenonly}[1]{\nuseven{[\NUSeven only]\, {#1}}}
-\newcommand{\nusevenonward}[1]{\nuseven{[\NUSeven onward]\, {#1}}}
-\newcommand{\prenusixthree}[1]{\notbeforenusixthree{\nusixthree{[Pre-\NUSixThree\!]\,}} {#1}}
-\newcommand{\nusixthreeonly}[1]{\nusixthree{[\NUSixThree only]\, {#1}}}
-\newcommand{\nusixthreeonward}[1]{\nusixthree{[\NUSixThree onward]\, {#1}}}
-\newcommand{\prenusixtwo}[1]{\notbeforenusixtwo{\nusixtwo{[Pre-\NUSixTwo\!]\,}} {#1}}
-\newcommand{\nusixtwoonly}[1]{\nusixtwo{[\NUSixTwo only]\, {#1}}}
-\newcommand{\nusixtwoonward}[1]{\nusixtwo{[\NUSixTwo onward]\, {#1}}}
-\newcommand{\prenusixone}[1]{\notbeforenusixone{\nusixone{[Pre-\NUSixOne\!]\,}} {#1}}
-\newcommand{\nusixoneonly}[1]{\nusixone{[\NUSixOne only]\, {#1}}}
-\newcommand{\nusixoneonward}[1]{\nusixone{[\NUSixOne onward]\, {#1}}}
-\newcommand{\prenusix}[1]{\notbeforenusix{\nusix{[Pre-\NUSix\!]\,}} {#1}}
-\newcommand{\nusixonly}[1]{\nusix{[\NUSix only]\, {#1}}}
-\newcommand{\nusixonward}[1]{\nusix{[\NUSix onward]\, {#1}}}
-\newcommand{\prenufive}[1]{\notbeforenufive{\nufive{[Pre-\NUFive\!]\,}} {#1}}
-\newcommand{\nufiveonly}[1]{\nufive{[\NUFive only\notbeforenusix{, pre-\NUSix}]\, {#1}}}
-\newcommand{\nufiveonward}[1]{\nufive{[\NUFive onward]\, {#1}}}
-\newcommand{\precanopy}[1]{\notbeforecanopy{\canopy{[Pre-\NUCanopy\!]\,}} {#1}}
-\newcommand{\canopyonly}[1]{\canopy{[\NUCanopy only\notbeforenufive{, pre-\NUFive}]\, {#1}}}
-\newcommand{\canopyonward}[1]{\canopy{[\NUCanopy onward]\, {#1}}}
-\newcommand{\preheartwood}[1]{\notbeforeheartwood{\heartwood{[Pre-\NUHeartwood\!]\,}} {#1}}
-\newcommand{\heartwoodonward}[1]{\heartwood{[\NUHeartwood onward]\, {#1}}}
-\newcommand{\heartwoodonly}[1]{\heartwood{[\NUHeartwood only\notbeforecanopy{, pre-\NUCanopy}]\, {#1}}}
-\newcommand{\heartwoodandcanopy}[1]{\heartwood{[\NUHeartwood\notbeforecanopy{ and \NUCanopy}\notbeforenufive{ only, pre-\NUFive}]\, {#1}}}
-\newcommand{\preblossom}[1]{\notbeforeblossom{\blossom{[Pre-\NUBlossom\!]\,}} {#1}}
-\newcommand{\blossomonly}[1]{\blossom{[\NUBlossom only\notbeforeheartwood{, pre-\NUHeartwood}]\, {#1}}}
-\newcommand{\blossomonward}[1]{\blossom{[\NUBlossom onward]\, {#1}}}
-\newcommand{\presapling}[1]{\sapling{[Pre-\NUSapling\!]\,} {#1}}
-\newcommand{\saplingonly}[1]{\sapling{[\NUSapling only\notbeforeblossom{, pre-\NUBlossom}]\, {#1}}}
-\newcommand{\saplingonward}[1]{\sapling{[\NUSapling onward]\, {#1}}}
-\newcommand{\saplingandblossom}[1]{\sapling{[\NUSapling\notbeforeblossom{ and \NUBlossom}\notbeforeheartwood{ only, pre-\NUHeartwood}]\, {#1}}}
-\newcommand{\saplingprenufive}[1]{\sapling{[\NUSapling \notnufive{onward}\notbeforenufive{ to \NUCanopy inclusive, pre-\NUFive}]\, {#1}}}
-\newcommand{\preoverwinter}[1]{\overwinter{[Pre-\NUOverwinter\!]\,} {#1}}
-\newcommand{\overwinteronly}[1]{\overwinter{[\NUOverwinter only, pre-\NUSapling]\, {#1}}}
-\newcommand{\overwinteronward}[1]{\overwinter{[\NUOverwinter onward]\, {#1}}}
-\newcommand{\overwinterprenufive}[1]{\overwinter{[\NUOverwinter \notnufive{onward}\notbeforenufive{ to \NUCanopy inclusive, pre-\NUFive}]\, {#1}}}
-\newcommand{\sproutspecific}[1]{[\Sprout\!]\, {#1}}
 
-\newcommand{\securityrequirement}[1]{\needspace{4ex}\vspace{2ex}\callout{}{Security requirement:}{#1}}
 \newenvironment{securityrequirements}{\introlist\callout{}{Security requirements:}\begin{itemize}}{\end{itemize}}
-\newcommand{\vuln}[1]{\needspace{3ex}{\color{\vulncolor}\callout{}{Vulnerability disclosure:}{#1}}}
-\newcommand{\pnote}[1]{\callout{}{Note:}{#1}}
 \newenvironment{pnotes}{\introlist\callout{}{Notes:}\begin{itemize}}{\end{itemize}}
-\newcommand{\nnote}[1]{\needspace{4ex}\vspace{2ex}\callout{}{Non-normative note:}{#1}}
 \newenvironment{nnotes}{\introlist\callout{}{Non-normative notes:}\begin{itemize}}{\end{itemize}}
 
-\newcommand{\nusevenonwardnnote}[1]{\nuseven{\callout{[\NUSeven onward]\,\,}{Non-normative note:}{#1}}}
-\newcommand{\nusevenonwardpnote}[1]{\nuseven{\callout{[\NUSeven onward]\,\,}{Note:}{#1}}}
-\newcommand{\nusixthreeonwardnnote}[1]{\nusixthree{\callout{[\NUSixThree onward]\,\,}{Non-normative note:}{#1}}}
-\newcommand{\nusixthreeonwardpnote}[1]{\nusixthree{\callout{[\NUSixThree onward]\,\,}{Note:}{#1}}}
-\newcommand{\nusixtwoonwardnnote}[1]{\nusixtwo{\callout{[\NUSixTwo onward]\,\,}{Non-normative note:}{#1}}}
-\newcommand{\nusixtwoonwardpnote}[1]{\nusixtwo{\callout{[\NUSixTwo onward]\,\,}{Note:}{#1}}}
-\newcommand{\nusixoneonwardnnote}[1]{\nusixone{\callout{[\NUSixOne onward]\,\,}{Non-normative note:}{#1}}}
-\newcommand{\nusixoneonwardpnote}[1]{\nusixone{\callout{[\NUSixOne onward]\,\,}{Note:}{#1}}}
-\newcommand{\nusixonwardnnote}[1]{\nusix{\callout{[\NUSix onward]\,\,}{Non-normative note:}{#1}}}
-\newcommand{\nusixonwardpnote}[1]{\nusix{\callout{[\NUSix onward]\,\,}{Note:}{#1}}}
-\newcommand{\nufiveonwardnnote}[1]{\nufive{\callout{[\NUFive onward]\,\,}{Non-normative note:}{#1}}}
-\newcommand{\nufiveonwardpnote}[1]{\nufive{\callout{[\NUFive onward]\,\,}{Note:}{#1}}}
-\newcommand{\canopyonwardnnote}[1]{\canopy{\callout{[\NUCanopy onward]\,\,}{Non-normative note:}{#1}}}
-\newcommand{\canopyonwardpnote}[1]{\canopy{\callout{[\NUCanopy onward]\,\,}{Note:}{#1}}}
-\newcommand{\precanopypnote}[1]{\callout{\notbeforecanopy{\canopy{[Pre-\NUCanopy\!]\,\,}}}{Note:}{#1}}
-\newcommand{\preheartwoodpnote}[1]{\callout{\notbeforeheartwood{\heartwood{[Pre-\NUHeartwood\!]\,\,}}}{Note:}{#1}}
-\newcommand{\presaplingpnote}[1]{\callout{\sapling{[Pre-\ NUSapling\!]\,\,}}{Note:}{#1}}
-\newcommand{\preoverwinterpnote}[1]{\callout{\overwinter{[Pre-\NUOverwinter\!]\,\,}}{Note:}{#1}}
-\newcommand{\overwinteronlypnote}[1]{\callout{\overwinter{[\NUOverwinter only\sapling{, pre-\NUSapling}]\,\,}}{Note:}{#1}}
-\newcommand{\overwinteronwardpnote}[1]{\callout{\overwinter{[\NUOverwinter onward]\,\,}}{Note:}{#1}}
-\newcommand{\sproutspecificpnote}[1]{\callout{[\Sprout\!]\,\,}{Note:}{#1}}
 
-\newcommand{\fact}[1]{\callout{}{Fact:}{#1}}
-\newcommand{\facts}[1]{\callout{}{Facts:}{#1}}
-\newcommand{\snarkcondition}[2]{\callout{}{#1}\phantomsection\label{#2}}
 
 \newcommand{\affiliation}[1]{\hairspace\thanks{\;#1}\;}
 
