@@ -1263,7 +1263,7 @@ Nodes cannot see a shielded transfer, so the transaction carries a description o
 
 \textbf{JoinSplits.} A Sprout JoinSplit spends two notes and creates two, and two public amounts move value in or out of the transparent side of the transaction, at most one of them non-zero. Since Canopy no value may move into Sprout, and since NU7 no value may move out, so the Sprout pool is frozen.
 
-\textbf{Spends and Outputs.} Sapling gives each spent note a Spend, which carries a spend authorization signature over the whole transaction, and each new note an Output, which carries the encrypted note and no signature. The value commitment and the randomized key of a Spend, and the value commitment and the ephemeral key of an Output, must not be points of small order.
+\textbf{Spends and Outputs.} Sapling gives each spent note a Spend, which carries a spend authorization signature over the whole transaction, and each new note an Output, which carries the encrypted note and no signature. A Spend shows a randomized key, made by shifting the owner's key by a fresh random value. An Output shows an ephemeral key, made by the sender for one use to encrypt the note. The two keys and the two value commitments must not be points of small order.
 
 \textbf{Actions.} Orchard and Ironwood join one optional spend and one optional output into each Action, with one value commitment for the net value. Two flags for each pool say whether the Actions may spend and may create non-zero value, and from NU6.3 a third flag says whether a new note may go to a different address from the spent note, which Orchard-pool Actions may never do. Every field of an Action must be a canonical encoding, and the randomized key must not be the identity point. The proof must verify under the verifying key of the circuit in force, and the circuit changed at NU6.2, to fix a flaw which could have let a transaction break the balance rule, and again at NU6.3.
 
@@ -1272,7 +1272,7 @@ Nodes cannot see a shielded transfer, so the transaction carries a description o
 
 A sender has the recipient's address and no private channel to the recipient, so the sender builds the whole note alone and puts everything the recipient needs on the block chain. The sender chooses fresh random values, computes the value commitment and the note commitment, encrypts the note to the recipient and makes the proof.
 
-Since Canopy most of a note's random values come from one 32-byte seed, $\mathit{rseed}$, which travels inside the encrypted note so the recipient can rebuild the note exactly. In Orchard the new note's $\rho$ is the nullifier of the note spent in the same Action. The sender also adds a second, shorter ciphertext readable by an outgoing viewing key, which lets the sender read the payment again later, or readable by no key at all, which keeps the payment secret even if the sender's keys later leak.
+Since Canopy most of a note's random values come from one 32-byte seed, $\mathit{rseed}$, which travels inside the encrypted note so the recipient can rebuild the note exactly. A note's nullifier is computed from a value $\rho$, which must differ for every note. In Orchard the new note's $\rho$ is the nullifier of the note spent in the same Action. The sender also adds a second, shorter ciphertext readable by an outgoing viewing key, which lets the sender read the payment again later, or readable by no key at all, which keeps the payment secret even if the sender's keys later leak.
 
 Wallets should shuffle the order of spends and outputs to reveal less about the transaction. Since Canopy wallets must not send to Sprout addresses \cite{ZIP-211}.
 
@@ -1285,7 +1285,7 @@ A spender has to show the spent note is one of the notes on the block chain with
 \lsubsection{Signatures and balance}{readablesigbalance}
 \phantomsection\label{orchardbalance}\label{saplingbalance}\label{sighash}\label{spendauthsig}\label{sproutnonmalleability}%
 
-Once the parts are built, nobody should be able to change the transaction, and every node must be able to check the hidden amounts balance. Each signature in a shielded transaction signs the SIGHASH, a hash of the whole transaction, computed for version 4 as \cite{ZIP-243} specifies, for version 5 as \cite{ZIP-244} specifies and for version 6 as \cite{ZIP-229} specifies. From NU5 the SIGHASH type must be one of the defined types in canonical form, and every transaction must name the consensus branch of the upgrade in force.
+Once the parts are built, nobody should be able to change the transaction, and every node must be able to check the hidden amounts balance. Each signature in a shielded transaction signs the SIGHASH, a hash of the whole transaction, computed for version 4 as \cite{ZIP-243} specifies, for version 5 as \cite{ZIP-244} specifies and for version 6 as \cite{ZIP-229} specifies. A transparent signature can instead cover only some parts of the transaction, and the SIGHASH type says which parts. In version 5 and 6 transactions the SIGHASH type must be one of the defined types in canonical form, and the transaction must name the consensus branch of the upgrade in force.
 
 \textbf{Sprout.} Sprout signs each transaction with a throwaway key used once, and the proof ties the key to the owners of the spent notes through the value $h_{\mathsf{Sig}}$. Sprout also checks the balance inside the proof.
 
@@ -1352,7 +1352,7 @@ BCTV14 has a flaw which could have let someone prove a false statement, and so c
 
 \textbf{Checking proof elements.} A BCTV14 or Groth16 proof is a list of encoded curve points. A proof whose elements are not well formed is not valid, even if the proof equations hold. For each element, the verifier must check the leading byte or bits have the required form, the remaining bits are a number below the size of the field, and the result is a point of the right order. Every Groth16 element needs the order check, and among the BCTV14 elements only the one in the second group of the pairing does. The point at infinity never appears in a proof and has no encoding.
 
-\textbf{Parameters.} BCTV14 and Groth16 each need a proving key and a verifying key for every circuit, and Zcash's keys came from multi-party computations \cite{BGG2017} \cite{BGM2017}. Software must use exactly the keys made for the Zcash block chain, with a proving system compatible with the library which made the proofs.
+\textbf{Parameters.} BCTV14 and Groth16 each need a proving key and a verifying key for every circuit. Making the keys also makes a secret, and whoever knows the secret can make fake proofs and counterfeit funds. Zcash's keys came from multi-party computations \cite{BGG2017} \cite{BGM2017}, called a trusted setup, where the secret cannot be recovered as long as one participant was honest. Software must use exactly the keys made for the Zcash block chain, with a proving system compatible with the library which made the proofs.
 
 \lsubsection{Elliptic curves}{readablecurves}
 \phantomsection\label{jubjub}%
