@@ -1154,9 +1154,11 @@ onto the block chain encrypted to the recipient, with a 512-byte memo for the se
 recipient to use as they agree, and each encrypted note starts with a version byte whose allowed
 values depend on the pool and the block height.
 
-From block 3,363,426 on Mainnet until the NU6.2 upgrade, no transaction could contain \Orchard
-Actions. Since NU6.3, value can leave the Orchard pool but cannot go into the Orchard pool, and new
-payments to \Orchard addresses go into the Ironwood pool, which uses the \Orchard protocol.
+In May 2026 a researcher found a bug in the \Orchard circuit which could have let anyone counterfeit
+funds. Within days \Orchard was switched off at block 3,363,426 on Mainnet, and NU6.2 switched
+\Orchard back on about a day later with a corrected circuit. Since NU6.3 value can only leave the
+Orchard pool, and new payments to \Orchard addresses go into the Ironwood pool, which runs the same
+protocol with quantum-recoverable notes \cite{ZIP-2005}.
 
 \textbf{Commitments and nullifiers.} When a transaction makes a note, the note commitment goes into
 the note commitment tree of the note's pool, and when a transaction spends the note, a
@@ -1246,7 +1248,7 @@ A wallet with one key for everything would put the power to spend at risk every 
 
 \textbf{Sapling.} The spending key gives three secrets, the spend authorizing key for approving spends, the nullifier private key for computing nullifiers and the outgoing viewing key for reading payments sent. The public halves $\mathit{ak}$ and $\mathit{nk}$ of the first two, together with the outgoing viewing key, form the full viewing key, and a hash of $\mathit{ak}$ and $\mathit{nk}$ gives the incoming viewing key, which finds and reads payments received.
 
-\textbf{Orchard and Ironwood.} The keys keep the same roles, but the outgoing viewing key and a diversifier key come from the full viewing key rather than straight from the spending key. Wallets must derive Orchard keys exactly as specified, or the notes may not be recoverable through the recovery protocol of \cite{ZIP-2005} if attacks with quantum computers become practical.
+\textbf{Orchard and Ironwood.} The keys keep the same roles, but the outgoing viewing key and a diversifier key come from the full viewing key rather than straight from the spending key. Wallets must derive Orchard keys exactly as specified, or the notes may not be recoverable through the recovery protocol of \cite{ZIP-2005} if attacks with quantum computers become practical. A wallet which takes the spend authorizing key from elsewhere, such as FROST or a hardware wallet, must keep the spending key and a record of the choice to recover the notes.
 
 \textbf{Sprout.} The spending key gives one paying key and one receiving key, and each spending key has exactly one address.
 
@@ -1263,7 +1265,7 @@ Nodes cannot see a shielded transfer, so the transaction carries a description o
 
 \textbf{Spends and Outputs.} Sapling gives each spent note a Spend, which carries a spend authorization signature over the whole transaction, and each new note an Output, which carries the encrypted note and no signature. The value commitment and the randomized key of a Spend, and the value commitment and the ephemeral key of an Output, must not be points of small order.
 
-\textbf{Actions.} Orchard and Ironwood join one optional spend and one optional output into each Action, with one value commitment for the net value. Two flags for each pool say whether the Actions may spend and may create non-zero value, and from NU6.3 a third flag says whether a new note may go to a different address from the spent note. Every field of an Action must be a canonical encoding, and the randomized key must not be the identity point. The proof must verify under the verifying key of the circuit in force, and the circuit changed at NU6.2, to fix a flaw which could have let a transaction break the balance rule, and again at NU6.3.
+\textbf{Actions.} Orchard and Ironwood join one optional spend and one optional output into each Action, with one value commitment for the net value. Two flags for each pool say whether the Actions may spend and may create non-zero value, and from NU6.3 a third flag says whether a new note may go to a different address from the spent note, which Orchard-pool Actions may never do. Every field of an Action must be a canonical encoding, and the randomized key must not be the identity point. The proof must verify under the verifying key of the circuit in force, and the circuit changed at NU6.2, to fix a flaw which could have let a transaction break the balance rule, and again at NU6.3.
 
 \lsubsection{Sending notes and dummy notes}{readablesending}
 \phantomsection\label{sproutdummynotes}%
@@ -1274,7 +1276,7 @@ Since Canopy most of a note's random values come from one 32-byte seed, $\mathit
 
 Wallets should shuffle the order of spends and outputs to reveal less about the transaction. Since Canopy wallets must not send to Sprout addresses \cite{ZIP-211}.
 
-\textbf{Dummy notes.} A transaction can still give away how many notes the sender really spends, and dummy notes hide the count. A dummy note is a note of zero value under a throwaway key, like a cheque made out for nothing, which fills a place in a transaction without moving money. JoinSplits use dummies to fill the fixed room for two notes in and two out, and Sapling and Orchard use dummy spends to hide the number of real spends. An Orchard Action with no real note to spend should spend a dummy note and take the dummy's nullifier as the new note's $\rho$. A dummy passes every check a real note passes except one, as the proof does not require a note of zero value to be in the tree.
+\textbf{Dummy notes.} A transaction can still give away how many notes the sender really spends, and dummy notes hide the count. A dummy note is a note of zero value under a throwaway key, like a cheque made out for nothing, which fills a place in a transaction without moving money. JoinSplits use dummies to fill the fixed room for two notes in and two out, and Sapling and Orchard use dummy spends to hide the number of real spends. An Orchard Action with no real note to spend should spend a dummy note and take the dummy's nullifier as the new note's $\rho$. When cross-address payments are disabled, a dummy spend uses the keys and address of the recipient and a dummy output goes to the address of the spent note \cite{ZIP-326}. A dummy passes every check a real note passes except one, as the proof does not require a note of zero value to be in the tree.
 
 \lsubsection{Merkle paths}{readablemerkle}
 
