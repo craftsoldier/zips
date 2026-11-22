@@ -6910,9 +6910,8 @@ $\MerkleNode{\MerkleDepth{}}{i}$ is in a tree with a given \merkleRoot $\rt{} = 
 \begin{pnotes}
   \item For \Sapling, Merkle \merkleHashes are specified to be encoded as \bitSequences, but the
         \merkleRoot $\rt{\SaplingPoolId}$ is encoded for the \primaryInput of a \spendProof as an element
-        of $\GF{\ParamJ{q}}$, as specified in \crossref{cctsaplingspend}. The \spendCircuit allows
-        inputs to $\MerkleCRH{Sapling}$ at each \merkleNode to be \nonCanonicallyFieldElement encoded,
-        as specified in \crossref{cctmerklepath}.
+        of $\GF{\ParamJ{q}}$. The \spendCircuit allows
+        inputs to $\MerkleCRH{Sapling}$ at each \merkleNode to be \nonCanonicallyFieldElement encoded.
 \nufive{
   \item For \Orchard, Merkle \merkleHashes have type $\MerkleHashOrchard$ as defined in
         \crossref{concreteextractorpallas}. Similarly to \Sapling, the \actionCircuit allows
