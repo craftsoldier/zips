@@ -3576,111 +3576,31 @@ A raw full viewing key is three field elements, $\mathit{ak}$, $\mathit{nk}$ and
 \intropart
 \lsection{Network Upgrades}{networkupgrades}
 
-\Zcash launched with a protocol revision that we call \defining{\Sprout}.
+A network upgrade is a planned change to the consensus rules which every node adopts at an agreed activation height \cite{ZIP-200}.
 
-\overwinter{A first upgrade, called \defining{\NUOverwinter}, activated on \Mainnet on 26~June, 2018
-at \blockHeight $347500$ \cite{Swihart2018}. Its specifications are
-described in this document, \cite{ZIP-201}, \cite{ZIP-202}, \cite{ZIP-203}, and \cite{ZIP-143}.}
+Zcash launched with the Sprout protocol on 28 October 2016 and has upgraded eleven times since.
 
-\sapling{A second upgrade, called \defining{\NUSapling}, activated on \Mainnet on 28~October, 2018
-at \blockHeight $419200$ \cite{Hamdon2018}. Its specifications are
-described in this document, \cite{ZIP-205}, and \cite{ZIP-243}.}
+\textbf{Overwinter} (June 2018) made every transaction name the upgrade the transaction was built for, so no transaction can be replayed across an upgrade, and let a transaction expire at a chosen height.
 
-\blossom{A third upgrade, called \defining{\NUBlossom}, activated on \Mainnet on 11~December, 2019
-at \blockHeight $653600$ \cite{Zcash-Blossom}. Its specifications are
-described in this document, \cite{ZIP-206}, and \cite{ZIP-208}.}
+\textbf{Sapling} (October 2018) added the Sapling pool, with shielded payments orders of magnitude faster than in Sprout, full viewing keys and diversified addresses.
 
-\heartwood{A fourth upgrade, called \defining{\NUHeartwood}, activated on \Mainnet on 16~July, 2020
-at \blockHeight $903000$ \cite{Zcash-Heartwd}. Its specifications are
-described in this document, \cite{ZIP-250}, \cite{ZIP-213}, and \cite{ZIP-221}.}
+\textbf{Blossom} (December 2019) halved the time between blocks from 150 to 75 seconds.
 
-\canopy{A fifth upgrade, called \defining{\NUCanopy}, activated on \Mainnet on 18~November, 2020
-at \blockHeight $1046400$ (coinciding with the first \blockSubsidy \halving)
-\cite{Zcash-Canopy}. Its specifications are described in this document,
-\cite{ZIP-251}, \cite{ZIP-207}, \cite{ZIP-211}, \cite{ZIP-212}, \cite{ZIP-214}, and \cite{ZIP-215}.
-Additional information and rationale is given in \cite{ZIP-1014}.}
+\textbf{Heartwood} (July 2020) let miners take the block reward straight into a Sapling address and made each block header commit to the history of the chain for light clients.
 
-\nufive{A sixth upgrade, called \defining{\NUFive}, activated on \Mainnet on 31~May, 2022
-at \blockHeight $1687104$ \cite{Zcash-Nu5}. Its specifications are described in this document,
-\cite{ZIP-252}, \cite{ZIP-216}, \cite{ZIP-221}, \cite{ZIP-224}, \cite{ZIP-225}, \cite{ZIP-239},
-\cite{ZIP-244}, and \cite{ZIP-316}, with updates to \cite{ZIP-32}, \cite{ZIP-203}, \cite{ZIP-209},
-\cite{ZIP-212}, \cite{ZIP-213}, and \cite{ZIP-221}.
-Additional information and rationale is given in \cite{Zcash-Orchard} and \cite{Zcash-halo2}.}
+\textbf{Canopy} (November 2020) arrived with the first halving, replaced the Founders' Reward with a development fund of 20\% of the block subsidy, and closed the Sprout pool to new value.
 
-\nusix{A seventh upgrade, called \defining{\NUSix}, activated on \Mainnet on 23~November, 2024
-at \blockHeight $2726400$ (coinciding with the second \blockSubsidy \halving) \cite{Zcash-Nu6}.
-Its specifications are described in this document, \cite{ZIP-253}, \cite{ZIP-236}, and
-\cite{ZIP-2001}, with updates to \cite{ZIP-207} and \cite{ZIP-214}.
-Additional information and rationale is given in \cite{ZIP-1015}.}
+\textbf{NU5} (May 2022) added the Orchard pool, whose Halo 2 proofs need no trusted setup, together with unified addresses.
 
-\nusixone{An eighth upgrade, called \defining{\NUSixOne}, activated on \Mainnet on 24~November, 2025
-at \blockHeight $3146400$ \cite{Zcash-Nu6.1}. Its specifications are described in this document,
-\cite{ZIP-255}, and \cite{ZIP-271}, with updates to \cite{ZIP-214}.
-Additional information and rationale is given in \cite{ZIP-1016}.}
+\textbf{NU6} (November 2024) arrived with the second halving and split development funding between Zcash Community Grants and a lockbox held by the protocol.
 
-\nusixtwo{A ninth upgrade, called \defining{\NUSixTwo}, activated on \Mainnet on 3~June, 2026
-at \blockHeight $3364600$ \cite{Zcash-Nu6.2} \cite{GHSA-zcashd}. It was necessary in order to
-re-enable the \OrchardPool, after it had been temporarily disabled in order to mitigate a soundness
-vulnerability \cite{GHSA-circuit} \cite{ZIP-257}. Its specifications are described in this document
-and \cite{ZIP-257}.}
+\textbf{NU6.1} (November 2025) paid out the lockbox for development grants and extended development funding until the third halving.
 
-\nusixthree{A tenth upgrade, called \defining{\NUSixThree}, activated on \Mainnet on 28~July, 2026
-at \blockHeight $3428143$ \cite{Zcash-Nu6.3}. Its specifications are described in this document,
-\cite{ZIP-258}, \cite{ZIP-229}, \cite{ZIP-2005}, and \cite{ZIP-2006}, with updates to \cite{ZIP-209},
-\cite{ZIP-213}, \cite{ZIP-221}, and \cite{ZIP-317}. Additional information
-and rationale is given in \cite{ZODL-Ironwood}. Specifications relating to wallet support and
-migration to the \IronwoodPool are in \cite{ZIP-318} and \cite{ZIP-326}.}
+\textbf{NU6.2} (June 2026) enabled the Orchard pool again with a corrected circuit, after a soundness vulnerability which could have allowed theft of funds had forced the pool to be disabled.
 
-\nuseven{An eleventh upgrade, called \defining{\NUSeven}, activated on \Mainnet on 6~November, 2026
-at \blockHeight $3543405$ \cite{ZIP-259}. Its specifications are described in this document,
-\cite{ZIP-259}, \cite{ZIP-218}, \cite{ZIP-235}, \cite{ZIP-237}, \cite{ZIP-2003}, and \cite{ZIP-2008},
-with updates to \cite{ZIP-207} and \cite{ZIP-214}.}
+\textbf{NU6.3} (July 2026) added the Ironwood pool, whose notes support quantum recovery, and closed the Orchard pool so value can only leave the pool.
 
-\introlist
-\vspace{1.5ex}
-This section summarizes the strategy for upgrading from the Sprout epoch to subsequent epochs
-of the protocol (\NUOverwinter, \NUSapling, \NUBlossom, \NUHeartwood, \NUCanopy, \NUFive, \NUSix,
-\NUSixOne, \NUSixTwo, \NUSixThree, and \NUSeven), and for future upgrades.
-
-\defining{The \networkUpgrade mechanism is described in \cite{ZIP-200}.}
-
-Each \networkUpgrade is introduced as a
-\definingquotedterm{bilateral consensus rule change}. In this kind of upgrade,
-
-\begin{itemize}
-  \item there is an \defining{\activationHeight} at which the \consensusRuleChange
-        takes effect;
-  \item \blocks and \transactions that are valid according to
-        the post-upgrade rules are not valid before the upgrade
-        \blockHeight;
-  \item \blocks and \transactions that are valid according to
-        the pre-upgrade rules are no longer valid at or after the
-        \activationHeight.
-\end{itemize}
-
-\vspace{-1ex}
-Full support for each \networkUpgrade is indicated by a minimum version
-of the \peerToPeerProtocol. At the planned \activationHeight,
-nodes that support a given upgrade will disconnect from (and will not
-reconnect to) nodes with a protocol version lower than this
-minimum. See \cite{ZIP-201} for how this applies to the \NUOverwinter
-upgrade, for example.
-
-This ensures that upgrade-supporting nodes transition cleanly
-from the old protocol to the new protocol. Nodes that do not
-support the upgrade will find themselves on a network that uses
-the old protocol and is fully partitioned from the upgrade-supporting
-network. This allows us to specify arbitrary protocol changes that
-take effect at a given \blockHeight.
-
-Note, however, that a
-\blockChainReorganization across the upgrade \activationHeight is possible.
-In the case of such a reorganization, \blocks at a height
-before the \activationHeight will still be created and
-validated according to the pre-upgrade rules, and
-upgrade-supporting nodes \MUST allow for this.
-
-%\todo{how upgrade-dependent rules are described in this specification.}
+\textbf{NU7} (November 2026) cut the time between blocks to 25 seconds and deprecated Sprout.
 
 
 \intropart
