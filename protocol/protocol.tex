@@ -9792,9 +9792,6 @@ Finally, define $\PedersenHash \typecolon \byteseq{8} \times \bitseq{\PosInt} \r
   \item $\PedersenHash(D, M) := \ExtractJ\big(\PedersenHashToPoint\Of{D, M}\kern-0.1em\big)$.
 \end{formulae}
 
-See \crossref{cctpedersenhash} for rationale and efficient circuit implementation
-of these functions.
-
 \securityrequirement{
 $\PedersenHash$ and $\PedersenHashToPoint$ are required to be \collisionResistant
 between inputs of fixed length, for a given personalization input $D$.
@@ -9879,9 +9876,6 @@ The function
 \vspace{-1ex}
 must be \collisionResistant on $(r, M, x)$.
 }
-
-\vspace{2ex}
-See \crossref{cctmixinghash} for efficient circuit implementation of this function.
 } %sapling
 
 
@@ -11277,9 +11271,6 @@ and adding a randomized point on the \jubjubCurve (see \crossref{jubjub}):
            \PedersenHashToPoint\Of{\ascii{Zcash\_PH}, s}\, + \scalarmult{r}{\FindGroupJHash\Of{\ascii{Zcash\_PH}, \ascii{r}}}$
 \end{formulae}
 
-See \crossref{cctwindowedcommit} for rationale and efficient circuit implementation
-of this function.
-
 The \noteCommitmentScheme $\NoteCommitAlg{Sapling}$ specified in \crossref{abstractcommit} is
 instantiated as follows using $\WindowedPedersenCommitAlg$:
 
@@ -11358,10 +11349,6 @@ Useful background is given in \crossref{spendsandoutputs}\nufive{ and \crossref{
            \scalarmult{\Value}{\FindGroupJHash\Of{D, \ascii{v}}} + \scalarmult{\ValueCommitRand}{\FindGroupJHash\Of{D, \ascii{r}}}$
   \item $\ValueCommitGenTrapdoor{Sapling}()$ generates the uniform distribution on $\GF{\ParamJ{r}}$.
 \end{formulae}
-
-\vspace{-1ex}
-See \crossref{ccthomomorphiccommit} for rationale and efficient circuit implementation
-of this function.
 
 \nufive{
 \vspace{0.5ex}
